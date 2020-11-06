@@ -1,0 +1,4 @@
+- name: Creates directory
+  file:
+    path: /tmp/everismarcos
+    state: directory
