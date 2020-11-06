@@ -1,4 +1,8 @@
-- name: Creates directory
-  file:
-    path: /tmp/everismarcos
-    state: directory
+
+- name: mkdir
+  hosts: all
+  tasks:
+    - name: Creates directory
+      file:
+        path: /tmp/everismarcos
+        state: directory
