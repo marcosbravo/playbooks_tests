@@ -4,5 +4,5 @@
   tasks:
     - name: Creates directory
       file:
-        path: /tmp/everismarcos2
+        path: /tmp/everismarcos3
         state: directory
