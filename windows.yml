@@ -1,6 +1,9 @@
 --- 
-- name: Creates directory
-  file:
-    path: C:\tmp\everis
-    state: directory
-...
+- hosts: all
+  become: yes
+  tasks:
+  
+  - name: Creates directory
+    file:
+      path: C:\tmp\everis
+      state: directory
