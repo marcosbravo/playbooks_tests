@@ -1,0 +1,10 @@
+--- 
+- hosts: 172.31.9.166
+  become: yes
+  tasks: 
+
+   - name: Creates directory
+     file:
+      path: C:\tmp\everis
+      state: directory
+...
