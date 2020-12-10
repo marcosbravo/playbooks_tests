@@ -5,8 +5,8 @@
   
   - name: Create directory structure
     ansible.windows.win_file:
-    path: C:\Temp2
-    state: directory
+      path: C:\Temp2
+      state: directory
 
   - name: Download the 7-Zip package
     win_get_url:
