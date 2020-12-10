@@ -4,7 +4,6 @@
   tasks:
   
   - name: Creates directory
-    delegate_to: 127.0.0.1
     file:
       path: C:\tmp\everis
       state: directory
