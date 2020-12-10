@@ -4,7 +4,7 @@
   tasks:
   
   - name: Create directory structure
-    ansible.windows.win_file:
+    win_file:
       path: C:\Temp2
       state: directory
 
