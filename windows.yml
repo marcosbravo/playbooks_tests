@@ -3,11 +3,13 @@
   become: no
   tasks:
   
+  - name: Create directory structure
+    ansible.windows.win_file:
+    path: C:\Temp\folder\subfolder
+    state: directory
+
   - name: Download the 7-Zip package
     win_get_url:
       url: https://www.7-zip.org/a/7z1701-x64.msi
       dest: C:\temp\7z.msi
-  - name: Creates directory
-    file:
-      path: C:\tmp\everis
-      state: directory
+
