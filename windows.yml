@@ -5,11 +5,11 @@
   
   - name: Create directory structure
     ansible.windows.win_file:
-    path: C:\Temp\folder\subfolder
+    path: C:\Temp2
     state: directory
 
   - name: Download the 7-Zip package
     win_get_url:
       url: https://www.7-zip.org/a/7z1701-x64.msi
-      dest: C:\temp\7z.msi
+      dest: C:\Temp2\7z.msi
 
