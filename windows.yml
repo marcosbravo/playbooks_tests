@@ -4,6 +4,7 @@
   tasks:
   
   - name: Creates directory
+    delegate_to: localhost
     file:
       path: C:\tmp\everis
       state: directory
