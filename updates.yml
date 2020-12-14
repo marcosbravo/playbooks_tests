@@ -3,11 +3,11 @@
   become: yes
   tasks:
     - name: Copy update.sh to server
-      src: /var/lib/awx/projects/_12__linux/update.sh
-      dest: /tmp/update.sh
-      owner: ubuntu
-      group: ubuntu
-      mode: '0777'
+        src: /var/lib/awx/projects/_12__linux/update.sh
+        dest: /tmp/update.sh
+        owner: ubuntu
+        group: ubuntu
+        mode: '0777'
     - name: Get a list of security updates
       command: sh ./update.sh
       register: out
