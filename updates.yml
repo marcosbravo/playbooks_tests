@@ -10,7 +10,7 @@
         group: ubuntu
         mode: '0766'
     - name: Get a list of security updates
-      command: sh ./update.sh
+      command: sh /tmp/update.sh
       register: out
       ignore_errors: yes
     
