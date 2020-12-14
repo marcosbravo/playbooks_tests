@@ -17,6 +17,6 @@
       register: out
     
     - set_fact:
-        string_to_echo: "{{ command_output.stdout }}"
+        string_to_echo: "{{ out.stdout_lines }}"
 ...
 
