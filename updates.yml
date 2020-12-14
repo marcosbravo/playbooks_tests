@@ -8,7 +8,7 @@
         dest: /tmp/update.sh
         owner: ubuntu
         group: ubuntu
-        mode: '0644'
+        mode: '0766'
     - name: Get a list of security updates
       command: sh ./update.sh
       register: out
