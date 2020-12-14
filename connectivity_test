@@ -1,0 +1,9 @@
+---
+- hosts: 172.31.1.176
+  tasks:
+    - name: Sleep
+      command: sleep 10
+    - name: PrintMessage
+      debug:
+        msg: 'Hello, this is a connectivity test!'
+...
