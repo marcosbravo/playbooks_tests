@@ -16,7 +16,6 @@
       command: cat /tmp/updates.json
       register: out
     
-    - set_fact:
-        string_to_echo: "{{ out.stdout_lines }}"
+    - debug: msg: "{{ out.stdou }}"
 ...
 
