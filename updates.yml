@@ -9,7 +9,6 @@
         owner: ubuntu
         group: ubuntu
         mode: '0766'
-        no_log: True
     - name: Get a list of security updates
       command: sh /tmp/update.sh
       ignore_errors: yes
