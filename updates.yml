@@ -3,6 +3,7 @@
   become: yes
   tasks:
     - name: Copy update.sh to server
+      copy:
         src: /var/lib/awx/projects/_12__linux/update.sh
         dest: /tmp/update.sh
         owner: ubuntu
