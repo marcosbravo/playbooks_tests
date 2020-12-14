@@ -14,7 +14,7 @@
       command: sh /tmp/update.sh
       ignore_errors: yes
     - name : List security updates
-      command: cat /tmp/update.json
+      command: cat /tmp/updates.json
       register: out
     
     - debug: var=out.stdout_lines
