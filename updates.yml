@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: 172.31.1.176
   become: yes
   tasks:
     - name: Copy update.sh to server
