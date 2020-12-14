@@ -4,6 +4,9 @@
   tasks:
     - name: Get a list of security updates
       shell: ./update.sh
+      register: out
       ignore_errors: yes
+    
+    - debug: var=out.stdout_lines
 ...
 
