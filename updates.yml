@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Get a list of security updates
+      shell: ./update.sh
+      ignore_errors: yes
+...
+
