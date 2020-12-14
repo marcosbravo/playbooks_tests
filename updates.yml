@@ -10,12 +10,12 @@
         group: ubuntu
         mode: '0766'
     - name: Get a list of security updates
-      command: sh /tmp/update.sh 2> /dev/null
+      command: /bin/bash /tmp/update.sh 2> /dev/null
       ignore_errors: no
     - name : List security updates
       command: cat /tmp/updates.json
       register: out
     
-    - debug: var=out.stdout_lines
+    - debug: msg="{{ details.stdout_lines | quote }}"
 ...
 
