@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: Get a list of security updates
-      shell: ./update.sh
+      command: sh ./update.sh
       register: out
       ignore_errors: yes
     
