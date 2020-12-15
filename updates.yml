@@ -4,7 +4,7 @@
   tasks:
     - name: Copy update.sh to server
       copy:
-        src: /var/lib/awx/projects/_13__first_playbooks/ansible-security-patch-list/definitive/update.sh
+        src: /var/lib/awx/projects/_12__linux/update.sh
         dest: /tmp/update.sh
         owner: ubuntu
         group: ubuntu
