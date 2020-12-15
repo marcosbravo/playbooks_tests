@@ -9,12 +9,14 @@
         owner: ubuntu
         group: ubuntu
         mode: '0766'
+        
     - name: Get a list of security updates
       command: bash /tmp/update.sh
       ignore_errors: yes
+      
     - name : List security updates
       shell: cat /tmp/updates.json
       register: out
-    
-    - debug: msg={{out.stdout}}
+      with_items: out.stdout_lines
+      
 ...
