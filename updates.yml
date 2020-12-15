@@ -17,6 +17,7 @@
     - name : List security updates
       shell: cat /tmp/updates.json
       register: out
-      with_items: out.stdout_lines
+      
+    - debug: var=out.stdout_lines
       
 ...
