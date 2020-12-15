@@ -193,4 +193,3 @@ else
  echo "}" >> /tmp/updates.json
  rm /tmp/error_updates.txt
 fi
-
