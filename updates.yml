@@ -16,5 +16,5 @@
       shell: cat /tmp/updates.json
       register: out
     
-    - debug: var=out.stdout
+    - debug: msg={{out.stdout}}
 ...
