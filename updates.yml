@@ -1,21 +1,20 @@
 ---
-- hosts: 172.31.1.176
+- hosts: all
   become: yes
   tasks:
     - name: Copy update.sh to server
       copy:
-        src: /var/lib/awx/projects/_12__linux/update.sh
+        src: /var/lib/awx/projects/_13__first_playbooks/ansible-security-patch-list/definitive/update.sh
         dest: /tmp/update.sh
         owner: ubuntu
         group: ubuntu
         mode: '0766'
     - name: Get a list of security updates
-      command: /bin/bash /tmp/update.sh 2> /dev/null
-      ignore_errors: no
+      command: bash /tmp/update.sh
+      ignore_errors: yes
     - name : List security updates
       command: cat /tmp/updates.json
       register: out
     
-    - debug: msg="{{ out.stdout }}"
+    - debug: msg="{{ out.stdout | from_json }}"
 ...
-
