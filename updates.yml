@@ -15,7 +15,7 @@
       ignore_errors: yes
       
     - name : List security updates
-      shell: cat /tmp/updates.json
+      command: cat /tmp/updates.json
       register: out
       
     - debug: msg={{out.stdout}}
