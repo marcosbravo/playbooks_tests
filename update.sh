@@ -17,10 +17,10 @@ then
   echo "            }" >> /tmp/updates.json
   echo "        }" >> /tmp/updates.json
   echo "    ]," >> /tmp/updates.json
-  echo "    \"metadata\":{" >> /tmp/updates.json
-  echo "         \"machine-hostname\":\"$(hostname)\"," >> /tmp/updates.json
-  echo "         \"generation_data_date\":\"$(ls /tmp/ --full-time | grep .json | awk '{print $6,$7}' | awk -F. '{print $1}' )\"" >> /tmp/updates.json
-  echo "    }" >> /tmp/updates.json
+  echo "      \"metadata\":{" >> /tmp/updates.json
+  echo "           \"machine-hostname\":\"$(hostname)\"," >> /tmp/updates.json
+  echo "           \"generation_data_date\":\"$(ls /tmp/ --full-time | grep .json | awk '{print $6,$7}' | awk -F. '{print $1}' )\"" >> /tmp/updates.json
+  echo "      }" >> /tmp/updates.json
   echo "}" >> /tmp/updates.json
  else
 
