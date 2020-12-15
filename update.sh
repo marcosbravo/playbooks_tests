@@ -14,7 +14,7 @@ then
   echo "            \"repository\":"respository\"," >> /tmp/updates.json
   echo "            \"packages\":[]," >> /tmp/updates.json
   echo "            \"metadata\":{" >> /tmp/updates.json
-  echo "                \"status\":\"No packages to update\"," >> /tmp/updates.json
+  echo "                \"status\":\"No pacckages to update\"," >> /tmp/updates.json
   echo "                \"reason_status\":\"There are no packages with security updates\"" >> /tmp/updates.json
   echo "            }" >> /tmp/updates.json
   echo "        }" >> /tmp/updates.json
