@@ -1,4 +1,3 @@
-No lines are selected.
 - name: 'Hello World Sample'
   hosts: all
 
