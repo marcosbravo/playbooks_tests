@@ -1,0 +1,60 @@
+- name: Provision Ansible host (create user and add authorized key)
+  hosts: all
+  tasks:
+    - name: Create Ansible user
+      user:
+        name: ansible
+        comment: Ansible
+        home: "/home/ansible"
+        state: present
+        shell: /bin/bash
+
+    - name: create ~ansible/.ssh directory
+      file:
+        path: "/home/ansible/.ssh"
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: 0700
+
+    - name: create ~ansible/.ssh/authorized_keys
+      copy:
+        dest: "/home/ansible/.ssh/authorized_keys"
+        owner: ansible
+        group: ansible
+        mode: 0600
+        content: |
+          ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAjPzILz8yshVWPaaoIbVdq9Rgz6O6xH96lQfxYEEGhMqLqhonuKYZXR1JdMTYIwkfkm1+3UB6iVVmSYfQCh9u24EAdOhw2bLylCfQ+JRZX52xBobEwz8OwuCxJ6MCNQNd3+QbhlHqRvTUmPiI/tegFEzwKXes5QTVfUNjfl0MnAWBV0U+iyF/yh+soH5c0rdAEgrHKpFgq6cn5GsohJZc1M5xloHlY4gjiRqChBBNxmwvTnlJnn0s3kH7suehDIuPjHO+sRG61Bg/bfstL9WOB5NmjbtCoQc+NEWBVJPFJ+krx4x4NrhjJyGh/zvTF5F9CGnXhBTwNPfBXUWEQ2rXxQ==
+
+    - name: Add mariadb repo key
+      when: ansible_os_family == 'Debian'
+      apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: "0xF1656F24C74CD1D8"
+        state: present
+
+    - name: add mariadb repository
+      when: ansible_os_family == 'Debian'
+      apt_repository:
+        repo: "deb [arch=amd64,arm64,ppc64el] http://mirrors.up.pt/pub/mariadb/repo/10.4/ubuntu {{ ansible_distribution_release }} main"
+        state: present
+
+    - name: add microsoft repo key
+      when: ansible_os_family == 'Debian'
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+
+    - name: add microsoft repository
+      when: ansible_os_family == 'Debian'
+      apt_repository:
+        repo: "deb https://packages.microsoft.com/{{ 'ubuntu' if ansible_distribution == 'Ubuntu' else 'debian' }}/{{ ansible_distribution_version }}/prod {{ ansible_distribution_release }} main"
+        state: present
+
+    - name: install basic packages
+      when: ansible_os_family == 'Debian'
+      apt:
+        name:  mssql-tools,unixodbc-dev,mariadb-client,postgresql-client
+        state: present
+      environment:
+        ACCEPT_EULA: "Y"
