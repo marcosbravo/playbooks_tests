@@ -24,7 +24,7 @@
         group: ansible
         mode: 0600
         content: |
-          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFvV0wrGOZpyoO5SzRNvPog1Dm0/rz2iSlhUNywjqPph560DdwV1+cvSgwKgZCsnJWjzWE9UCYLjGhB3wx6ap+9taOAi1Suk56qMuahgiBtfIxeC5zKgDpQWOC1LkxOc1m80DRIrnLKhJ1wt4VNDqLEOdzHhlo36Ge8jwlmoBsydKSAXCetLdG/Wmn093RjOd+xW8ddbehHSDg+3zgAxUSOtvPsy7so0DNL+a1AOM5Dsio6QzdiUEJgam3CuA09FpbVT3TyxSwzeN0RiBtYXLf6aQs1WEQdmN2HGT4r+tQUX1Kz9Ek/qvdh/Wnflgey6vlKmHsOF3D2jb8JiulcPxh
+          ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMlDJe5fbvicbWKJZ1ArChxE/GT3tqJ5ASWBGTX/bIKq7uJ9x7M4vitaXaV0Z4BcuIcA3cBw51aTMEP/ZQAzWQF8nwy+Tg2Zl+rOHhtVjbcTIzVQxHRx8LadAoWPInPiQlbJCSgrsTKpbY39PleejCu/QxTN8oTCGqCnWqt2EajJnFm3MOPpW6ejLhQKOgHovX6VLXov8HoM9iAwR6Eo5EQe3pP45mjJFMUlUu/6PF9xfIdqBnALZwgUSmg6j7OR4v8L6CU4gah9G/63cm00vugUgcQD4jP+pBFTSVuFZQHzJbSduxghpn576AFhbVn/ytRjIV0DqmlBlz9Vka7/PH
 
     - name: Add mariadb repo key
       when: ansible_os_family == 'Debian'
