@@ -20,10 +20,11 @@
         state: present
       tags: newrelic
 
-    -name: NewRelic | Create newrelic-infra.yml
+    - name: NewRelic | Create newrelic-infra.yml
       file:
-        path: "/etc/newrelic-infra.yml"
+        path: /etc/newrelic-infra.yml
         state: touch
+
     - name: NewRelic | Add license key in the config file
       lineinfile:
         path: /etc/newrelic-infra.yml
