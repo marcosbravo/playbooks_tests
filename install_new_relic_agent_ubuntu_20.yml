@@ -1,0 +1,50 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+
+  vars:
+    os_codename: focal
+
+  tasks:
+
+    - name: NewRelic | Add GPG key to the apt sources keyring
+      apt_key:
+        url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+        state: present
+      tags: newrelic
+
+    - name: NewRelic | Add apt sources list
+      apt_repository:
+        repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt {{ os_codename }} main
+        state: present
+      tags: newrelic
+
+    - name: NewRelic | Add license key in the config file
+      lineinfile:
+        path: /etc/newrelic-infra.yml
+        regexp: '^license_key: {{ newrelic_license_key }}'
+        line: 'license_key: {{ newrelic_license_key }}'
+        state: present
+      notify: NewRelic | Restart service
+      tags: [newrelic, newrelic-license]
+
+    - name: NewRelic | Run the install command
+      apt: pkg=newrelic-infra update_cache=yes
+      tags: newrelic
+
+    - name: NewRelic | Check that NewRelic service is started
+      systemd:
+        name: newrelic-infra
+        state: started
+        enabled: True
+      tags: newrelic
+
+  handlers:
+
+    - name: NewRelic | Restart service
+      systemd:
+        name: newrelic-infra
+        state: restarted
+        enabled: yes
+        daemon-reload: yes
