@@ -1,5 +1,6 @@
 ---
 - name: Ubuntu 20
+  when: (1 == 1)
 
 - name: NewRelic  Add GPG key to the apt sources keyring
   apt_key:
