@@ -35,11 +35,11 @@
     enabled: True
   tags: newrelic
 
-handlers:
+  handlers:
 
-- name: NewRelic | Restart service
-  systemd:
-    name: newrelic-infra
-    state: restarted
-    enabled: yes
-    daemon-reload: yes
+  - name: NewRelic | Restart service
+    systemd:
+      name: newrelic-infra
+      state: restarted
+      enabled: yes
+      daemon-reload: yes
