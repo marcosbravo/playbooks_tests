@@ -1,6 +1,6 @@
 ---
 - name: Ubuntu 20
-  when: (1 == 1)
+  when: {{ansible_distribution == Ubuntu}}
 
 - name: NewRelic  Add GPG key to the apt sources keyring
   apt_key:
