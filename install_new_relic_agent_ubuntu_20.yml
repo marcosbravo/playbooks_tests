@@ -1,8 +1,5 @@
 ---
-- hosts: Ubuntu_20
-  become: yes
-  gather_facts: true
-
+- become: yes
   vars:
     os_codename: focal
 
