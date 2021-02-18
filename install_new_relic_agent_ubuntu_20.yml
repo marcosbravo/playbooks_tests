@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: Ubuntu_20
   become: yes
   gather_facts: true
 
