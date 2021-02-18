@@ -1,5 +1,4 @@
 ---
-- become: yes
   vars:
     os_codename: focal
 
