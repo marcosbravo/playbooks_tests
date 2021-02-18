@@ -8,8 +8,14 @@
       group_by:
         key: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}"
 
-- hosts: Ubuntu_20
-  gather_facts: false
+- hosts: Ubuntu_18
+  gather_facts: true
   tasks:
-    - name: NewRelic | Install Infraestructure Agent
+    - name: NewRelic | Install Infraestructure Agent Ubuntu 18
+      include_tasks: install_new_relic_agent_ubuntu_18.yml
+
+- hosts: Ubuntu_20
+  gather_facts: true
+  tasks:
+    - name: NewRelic |  Install Infraestructure Agent Ubuntu 20
       include_tasks: install_new_relic_agent_ubuntu_20.yml
