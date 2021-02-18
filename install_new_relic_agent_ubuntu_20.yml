@@ -1,22 +1,22 @@
 ---
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}} | Add GPG key to the apt sources keyring
+- name: NewRelic | "{{ansible_distribution}}{{ansible distribution major}}" | Add GPG key to the apt sources keyring
   apt_key:
     url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
     state: present
   tags: newrelic
 
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}}  | Add apt sources list
+- name: NewRelic | | Add apt sources list
   apt_repository:
     repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt focal main
     state: present
   tags: newrelic
 
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}}  | Create newrelic-infra.yml
+- name: NewRelic |  | Create newrelic-infra.yml
   file:
     path: /etc/newrelic-infra.yml
     state: touch
 
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}}  | Add license key in the config file
+- name: NewRelic || Add license key in the config file
   lineinfile:
     path: /etc/newrelic-infra.yml
     regexp: '^license_key: {{ newrelic_license_key }}'
@@ -25,11 +25,11 @@
   notify: NewRelic | Restart service
   tags: [newrelic, newrelic-license]
 
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}}  | Run the install command
+- name: NewRelic |  | Run the install command
   apt: pkg=newrelic-infra update_cache=yes
   tags: newrelic
 
-- name: NewRelic | {{ ansible_distribution ~ ansible distribution major}}  | Check that NewRelic service is started
+- name: NewRelic |  | Check that NewRelic service is started
   systemd:
     name: newrelic-infra
     state: started
