@@ -1,7 +1,4 @@
 ---
-- name: Ubuntu 20
-  when: {{ansible_distribution == Ubuntu}}
-
 - name: NewRelic  Add GPG key to the apt sources keyring
   apt_key:
     url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
