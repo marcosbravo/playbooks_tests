@@ -13,9 +13,10 @@
   tasks:
     - name: NewRelic | Install Infraestructure Agent Ubuntu 18
       include_tasks: install_new_relic_agent_ubuntu_18.yml
-
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18" )
 - hosts: Ubuntu_20
   gather_facts: true
   tasks:
     - name: NewRelic |  Install Infraestructure Agent Ubuntu 20
       include_tasks: install_new_relic_agent_ubuntu_20.yml
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
