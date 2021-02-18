@@ -1,0 +1,10 @@
+
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+
+    - name: NewRelic | Uninstall
+      apt:
+        name: newrelic-infra
+        state: absent
