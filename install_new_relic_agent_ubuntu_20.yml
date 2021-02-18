@@ -1,4 +1,4 @@
-- name: NewRelic | Add GPG key to the apt sources keyring
+- name: NewRelic | {{ ansible_distribution }} |Add GPG key to the apt sources keyring
   apt_key:
     url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
     state: present
