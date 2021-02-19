@@ -32,4 +32,9 @@
     - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20"
-      when: (ansible_distribution == "Ubuntu" or ansible_distribution != [12,14,16,18])
+      when: (ansible_distribution == "Ubuntu" or distribution_major_version != [12,14,16,18])
+
+    - name: NewRelic | SO RedHat No Contemplado
+      ansible.builtin.debug:
+        msg: "SO no contemplado, Distribuciones RedHat aceptadas: 12,14,16,18,20"
+      when: (ansible_distribution == "RedHat" and distribution_major_version != [10,12,14,16])
