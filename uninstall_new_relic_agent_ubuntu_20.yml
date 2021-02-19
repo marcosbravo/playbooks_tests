@@ -3,8 +3,8 @@
   become: yes
   gather_facts: true
 
-- tasks:
-  
+  tasks:
+
     - name: NewRelic | Uninstall
       apt:
         name: newrelic-infra
