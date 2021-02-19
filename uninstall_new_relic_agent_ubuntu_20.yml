@@ -6,11 +6,6 @@
   vars:
     os_codename: focal
 
-  tasks:
-    - name: Print all available facts
-      ansible.builtin.debug:
-        var: ansible_facts
-
     - name: NewRelic | Uninstall
       apt:
         name: newrelic-infra
