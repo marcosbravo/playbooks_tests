@@ -3,10 +3,7 @@
   become: yes
   gather_facts: true
 
-  vars:
-    os_codename: focal
-
-    - name: NewRelic | Uninstall
-      apt:
-        name: newrelic-infra
-        state: absent
+  - name: NewRelic | Uninstall
+    apt:
+      name: newrelic-infra
+      state: absent
