@@ -1,14 +1,31 @@
 ---
 
-- name: talk to all hosts for ansible distribution and ansible distribution major
+- name:
   hosts: all
   gather_facts: true
   tasks:
+
+    - name: NewRelic | Install Infraestructure Agent Ubuntu 20
+      include_tasks: install_new_relic_agent_ubuntu_20.yml
+      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
 
     - name: NewRelic | Install Infraestructure Agent Ubuntu 18
       include_tasks: install_new_relic_agent_ubuntu_18.yml
       when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18" )
 
-    - name: NewRelic |  Install Infraestructure Agent Ubuntu 20
-      include_tasks: install_new_relic_agent_ubuntu_20.yml
-      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
+    - name: NewRelic | Install Infraestructure Agent Ubuntu 16
+      include_tasks: install_new_relic_agent_ubuntu_16.yml
+      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16" )
+
+    - name: NewRelic |  Install Infraestructure Agent Ubuntu 14
+      include_tasks: install_new_relic_agent_ubuntu_14.yml
+      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "14" )
+
+    - name: NewRelic | Install Infraestructure Agent Ubuntu 12
+      include_tasks: install_new_relic_agent_ubuntu_12.yml
+      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "12" )
+
+    - name: NewRelic | SO No Contemplado
+      ansible.builtin.debug:
+        msg: SO no contemplado
+      when: (ansible_distribution != Ubuntu)
