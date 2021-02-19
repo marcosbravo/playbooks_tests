@@ -31,5 +31,5 @@
 
     - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
-        msg: SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20
+        msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20"
       when: (ansible_distribution == "Ubuntu" or ansible_distribution != [12,14,16,18])
