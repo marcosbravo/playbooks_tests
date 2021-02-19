@@ -11,18 +11,18 @@
     state: present
   tags: newrelic
 
-- name: NewRelic | 3. Check that newrelic-infra.yml exists
+- name: NewRelic | 3a. Check that newrelic-infra.yml exists
   stat:
     path: /etc/newrelic-infra.yml
   register: stat_result
 
-- name: NewRelic | 4. Create newrelic-infra.yml
+- name: NewRelic | 3b. Create newrelic-infra.yml
   file:
     path: /etc/newrelic-infra.yml
     state: touch
   when: not stat_result.stat.exists
 
-- name: NewRelic | 5. Add license key in the config file
+- name: NewRelic | 4. Add license key in the config file
   lineinfile:
     path: /etc/newrelic-infra.yml
     regexp: '^license_key: {{ newrelic_license_key }}'
@@ -31,11 +31,11 @@
   notify: NewRelic | Restart service
   tags: [newrelic, newrelic-license]
 
-- name: NewRelic | 6. Run the install command
+- name: NewRelic | 5. Run the install command
   apt: pkg=newrelic-infra update_cache=yes
   tags: newrelic
 
-- name: NewRelic | 7. Check that NewRelic service is started
+- name: NewRelic | 6. Check that NewRelic service is started
   systemd:
     name: newrelic-infra
     state: started

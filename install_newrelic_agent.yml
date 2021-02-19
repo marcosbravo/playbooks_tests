@@ -28,4 +28,4 @@
     - name: NewRelic | SO No Contemplado
       ansible.builtin.debug:
         msg: SO no contemplado
-      when: (ansible_distribution != Ubuntu)
+      when: (ansible_distribution != "Ubuntu")
