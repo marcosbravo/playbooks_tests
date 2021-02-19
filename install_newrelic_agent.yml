@@ -33,4 +33,4 @@
     - name: NewRelic | SO RedHat No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones RedHat aceptadas: 8,10,12,14,16,18"
-      when: (ansible_distribution == "RedHat" and distribution_major_version != ("10" or "12" or "14"))
+      when: (ansible_distribution == "RedHat" and (distribution_major_version != "10" or distribution_major_version != "12" or distribution_major_version != "14"))
