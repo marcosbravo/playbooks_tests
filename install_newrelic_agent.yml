@@ -5,6 +5,10 @@
   gather_facts: true
   tasks:
 
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
     - name: NewRelic | Install Infraestructure Agent Ubuntu 20
       include_tasks: install_new_relic_agent_ubuntu_20.yml
       when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
@@ -25,7 +29,7 @@
       include_tasks: install_new_relic_agent_ubuntu_12.yml
       when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "12" )
 
-    - name: NewRelic | SO No Contemplado
+    - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
-        msg: SO no contemplado
-      when: (ansible_distribution != "Ubuntu")
+        msg: SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20
+      when: (ansible_distribution == "Ubuntu" or ansible_distribution != [12,14,16,18])
