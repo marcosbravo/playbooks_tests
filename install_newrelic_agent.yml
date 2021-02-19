@@ -5,6 +5,12 @@
   gather_facts: true
   tasks:
 
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    # UBUNTU BLOCK
+
     - name: NewRelic | Install Infraestructure Agent Ubuntu 20
       include_tasks: install_new_relic_agent_ubuntu_20.yml
       when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
@@ -28,12 +34,31 @@
     - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20"
-      when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version != [12,14,16,18])
+      when: (ansible_distribution == "Ubuntu" and
+            (ansible_distribution_major_version != "12" or
+             ansible_distribution_major_version != "14" or
+             ansible_distribution_major_version != "16" or
+             ansible_distribution_major_version != "18" or
+             ansible_distribution_major_version != "20"))
 
-    - name: NewRelic | SO RedHat No Contemplado
+      # RHEL BLOCK
+
+    - name: NewRelic | Install Infraestructure Agent RHEL 8
+      include_tasks: install_new_relic_agent_rhel_8.yml
+      when: (ansible_distribution == "RHEL" and ansible_distribution_major_version == "8" )
+
+    - name: NewRelic | Install Infraestructure Agent RHEL 7
+      include_tasks: install_new_relic_agent_rhel_7.yml
+      when: (ansible_distribution == "RHEL" and ansible_distribution_major_version == "7" )
+
+    - name: NewRelic | Install Infraestructure Agent RHEL 6
+      include_tasks: install_new_relic_agent_rhel_6.yml
+      when: (ansible_distribution == "RHEL" and ansible_distribution_major_version == "6" )
+
+    - name: NewRelic | SO RHEL No Contemplado
       ansible.builtin.debug:
-        msg: "SO no contemplado, Distribuciones RedHat aceptadas: 8,10,12,14,16,18"
-      when: (ansible_distribution == "RedHat" and
-            (ansible_distribution_major_version != "10" or
-             ansible_distribution_major_version != "12" or
-             ansible_distribution_major_version != "14"))
+        msg: "SO no contemplado, Distribuciones RedHat aceptadas: 5,6,7"
+      when: (ansible_distribution == "RHEL" and
+            (ansible_distribution_major_version != "5" or
+             ansible_distribution_major_version != "6" or
+             ansible_distribution_major_version != "7"))
