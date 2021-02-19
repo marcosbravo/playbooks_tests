@@ -5,6 +5,10 @@
   gather_facts: true
   tasks:
 
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
     - name: NewRelic | Install Infraestructure Agent Ubuntu 20
       include_tasks: install_new_relic_agent_ubuntu_20.yml
       when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
