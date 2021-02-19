@@ -45,17 +45,17 @@
 
     - name: NewRelic | Install Infraestructure Agent RHEL 8
       include_tasks: install_new_relic_agent_rhel_8.yml
-      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "8" )
+      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7" )
 
     - name: NewRelic | Install Infraestructure Agent RHEL 7
       include_tasks: install_new_relic_agent_rhel_7.yml
-      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7" )
+      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "6" )
 
     - name: NewRelic | Install Infraestructure Agent RHEL 6
       include_tasks: install_new_relic_agent_rhel_6.yml
-      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "6" )
+      when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "5" )
 
-    - name: NewRelic | SO RHEL No Contemplado
+    - name: NewRelic | SO RedHat No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones RedHat aceptadas: 5,6,7"
       when: (ansible_distribution == "RedHat" and
