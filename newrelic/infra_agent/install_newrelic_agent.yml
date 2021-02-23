@@ -10,11 +10,11 @@
     - name: NewRelic | Install Infraestructure Agent Ubuntu
       include_tasks: "./ubuntu/install_new_relic_agent_ubuntu.yml"
       when: (ansible_distribution == "Ubuntu" and
-            (ansible_distribution_major_version == "16" or
-             ansible_distribution_major_version == "18" or
-             ansible_distribution_major_version == "5" or
-             ansible_distribution_major_version == "14" or
-             ansible_distribution_major_version == "12"))
+            (ansible_distribution_major_version != "16" or
+             ansible_distribution_major_version != "18" or
+             ansible_distribution_major_version != "5" or
+             ansible_distribution_major_version != "14" or
+             ansible_distribution_major_version != "12"))
 
 
     - name: NewRelic | SO Ubuntu No Contemplado
