@@ -1,6 +1,5 @@
 ---
 - name: Install
-  hosts: all
 
   tasks:
   - name: NewRelic | Ubuntu X | 1. Add GPG key to the apt sources keyring
