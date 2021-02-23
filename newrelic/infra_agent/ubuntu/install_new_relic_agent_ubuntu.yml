@@ -1,42 +1,41 @@
 ---
-- name: Install
-
+- hosts: all
   tasks:
-  - name: NewRelic | Ubuntu X | 1. Add GPG key to the apt sources keyring
-    apt_key:
-      url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
-      state: present
-    tags: newrelic
+    - name: NewRelic | Ubuntu X | 1. Add GPG key to the apt sources keyring
+      apt_key:
+        url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+        state: present
+      tags: newrelic
 
-  - name: NewRelic | Ubuntu X | 2. Add apt sources list
-    apt_repository:
-      repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt {{ansible_distribution_release}} main
-      state: present
-    tags: newrelic
+    - name: NewRelic | Ubuntu X | 2. Add apt sources list
+      apt_repository:
+        repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt {{ansible_distribution_release}} main
+        state: present
+      tags: newrelic
 
-  - name: NewRelic | Ubuntu X | 3. Check that newrelic-infra.yml exists
-    stat:
-      path: /etc/newrelic-infra.yml
-    register: stat_result
+    - name: NewRelic | Ubuntu X | 3. Check that newrelic-infra.yml exists
+      stat:
+        path: /etc/newrelic-infra.yml
+      register: stat_result
 
-  - name: NewRelic | 3b. Create newrelic-infra.yml
-    file:
-      path: /etc/newrelic-infra.yml
-      state: touch
-    when: not stat_result.stat.exists
+    - name: NewRelic | 3b. Create newrelic-infra.yml
+      file:
+        path: /etc/newrelic-infra.yml
+        state: touch
+      when: not stat_result.stat.exists
 
-  - name: NewRelic | Ubuntu X | 4. Add license key in the config file
-    lineinfile:
-      path: /etc/newrelic-infra.yml
-      regexp: '^license_key: {{ newrelic_license_key }}'
-      line: 'license_key: {{ newrelic_license_key }}'
-      state: present
-    notify: NewRelic | Restart service
-    tags: [newrelic, newrelic-license]
+    - name: NewRelic | Ubuntu X | 4. Add license key in the config file
+      lineinfile:
+        path: /etc/newrelic-infra.yml
+        regexp: '^license_key: {{ newrelic_license_key }}'
+        line: 'license_key: {{ newrelic_license_key }}'
+        state: present
+      notify: NewRelic | Restart service
+      tags: [newrelic, newrelic-license]
 
-  - name: NewRelic | Ubuntu X | 5. Run the install command
-    apt: pkg=newrelic-infra update_cache=yes
-    tags: newrelic
+    - name: NewRelic | Ubuntu X | 5. Run the install command
+      apt: pkg=newrelic-infra update_cache=yes
+      tags: newrelic
 
   handlers:
   - name: NewRelic | Restart service
