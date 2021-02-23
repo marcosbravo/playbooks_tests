@@ -24,14 +24,14 @@
           state: touch
         when: not stat_result.stat.exists
 
-      - name: NewRelic | Ubuntu X | 4. Add license key in the config file
-        lineinfile:
-          path: /etc/newrelic-infra.yml
-          regexp: '^license_key: {{ newrelic_license_key }}'
-          line: 'license_key: {{ newrelic_license_key }}'
-          state: present
-        notify: NewRelic | Restart service
-        tags: [newrelic, newrelic-license]
+      # - name: NewRelic | Ubuntu X | 4. Add license key in the config file
+      #   lineinfile:
+      #     path: /etc/newrelic-infra.yml
+      #     regexp: '^license_key: {{ newrelic_license_key }}'
+      #     line: 'license_key: {{ newrelic_license_key }}'
+      #     state: present
+      #   notify: NewRelic | Restart service
+      #   tags: [newrelic, newrelic-license]
 
       - name: NewRelic | Ubuntu X | 5. Run the install command
         apt: pkg=newrelic-infra update_cache=yes
