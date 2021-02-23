@@ -21,11 +21,11 @@
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20; {{ansible_facts['distribution_major_version']}}"
       when:  (ansible_distribution == "Ubuntu" and
-            (ansible_distribution_major_version != "16" or
-             ansible_distribution_major_version != "18" or
-             ansible_distribution_major_version != "20" or
-             ansible_distribution_major_version != "14" or
-             ansible_distribution_major_version != "12"))
+             (ansible_distribution_major_version != "16" or
+              ansible_distribution_major_version != "18" or
+              ansible_distribution_major_version != "20" or
+              ansible_distribution_major_version != "14" or
+              ansible_distribution_major_version != "12"))
 
 
       # # REDHAT BLOCK
