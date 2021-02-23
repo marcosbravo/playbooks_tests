@@ -35,12 +35,6 @@
   apt: pkg=newrelic-infra update_cache=yes
   tags: newrelic
 
-- name: NewRelic | Ubuntu X | 6. Check that NewRelic service is started
-  systemd:
-    name: newrelic-infra
-    state: started
-    enabled: True
-  tags: newrelic
 
   handlers:
     - name: NewRelic | Restart service
