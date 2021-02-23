@@ -43,7 +43,7 @@
   tags: newrelic
 
   handlers:
-    -name: NewRelic | Restart service
-     ansible.builtin.service:
-       name: newrelic-infra
-       state: restarted
+    - name: NewRelic | Restart service
+      ansible.builtin.service:
+        name: newrelic-infra
+        state: restarted
