@@ -16,37 +16,25 @@
              ansible_distribution_major_version == "14" or
              ansible_distribution_major_version == "12"))
 
-    # - name: NewRelic | Install Infraestructure Agent Ubuntu 20
-    #   include_tasks: install_new_relic_agent_ubuntu_20.yml
-    #   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20" )
-    #
-    # - name: NewRelic | Install Infraestructure Agent Ubuntu 18
-    #   include_tasks: install_new_relic_agent_ubuntu_18.yml
-    #   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18" )
-    #
-    # - name: NewRelic | Install Infraestructure Agent Ubuntu 16
-    #   include_tasks: install_new_relic_agent_ubuntu_16.yml
-    #   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16" )
-    #
-    # - name: NewRelic | Install Infraestructure Agent Ubuntu 14
-    #   include_tasks: install_new_relic_agent_ubuntu_14.yml
-    #   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "14" )
-    #
-    # - name: NewRelic | Install Infraestructure Agent Ubuntu 12
-    #   include_tasks: install_new_relic_agent_ubuntu_12.yml
-    #   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "12" )
 
     - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20"
-      when: (ansible_distribution == "Ubuntu" and
-            (ansible_distribution_major_version != "20" or
-             ansible_distribution_major_version != "18" or
-             ansible_distribution_major_version != "16" or
-             ansible_distribution_major_version != "14" or
-             ansible_distribution_major_version != "12"))
-
-      # REDHAT BLOCK
+        when:
+          - ansible_distribution | lower == "ubuntu"
+          - ansible_distribution_major_version != "20" or
+            ansible_distribution_major_version != "18" or
+            ansible_distribution_major_version != "16" or
+            ansible_distribution_major_version != "14" or
+            ansible_distribution_major_version != "12"
+      # when: (ansible_distribution == "Ubuntu" and
+      #       (ansible_distribution_major_version != "20" or
+      #        ansible_distribution_major_version != "18" or
+      #        ansible_distribution_major_version != "16" or
+      #        ansible_distribution_major_version != "14" or
+      #        ansible_distribution_major_version != "12"))
+      #
+      # # REDHAT BLOCK
 
     - name: NewRelic | Install Infraestructure Agent RHEL 8
       include_tasks: install_new_relic_agent_rhel_8.yml
