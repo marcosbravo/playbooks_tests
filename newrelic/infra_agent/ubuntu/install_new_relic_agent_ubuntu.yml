@@ -1,4 +1,3 @@
----
 - name: NewRelic | Ubuntu X | 1. Add GPG key to the apt sources keyring
   apt_key:
     url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
@@ -36,7 +35,7 @@
   tags: newrelic
 
 handlers:
-  - name: NewRelic | Restart service
-    ansible.builtin.service:
-      name: newrelic-infra
-      state: restarted
+- name: NewRelic | Restart service
+  ansible.builtin.service:
+    name: newrelic-infra
+    state: restarted
