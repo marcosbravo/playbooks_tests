@@ -20,8 +20,8 @@
     - name: NewRelic | SO Ubuntu No Contemplado
       ansible.builtin.debug:
         msg: "SO no contemplado, Distribuciones Ubuntu aceptadas: 12,14,16,18,20; {{ansible_facts['distribution_major_version']}}"
-      when:  (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] != "20") or
-             (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] != "18")
+      when:  ((ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] != "20") or
+             (ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] != "18"))
 
 
       # # REDHAT BLOCK
