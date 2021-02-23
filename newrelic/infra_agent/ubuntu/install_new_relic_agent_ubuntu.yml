@@ -42,7 +42,7 @@
     enabled: True
   tags: newrelic
 
-- handlers:
+  handlers:
     -name: NewRelic | Restart service
      ansible.builtin.service:
        name: newrelic-infra
