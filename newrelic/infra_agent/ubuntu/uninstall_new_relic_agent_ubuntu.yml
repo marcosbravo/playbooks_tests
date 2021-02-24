@@ -58,6 +58,8 @@
   - name: asdfasd
     debug:
       msg: '{{ directories_var.files.path }}'
+    with_items:
+      - '{{ directories_var.files }}'
 
 
   - name: NewRelic | Print Directories will be removed
