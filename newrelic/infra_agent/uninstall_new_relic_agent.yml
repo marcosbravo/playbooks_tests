@@ -2,8 +2,7 @@
 - hosts: all
   become: yes
   gather_facts: true
-  #vars:
-  #  ubuntu_paths: ['/etc/', '/etc/systemd/system/']
+
   tasks:
 
     - name: NewRelic | Uninstall
@@ -15,7 +14,7 @@
 
     - name: NewRelic | Clean pending files associated with NewRelic
       file:
-        path: /etc
+        path: /etc/newrelic*
         state: absent
       when:
         - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
