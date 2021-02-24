@@ -25,7 +25,7 @@
 
   - name: print
     debug:
-      msg: '{{ item.path.stdout }}'
+      msg: '{{ item.path }}'
     with_items:
       - '{{ files_etc.files }}'
 
