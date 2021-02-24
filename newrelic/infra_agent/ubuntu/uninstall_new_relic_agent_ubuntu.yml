@@ -63,8 +63,8 @@
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
 
-   - name: NR | Print
-      msg: {{ listd }}
+  - name: NR | Print
+      msg: '{{ listd }}'
 
   - name: NewRelic | Remove pending directories
     file:
