@@ -15,7 +15,7 @@
 
     - name: NewRelic | SO Ubuntu No Contemplado
       debug:
-        msg: "Version Ubuntu ansible_distribution_major_version not covered,  Ubuntu versions covered: 12 | 14 | 16 | 17 | 20. If it is a new version contact the administrator"
+        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 12 | 14 | 16 | 17 | 20. If it is a new version contact the administrator"
       when:
         - ansible_distribution_major_version not in ['20', '17', '16', '14', '12']
         - ansible_distribution | lower == 'ubuntu'
@@ -30,7 +30,7 @@
 
     - name: NewRelic | SO RedHat No Contemplado
       ansible.builtin.debug:
-        msg: "Version RedHat ansible_distribution_major_version not covered,  Ubuntu versions covered: 12 | 14 | 16 |18 | 20. If it is a new version contact the administrator"
+        msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 12 | 14 | 16 |18 | 20. If it is a new version contact the administrator"
       when:
         - ansible_distribution_major_version not in ['8', '7', '6']
         - ansible_distribution | lower == 'redhat'
