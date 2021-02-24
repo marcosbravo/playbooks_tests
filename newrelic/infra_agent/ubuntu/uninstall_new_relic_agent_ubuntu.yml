@@ -64,7 +64,7 @@
       - '{{ directories_var.files }}'
 
   - name: NR | Print
-      msg: '{{ listd }}'
+      msg: 'listd'
 
   - name: NewRelic | Remove pending directories
     file:
