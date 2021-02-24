@@ -17,7 +17,7 @@
         path: '/etc'
         patterns:
           - 'newrelic*'
-          - 'newrelic-*'
+          - 'newrelic-infra'
         recurse: yes
         file_type: file
       register: files_etc
