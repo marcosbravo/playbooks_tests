@@ -10,7 +10,7 @@
   - name: NewRelic | Find pending files associated with NewRelic on /etc
     find:
       path: '/etc'
-      pattern: "newrelic*"
+      pattern: "*newrelic*"
       recurse: yes
       file_type: file
     register: files_etc
@@ -18,7 +18,7 @@
   - name: NewRelic | Find pending files associated with NewRelic on /var
     find:
       path: '/var'
-      pattern: "newrelic*"
+      pattern: "*newrelic*"
       recurse: yes
       file_type: file
     register: files_var
