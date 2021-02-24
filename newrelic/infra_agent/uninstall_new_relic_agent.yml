@@ -30,7 +30,7 @@
 
     - name: print
       debug:
-        msg: '{{ files_etc }}'
+        msg: '{{ files_etc.files }}'
 
     - name: print
       debug:
