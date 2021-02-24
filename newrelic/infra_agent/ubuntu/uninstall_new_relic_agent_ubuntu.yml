@@ -38,7 +38,7 @@
       - '{{ files_var.files }}'
 
   - name: NewRelic | Remove gpg key NewRelic
-    ansible.builtin.command: apt-key list | grep -B1 newrelic | head -n1
+    ansible.builtin.command: 'apt-key list | grep -B1 newrelic | head -n1'
     register: gpguid
 
   - debug: msg='{{ gpguid.stdout }}'
