@@ -56,7 +56,7 @@
     register: directories_var
 
   - name: NewRelic | Store
-    listd: '{{ item.path }}'
+      listd: '{{ item.path }}'
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
