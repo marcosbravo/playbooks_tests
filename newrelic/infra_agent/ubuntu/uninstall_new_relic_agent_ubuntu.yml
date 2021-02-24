@@ -40,7 +40,8 @@
   - name: NewRelic | Get uid gpg newrelic
     shell: apt-key list | grep -B1 newrelic | head -n1
     register: gpguid
-    debug: msg='{{ gpguid.stdout }}'
+
+  - debug: msg='{{ gpguid.stdout }}'
 
     # Pending Directories
 
