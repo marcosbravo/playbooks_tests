@@ -1,40 +1,36 @@
-- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 1. Add GPG key to the apt sources keyring
-  apt_key:
-    url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
-    state: present
-  tags: newrelic
-
-- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 2. Add apt sources list
-  apt_repository:
-    repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt {{ansible_distribution_release}} main
-    state: present
-  tags: newrelic
-
-- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3. Check that newrelic-infra.yml exists
+- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 1.0. Check that newrelic-infra.yml exists
   stat:
     path: /etc/newrelic-infra.yml
   register: stat_result
 
-- name: NewRelic | 3b. Create newrelic-infra.yml
+- name: NewRelic | 1. Create newrelic-infra.yml
   file:
     path: /etc/newrelic-infra.yml
     state: touch
   when: not stat_result.stat.exists
 
-- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 4. Add license key in the config file
+- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 2. Add license key in the config file
   lineinfile:
     path: /etc/newrelic-infra.yml
     regexp: '^license_key: {{ newrelic_license_key }}'
     line: 'license_key: {{ newrelic_license_key }}'
     state: present
-  # notify: NewRelic | Restart service
-  tags: [newrelic, newrelic-license]
+
+- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3. Add GPG key to the apt sources keyring
+  apt_key:
+    url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+    state: present
+
+- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 4. Add repository sources list
+  apt_repository:
+    repo: deb [arch=amd64] http://download.newrelic.com/infrastructure_agent/linux/apt {{ansible_distribution_release}} main
+    state: present
 
 - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 5. Run the install command
   apt: pkg=newrelic-infra update_cache=yes
-  tags: newrelic
 
-- name: NewRelic | Restart service
+
+- name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 6. Restart service
   ansible.builtin.service:
     name: newrelic-infra
     state: restarted
