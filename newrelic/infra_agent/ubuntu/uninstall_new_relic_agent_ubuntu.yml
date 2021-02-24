@@ -55,22 +55,17 @@
       file_type: directory
     register: directories_var
 
-  - name: NewRelic | Store
-      listd: '{{ item.path }}'
-    with_items:
-      - '{{ directories_etc.files }}'
-      - '{{ directories_var.files }}'
-
   - name: NewRelic | Print Directories will be removed
     debug:
       msg: '{{ item.path }}'
+      var: result
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
 
   - name: NR | Print
     debug:
-      msg: '{{ listd }}'
+      msg: result
 
 
   - name: NewRelic | Remove pending directories
