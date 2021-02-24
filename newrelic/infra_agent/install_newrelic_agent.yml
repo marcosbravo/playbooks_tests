@@ -11,7 +11,7 @@
       include_tasks: "./ubuntu/install_new_relic_agent_ubuntu.yml"
       when:
         - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
-        - ansible_distribution == 'Ubuntu'
+        - ansible_distribution == 'RUbuntu'
 
     - name: NewRelic | SO Ubuntu No Contemplado
       debug:
