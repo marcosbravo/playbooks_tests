@@ -43,6 +43,9 @@
 
   - debug: msg='{{ gpguid.stdout }}'
 
+  - name: NewRelic | Delete gpg key
+    shell: apt-key del '{{ gpguid.stdout }}'
+
     # Pending Directories
 
   - name: NewRelic | Find pending directories associated with NewRelic on /etc
