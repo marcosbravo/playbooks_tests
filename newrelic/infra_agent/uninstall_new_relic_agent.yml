@@ -5,64 +5,75 @@
 
   tasks:
 
-    - name: NewRelic | Uninstall
-      apt:
-        name: newrelic-infra
-        state: absent
-
     # UBUNTU BLOCK
 
-    - name: NewRelic | Find pending files associated with NewRelic on /etc
-      find:
-        path: '/etc'
-        patterns:
-          - 'newrelic*'
-          - 'newrelic-infra'
-        recurse: yes
-        file_type: file
-      register: files_etc
+    - name: NewRelic | Install Infraestructure Agent Ubuntu
+      include_tasks: "./ubuntu/uninstall_new_relic_agent_ubuntu.yml"
+      when:
+        - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
+        - ansible_distribution | lower == 'ubuntu'
 
-    - name: NewRelic | Find pending files associated with NewRelic on /var
-      find:
-        path: '/var'
-        pattern: "newrelic*"
-        recurse: yes
-        file_type: file
-      register: files_var
-
-    - name: print
+    - name: NewRelic | SO Ubuntu No Contemplado
       debug:
-        msg: '{{ files_etc.files }}'
+        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 20 | 18 | 16 | 14 | 12
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['20', '18', '16', '14', '12']
+        - ansible_distribution | lower == 'ubuntu'
 
-    - name: print
-      debug:
-        msg: '{{ item.path }}'
-      with_items:
-        - '{{ files_etc.files }}'
+      # REDHAT BLOCK
 
-    - name: NewRelic | Remove pending files
-      file:
-        path: '{{ item.path }}'
-        state: absent
-      with_items:
-        - '{{ files_etc.files }}'
-        - '{{ files_var.files }}'
+    - name: NewRelic | Install Infraestructure Agent RHEL 8
+      include_tasks: ./redhat/uninstall_new_relic_agent_rhel.yml
+      when:
+        - ansible_distribution_major_version in ['8', '7', '6']
+        - ansible_distribution | lower == 'redhat'
+
+    - name: NewRelic | SO RedHat No Contemplado
+      ansible.builtin.debug:
+        msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8', '7', '6']
+        - ansible_distribution | lower == 'redhat'
 
 
-
-
-    # - name: NewRelic | Clean pending files associated with NewRelic
+    # # UBUNTU BLOCK
+    #
+    # - name: NewRelic | Find pending files associated with NewRelic on /etc
+    #   find:
+    #     path: '/etc'
+    #     patterns:
+    #       - 'newrelic*'
+    #       - 'newrelic-infra'
+    #     recurse: yes
+    #     file_type: file
+    #   register: files_etc
+    #
+    # - name: NewRelic | Find pending files associated with NewRelic on /var
+    #   find:
+    #     path: '/var'
+    #     pattern: "newrelic*"
+    #     recurse: yes
+    #     file_type: file
+    #   register: files_var
+    #
+    # - name: print
+    #   debug:
+    #     msg: '{{ files_etc.files }}'
+    #
+    # - name: print
+    #   debug:
+    #     msg: '{{ item.path }}'
+    #   with_items:
+    #     - '{{ files_etc.files }}'
+    #
+    # - name: NewRelic | Remove pending files
     #   file:
-    #     path: '{{ item }}'
+    #     path: '{{ item.path }}'
     #     state: absent
     #   with_items:
-    #     - /var/lib/dpkg/info/newrelic-infra.list
-    #     - /var/lib/dpkg/info/newrelic-infra.postrm
-    #     - /var/db/newrelic-infra
-    #     - /var/cache/apt/archives/newrelic-infra*.deb
-    #     - /etc/newrelic-infra.yml
-    #     - /etc/systemd/system/newrelic-infra.service
-    #     - /etc/newrelic-infra
-    #   when:
-    #     - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
-    #     - ansible_distribution | lower == 'ubuntu'
+    #     - '{{ files_etc.files }}'
+    #     - '{{ files_var.files }}'
+    #
+    #

@@ -1,0 +1,81 @@
+  # UBUNTU BLOCK
+
+  # Remove apt
+  - name: NewRelic | Uninstall
+    apt:
+      name: newrelic-infra
+      state: absent
+ # Pending files
+  - name: NewRelic | Find pending files associated with NewRelic on /etc
+    find:
+      path: '/etc'
+      patterns:
+        - 'newrelic*'
+        - 'newrelic-infra'
+      recurse: yes
+      file_type: file
+    register: files_etc
+
+  - name: NewRelic | Find pending files associated with NewRelic on /var
+    find:
+      path: '/var'
+      pattern: "newrelic*"
+      recurse: yes
+      file_type: file
+    register: files_var
+
+  - name: print
+    debug:
+      msg: '{{ files_etc.files }}'
+
+  - name: print
+    debug:
+      msg: '{{ item.path }}'
+    with_items:
+      - '{{ files_etc.files }}'
+
+  - name: NewRelic | Remove pending files
+    file:
+      path: '{{ item.path }}'
+      state: absent
+    with_items:
+      - '{{ files_etc.files }}'
+      - '{{ files_var.files }}'
+
+    # Pending Directories
+
+    - name: NewRelic | Find pending files associated with NewRelic on /etc
+      find:
+        path: '/etc'
+        patterns:
+          - 'newrelic*'
+          - 'newrelic-infra'
+        recurse: yes
+        file_type: directory
+      register: directories_etc
+
+    - name: NewRelic | Find pending files associated with NewRelic on /var
+      find:
+        path: '/var'
+        pattern: "newrelic*"
+        recurse: yes
+        file_type: file
+      register: directories__var
+
+    - name: print
+      debug:
+        msg: '{{ directories_etc.files }}'
+
+    - name: print
+      debug:
+        msg: '{{ item.path }}'
+      with_items:
+        - '{{ directories_etc.files }}'
+
+    - name: NewRelic | Remove pending files
+      file:
+        path: '{{ item.path }}'
+        state: absent
+      with_items:
+        - '{{ directories_etc.files }}'
+        - '{{ directories_var.files }}'
