@@ -30,15 +30,15 @@
 
     - name: print
       debug:
-        msg: '{{ files.files_etc }}'
-
-    - name: NewRelic | Remove pending files
-      file:
-        path: '{{ item.path }}'
-        state: absent
-      with_items:
-        - '{{ files_etc.files }}'
-        - '{{ files_var.files }}'
+        msg: '{{ files_etc }}'
+    # 
+    # - name: NewRelic | Remove pending files
+    #   file:
+    #     path: '{{ item.path }}'
+    #     state: absent
+    #   with_items:
+    #     - '{{ files_etc.files }}'
+    #     - '{{ files_var.files }}'
 
 
 
