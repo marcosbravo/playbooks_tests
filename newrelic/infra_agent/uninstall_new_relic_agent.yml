@@ -30,7 +30,7 @@
 
     - name: print
       debug:
-        msg: files_etc
+        msg: '{{ files.files_etc }}'
 
     - name: NewRelic | Remove pending files
       file:
