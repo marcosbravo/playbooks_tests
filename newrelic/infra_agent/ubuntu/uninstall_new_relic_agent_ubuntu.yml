@@ -58,13 +58,12 @@
   - name: NewRelic | Print Directories will be removed
     debug:
       msg: '{{ item.path }}'
-      listd: '{{ listd + item.path}}'
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
 
   - name: NR | Print
-      msg: 'listd'
+      msg: '{{ listd }}'
 
   - name: NewRelic | Remove pending directories
     file:
