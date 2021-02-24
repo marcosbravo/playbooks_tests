@@ -30,6 +30,7 @@
   apt:
     update_cache: yes
     pkg: newrelic-infra
+    state: latest
   register: install
 
 - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 6. Restart service
