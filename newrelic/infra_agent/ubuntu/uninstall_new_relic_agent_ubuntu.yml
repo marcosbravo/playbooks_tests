@@ -58,7 +58,7 @@
   - name: NewRelic | Print Directories will be removed
     debug:
       msg: '{{ item.path }}'
-      var: result
+      register: result
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
