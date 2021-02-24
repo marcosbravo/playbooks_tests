@@ -5,6 +5,7 @@
     apt:
       name: newrelic-infra
       state: absent
+
  # Pending files
   - name: NewRelic | Find pending files associated with NewRelic on /etc
     find:
@@ -54,14 +55,18 @@
       file_type: directory
     register: directories_var
 
-  - name: print
+  - name: NewRelic | Print Directories will be removed
     debug:
       msg: '{{ item.path }}'
+      listd: '{{ listd + item.path}}'
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
 
-  - name: NewRelic | Remove pending files
+   - name: NR | Print
+      msg: {{ listd }}
+
+  - name: NewRelic | Remove pending directories
     file:
       path: '{{ item.path }}'
       state: absent
