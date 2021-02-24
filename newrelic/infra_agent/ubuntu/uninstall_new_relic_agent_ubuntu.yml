@@ -39,9 +39,9 @@
 
   - name: NewRelic | Remove gpg key NewRelic
     ansible.builtin.command: apt-key list | grep -B1 newrelic | head -n1
-      register: gpguid
-      debug:
-        msg: {{ gpguid }}
+    register: gpguid
+    debug:
+      msg: {{ gpguid }}
 
     # Pending Directories
 
