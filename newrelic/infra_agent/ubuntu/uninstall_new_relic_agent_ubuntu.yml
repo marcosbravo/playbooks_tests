@@ -55,22 +55,23 @@
       file_type: directory
     register: directories_var
 
-  - name: NewRelic | Print Directories will be removed
-    var: result
-    result: '{{ item.path }}'
-    with_items:
-      - '{{ directories_etc.files }}'
-      - '{{ directories_var.files }}'
-
-  - name: NR | Print
+  - name: asdfasd
     debug:
-      msg: result
+      msg: '{{ directories_var.files.path }}'
 
 
-  - name: NewRelic | Remove pending directories
-    file:
-      path: '{{ item.path }}'
-      state: absent
+  - name: NewRelic | Print Directories will be removed
+    debug:
+      msg: '{{ item.path }}'
     with_items:
       - '{{ directories_etc.files }}'
       - '{{ directories_var.files }}'
+
+
+  # - name: NewRelic | Remove pending directories
+  #   file:
+  #     path: '{{ item.path }}'
+  #     state: absent
+  #   with_items:
+  #     - '{{ directories_etc.files }}'
+  #     - '{{ directories_var.files }}'
