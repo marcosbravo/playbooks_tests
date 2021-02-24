@@ -37,6 +37,12 @@
       - '{{ files_etc.files }}'
       - '{{ files_var.files }}'
 
+  - name: NewRelic | Remove gpg key NewRelic
+    ansible.builtin.command: apt-key list | grep -B1 newrelic | head -n1
+    register: gpguid
+    debug:
+      msg: {{ gpguid }}
+
     # Pending Directories
 
   - name: NewRelic | Find pending directories associated with NewRelic on /etc
