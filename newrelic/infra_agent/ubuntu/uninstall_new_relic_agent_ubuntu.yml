@@ -23,11 +23,11 @@
       file_type: file
     register: files_var
 
-  - name: print
-    debug:
-      msg: '{{ item.path }}'
-    with_items:
-      - '{{ files_etc.files }}'
+  # - name: print
+  #   debug:
+  #     msg: '{{ item.path }}'
+  #   with_items:
+  #     - '{{ files_etc.files }}'
 
   - name: NewRelic | Remove pending files
     file:
@@ -37,12 +37,10 @@
       - '{{ files_etc.files }}'
       - '{{ files_var.files }}'
 
-  - name: NewRelic | Remove gpg key NewRelic
+  - name: NewRelic | Get uid gpg newrelic
     shell: apt-key list | grep -B1 newrelic | head -n1
     register: gpguid
-
-  - debug: msg='{{ gpguid.stdout }}'
-
+    debug: msg='{{ gpguid.stdout }}'
 
     # Pending Directories
 
