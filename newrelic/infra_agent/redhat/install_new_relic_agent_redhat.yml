@@ -23,6 +23,13 @@
     baseurl: https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/newrelic-infra.repo
     state: present
 
+# Task to fix NewRelic error on his url repo on newrelic-infra.repo.repo
+- name: NewRelic | Fix URL repo
+  lineinfile:
+    path: /etc/yum.repos.d/newrelic-infra.repo.repo
+    regexp: baseurl = https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/newrelic-infra.repo
+    line: baseurl = https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/
+
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 4. Enable repository newrelic
   shell: yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra.repo'
   become: yes
