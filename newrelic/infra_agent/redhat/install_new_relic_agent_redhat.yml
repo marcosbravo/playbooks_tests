@@ -18,7 +18,7 @@
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 3.0 Check If repository exists
   stat:
-    path: /etc/yum.repos.d/newrelic-infra.repos
+    path: /etc/yum.repos.d/newrelic-infra.repo
   register: stat_result
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 3. Add repository repository yum
