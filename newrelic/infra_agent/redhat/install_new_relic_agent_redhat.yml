@@ -53,7 +53,6 @@
     name: newrelic-infra
     enablerepo: newrelic-infra
     state: latest
-  register: install
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 6. Restart service
   ansible.builtin.service:
