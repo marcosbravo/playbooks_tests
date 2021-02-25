@@ -27,7 +27,7 @@
     description: Repository NewRelic Infraestructure Agent
     baseurl: https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/newrelic-infra.repo
     state: present
-  when: not stat_result.stat.exists
+  when: stat_result.stat.exists
 
 # Task to fix NewRelic error on his url repo on newrelic-infra.repo.repo
 - name: NewRelic | Fix URL repo
