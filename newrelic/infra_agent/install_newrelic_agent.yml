@@ -5,6 +5,10 @@
   gather_facts: true
   tasks:
 
+    - name: Print all available facts
+      ansible.builtin.debug:
+      var: ansible_facts
+
     # UBUNTU BLOCK
 
     - name: NewRelic | Install Infraestructure Agent Ubuntu
