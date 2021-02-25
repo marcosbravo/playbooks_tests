@@ -37,10 +37,10 @@
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 4. Enable repository newrelic and Install
   yum:
-    name: newrelic-infra.repo
+    name: newrelic-infra
     update_cache: yes
     disablerepo: '*'
-    enablerepo: newrelic-infra.repo
+    enablerepo: newrelic-infra
   become: yes
   register: install
 
