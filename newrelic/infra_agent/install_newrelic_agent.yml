@@ -26,7 +26,7 @@
     - name: NewRelic | Install Infraestructure Agent RHEL 8
       include_tasks: ./redhat/install_new_relic_agent_rhel.yml
       when:
-        - ansible_distribution_major_version in ['8', '7', '6']
+        - ansible_distribution_major_version in ['8.3', '7', '6']
         - ansible_distribution | lower == 'redhat'
 
     - name: NewRelic | SO RedHat No Contemplado
@@ -34,5 +34,5 @@
         msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
               If it is a new version contact the administrator"
       when:
-        - ansible_distribution_major_version not in ['8', '7', '6']
+        - ansible_distribution_major_version not in ['8.3', '7', '6']
         - ansible_distribution | lower == 'redhat'
