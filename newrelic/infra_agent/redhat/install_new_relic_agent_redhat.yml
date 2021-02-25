@@ -40,7 +40,7 @@
     name: newrelic-infra
     update_cache: yes
     disablerepo: '*'
-    enablerepo: newrelic-infra
+    enablerepo: newrelic-infra.repo
   become: yes
   register: install
 
