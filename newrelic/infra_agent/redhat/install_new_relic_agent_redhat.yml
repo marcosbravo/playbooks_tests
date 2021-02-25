@@ -24,9 +24,7 @@
     state: present
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 4. Enable repository newrelic
-  ansible.builtin.shell:
-  args:
-    cmd: sudo yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
+  ansible.builtin.shell: sudo yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Install NewRelic Infraestructure Agent
   yum:
