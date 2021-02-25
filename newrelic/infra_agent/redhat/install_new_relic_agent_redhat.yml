@@ -48,11 +48,10 @@
   yum:
     list: newrelic-infra
 
-- name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Install NewRelic Infraestructure Agent
-  yum:
-    name: newrelic-infra
-    enablerepo: newrelic-infra
-    state: latest
+# - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Install NewRelic Infraestructure Agent
+#   yum:
+#     name: newrelic-infra
+#     state: latest
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 6. Restart service
   ansible.builtin.service:
