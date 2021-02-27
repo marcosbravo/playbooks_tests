@@ -47,7 +47,7 @@
 
     - name: NewRelic | Install Infraestructure Agent Amazon Linux 2
       include_tasks: ./amazonlinux/install_new_relic_agent_amazon_linux_2.yml
-      when: ansible_distribution_major_version == 2 
+      when: ansible_distribution == 'Amazon'
         # - ansible_facts['distribution_major_version'] == 2
         # - ansible_facts['distribution'] == 'Amazon'
 
