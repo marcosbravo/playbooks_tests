@@ -28,14 +28,6 @@
   args:
     warn: no
 
-# - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 3. Add repository repository yum
-#   ansible.builtin.yum_repository:
-#     name: newrelic-infra
-#     description: Repository NewRelic Infraestructure Agent
-#     baseurl: https://download.newrelic.com/infrastructure_agent/linux/yum/el/{{ansible_distribution_major_version}}/x86_64/
-#     state: present
-#   when: not stat_result.stat.exists
-
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 4. Enable repository newrelic
   shell: yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
   become: yes
@@ -48,14 +40,6 @@
     name: newrelic-infra
     state: latest
   register: install
-# - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 4. Enable repository newrelic and Install
-#   yum:
-#     name: newrelic-infra
-#     update_cache: yes
-#     disablerepo: '*'
-#     enablerepo: newrelic-infra
-#   become: yes
-#   register: install
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Restart service
   ansible.builtin.service:
