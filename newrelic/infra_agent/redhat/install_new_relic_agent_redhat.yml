@@ -41,7 +41,7 @@
   become: yes
   args:
     warn: no
-  when: not repo_install.stat.exists
+  when: repo_install.changed
 
 - name: NewRelic | RedHat  {{ansible_distribution_major_version}} | 4. Install NewRelic
   yum:
