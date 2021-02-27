@@ -63,5 +63,5 @@
         msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1
               If it is a new version contact the administrator"
       when:
-        - nsible_facts['distribution_major_version'] not in ['2', '1']
+        - ansible_facts['distribution_major_version'] not in ['2', '1']
         - ansible_facts['distribution'] == 'Amazon'
