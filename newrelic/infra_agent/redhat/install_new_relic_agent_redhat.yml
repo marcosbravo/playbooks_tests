@@ -22,7 +22,7 @@
   register: stat_result
 
 - name: NewRelic | RedHat {{ansible_distribution_major_version}} | 3. Add repository repository yum
-  shell: sudo curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/newrelic-infra.repo
+  shell: sudo curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/{{ansible_distribution_major_version}}/x86_64/newrelic-infra.repo
   when: not stat_result.stat.exists
   register: repo_install
   args:
