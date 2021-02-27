@@ -1,0 +1,70 @@
+  # UBUNTU BLOCK
+
+  # Remove apt
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 1. Uninstall apt newrelic
+    apt:
+      name: newrelic-infra
+      state: absent
+
+  # Remove gpg key
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 2.0 Get uid gpg newrelic
+    shell: apt-key list | grep -B1 newrelic | head -n1
+    register: gpguid
+
+  - debug: msg='{{ gpguid.stdout }}'
+
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 2.1 Delete gpg key
+    shell: apt-key del '{{ gpguid.stdout }}'
+
+ # Pending files
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3.1 Find pending files associated with NewRelic on /etc
+    find:
+      path: '/etc'
+      pattern: "*newrelic*"
+      recurse: yes
+      file_type: file
+    register: files_etc
+
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3.2 Find pending files associated with NewRelic on /var
+    find:
+      path: '/var'
+      pattern: "*newrelic*"
+      recurse: yes
+      file_type: file
+    register: files_var
+
+
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3.3. Remove pending files
+    file:
+      path: '{{ item.path }}'
+      state: absent
+    with_items:
+      - '{{ files_etc.files }}'
+      - '{{ files_var.files }}'
+
+
+    # Pending Directories
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 4.0 Find pending directories associated with NewRelic on /etc
+    find:
+      path: '/etc'
+      pattern: "newrelic*"
+      recurse: yes
+      file_type: directory
+    register: directories_etc
+
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 4.1 Find pending directories associated with NewRelic on /var
+    find:
+      path: '/var'
+      pattern: "newrelic*"
+      recurse: yes
+      file_type: directory
+    register: directories_var
+
+
+  - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 4.2 Remove pending directories
+    file:
+      path: '{{ item.path }}'
+      state: absent
+    with_items:
+      - '{{ directories_etc.files }}'
+      - '{{ directories_var.files }}'
