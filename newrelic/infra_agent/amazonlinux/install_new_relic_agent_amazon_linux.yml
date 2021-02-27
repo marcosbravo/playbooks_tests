@@ -1,0 +1,48 @@
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 1.0. Check that newrelic-infra.yml exists
+  stat:
+    path: /etc/newrelic-infra.yml
+  register: stat_result
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 1. Create newrelic-infra.yml
+  file:
+    path: /etc/newrelic-infra.yml
+    state: touch
+  when: not stat_result.stat.exists
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2. Add license key in the config file
+  lineinfile:
+    path: /etc/newrelic-infra.yml
+    regexp: '^license_key: {{ newrelic_license_key }}'
+    line: 'license_key: {{ newrelic_license_key }}'
+    state: present
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 3.0 Check If repository exists
+  stat:
+    path: /etc/yum.repos.d/newrelic-infra.repo
+  register: stat_result
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 3. Add repository repository yum
+  shell: sudo curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/{{ansible_distribution_major_version}}/x86_64/newrelic-infra.repo
+  when: not stat_result.stat.exists
+  register: repo_install
+  args:
+    warn: no
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 4. Enable repository newrelic
+  shell: yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
+  become: yes
+  args:
+    warn: no
+  when: repo_install.changed
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 5. Install NewRelic
+  yum:
+    name: newrelic-infra
+    state: latest
+  register: install
+
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 6. Restart service
+  ansible.builtin.service:
+    name: newrelic-infra
+    state: restarted
+  when: install.changed
