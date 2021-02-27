@@ -35,13 +35,13 @@
     warn: no
   when: repo_install.changed
 
-- name: NewRelic | RedHat  {{ansible_distribution_major_version}} | 4. Install NewRelic
+- name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Install NewRelic
   yum:
     name: newrelic-infra
     state: latest
   register: install
 
-- name: NewRelic | RedHat {{ansible_distribution_major_version}} | 5. Restart service
+- name: NewRelic | RedHat {{ansible_distribution_major_version}} | 6. Restart service
   ansible.builtin.service:
     name: newrelic-infra
     state: restarted
