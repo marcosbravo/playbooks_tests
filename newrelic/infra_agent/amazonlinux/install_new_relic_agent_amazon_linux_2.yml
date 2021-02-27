@@ -1,4 +1,4 @@
-- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 1.0. Check that newrelic-infra.yml exists
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 1.0 Check that newrelic-infra.yml exists
   stat:
     path: /etc/newrelic-infra.yml
   register: stat_result
@@ -35,13 +35,13 @@
     warn: no
   when: repo_install.changed
 
-- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 5. Install NewRelic
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 5. Install NewRelic Agent
   yum:
     name: newrelic-infra
     state: latest
   register: install
 
-- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 6. Restart service
+- name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 6. Restart NewRelc Service
   ansible.builtin.service:
     name: newrelic-infra
     state: restarted
