@@ -48,20 +48,20 @@
     - name: NewRelic | Install Infraestructure Agent Amazon Linux 2
       include_tasks: ./amazonlinux/install_new_relic_agent_amazon_linux_2.yml
       when:
-        - ansible_distribution_major_version == 2
-        - ansible_distribution == 'Amazon'
+        - ansible_facts['distribution_major_version'] == 2
+        - ansible_facts['distribution'] == 'Amazon'
 
 
-    - name: NewRelic | Install Infraestructure Agent AmazonLinux 2
+    - name: NewRelic | Install Infraestructure Agent AmazonLinux 1
       include_tasks: ./amazonlinux/install_new_relic_agent_amazon_linux_1.yml
       when:
-        - ansible_distribution_major_version == 1
-        - ansible_distribution == 'Amazon'
+        - ansible_facts['distribution_major_version'] == 1
+        - ansible_facts['distribution'] == 'Amazon'
 
     - name: NewRelic | SO Amazon Linux No Contemplado
       ansible.builtin.debug:
         msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1
               If it is a new version contact the administrator"
       when:
-        - ansible_distribution_major_version not in ['2', '1']
-        - ansible_distribution == 'Amazon'
+        - nsible_facts['distribution_major_version'] not in ['2', '1']
+        - ansible_facts['distribution'] == 'Amazon'
