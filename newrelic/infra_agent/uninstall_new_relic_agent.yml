@@ -2,16 +2,10 @@
 - hosts: all
   become: yes
   gather_facts: true
-  vars:
-    listd: []
 
   tasks:
 
-    - name: Print all available facts
-      ansible.builtin.debug:
-        var: ansible_facts
-
-    # UBUNTU BLOCK
+    # REDHAT BLOCK
 
     - name: NewRelic | Install Infraestructure Agent Ubuntu
       include_tasks: "./ubuntu/uninstall_new_relic_agent_ubuntu.yml"
@@ -19,7 +13,7 @@
         - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
         - ansible_distribution | lower == 'ubuntu'
 
-    - name: NewRelic | SO Ubuntu No Contemplado
+    - name: NewRelic | OS Ubuntu not contemplated
       debug:
         msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 20 | 18 | 16 | 14 | 12
               If it is a new version contact the administrator"
@@ -35,7 +29,7 @@
         - ansible_distribution_major_version in ['8', '7', '6']
         - ansible_distribution | lower == 'redhat'
 
-    - name: NewRelic | SO RedHat No Contemplado
+    - name: NewRelic | OS RedHat not contemplated
       ansible.builtin.debug:
         msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
               If it is a new version contact the administrator"
@@ -43,7 +37,7 @@
         - ansible_distribution_major_version not in ['8', '7', '6']
         - ansible_distribution | lower == 'redhat'
 
-      # AMI LINUX
+      # AMAZON LINUX BLOCK
 
     - name: NewRelic | Install Infraestructure Agent Amazon Linux 2
       include_tasks: ./amazonlinux/uninstall_new_relic_agent_amazon_linux_2.yml
@@ -57,7 +51,7 @@
         - ansible_facts['distribution_major_version'] == '1'
         - ansible_facts['distribution'] == 'Amazon'
 
-    - name: NewRelic | SO Amazon Linux No Contemplado
+    - name: NewRelic | OS Amazon Linux not contemplated
       ansible.builtin.debug:
         msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1
               If it is a new version contact the administrator"
