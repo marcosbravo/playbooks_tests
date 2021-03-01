@@ -59,3 +59,12 @@
       when:
         - ansible_distribution_major_version not in ['2', '1']
         - ansible_distribution | lower == 'amazon'
+
+      # Block OS not contemplated
+
+    - name: NewRelic | OS {{ansible_distribution}} not contemplated
+      ansible.builtin.debug:
+        msg: "Version {{ansible_distribution}}  {{ansible_distribution_major_version}} not covered
+              If it is a new Operation System contact the administrator"
+      when:
+        - ansible_distribution | lower not in ['ubuntu', 'redhat', 'amazon']
