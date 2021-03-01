@@ -1,0 +1,20 @@
+---
+
+- name:
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    # WINDOWS BLOCK
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 1. Add environment variable License
+      win_shell: $LICENSE_KEY="eu01xx119f7749aa5b4560a623bbfe86c11fNRAL";
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 2. Download Agent MSI
+      win_shell: (New-Object System.Net.WebClient).DownloadFile("https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi", "$env:TEMP\newrelic-infra.msi");
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
+      win_shell: msiexec.exe /qn /i "$env:TEMP\newrelic-infra.msi" GENERATE_CONFIG=true LICENSE_KEY="eu01xx119f7749aa5b4560a623bbfe86c11fNRAL" | Out-Null;
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 3. Start Agent MSI
+      win_shell: net start newrelic-infra

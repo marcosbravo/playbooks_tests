@@ -1,0 +1,82 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+
+  tasks:
+
+    # UBUNTU BLOCK
+
+    - name: NewRelic | Install Infraestructure Agent Ubuntu
+      include_tasks: "./ubuntu/uninstall_new_relic_agent_ubuntu.yml"
+      when:
+        - ansible_distribution_major_version in ['20', '18', '16', '14', '12']
+        - ansible_distribution | lower == 'ubuntu'
+
+    - name: NewRelic | OS Ubuntu not contemplated
+      debug:
+        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 20 | 18 | 16 | 14 | 12
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['20', '18', '16', '14', '12']
+        - ansible_distribution | lower == 'ubuntu'
+
+      # REDHAT BLOCK
+
+    - name: NewRelic | Install Infraestructure Agent RHEL 8
+      include_tasks: ./redhat/uninstall_new_relic_agent_redhat.yml
+      when:
+        - ansible_distribution_major_version in ['8', '7', '6']
+        - ansible_distribution | lower == 'redhat'
+
+    - name: NewRelic | OS RedHat not contemplated
+      ansible.builtin.debug:
+        msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8', '7', '6']
+        - ansible_distribution | lower == 'redhat'
+
+      # CENTOS BLOCK
+
+    - name: NewRelic | Install Infraestructure Agent CentOS 7
+      include_tasks: ./centos/uninstall_new_relic_agent_centos_7.yml
+      when:
+        - ansible_distribution_major_version == '7'
+        - ansible_distribution | lower == 'centos'
+
+    - name: NewRelic | Install Infraestructure Agent CentOS 6
+      include_tasks: ./centos/uninstall_new_relic_agent_centos_6.yml
+      when:
+        - ansible_distribution_major_version == '6'
+        - ansible_distribution | lower == 'centos'
+
+    - name: NewRelic | OS CentOS not contemplated
+      ansible.builtin.debug:
+        msg: "Version CentOS {{ansible_distribution_major_version}} not covered,  CentOS versions covered: 7 | 6
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['7', '6']
+        - ansible_distribution | lower == 'centos'
+
+      # AMAZON LINUX BLOCK
+
+    - name: NewRelic | Install Infraestructure Agent Amazon Linux 2
+      include_tasks: ./amazonlinux/uninstall_new_relic_agent_amazon_linux_2.yml
+      when:
+        - ansible_facts['distribution_major_version'] == '2'
+        - ansible_facts['distribution'] == 'Amazon'
+
+    - name: NewRelic | Install Infraestructure Agent AmazonLinux 1
+      include_tasks: ./amazonlinux/uninstall_new_relic_agent_amazon_linux_1.yml
+      when:
+        - ansible_facts['distribution_major_version'] == '1'
+        - ansible_facts['distribution'] == 'Amazon'
+
+    - name: NewRelic | OS Amazon Linux not contemplated
+      ansible.builtin.debug:
+        msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1
+              If it is a new version contact the administrator"
+      when:
+        - ansible_facts['distribution_major_version'] not in ['2', '1']
+        - ansible_facts['distribution'] == 'Amazon'
