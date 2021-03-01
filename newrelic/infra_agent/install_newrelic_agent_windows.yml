@@ -7,17 +7,12 @@
 
     # WINDOWS BLOCK
 
-    - name: NewRelic | Install Infraestructure Windows Agent | 1. Check if environment variable License exists
-
-      register:
-
     - name: Set an environment variable for all users
       win_environment:
         state: present
         name: LICENSE_KEY
         value: {{ newrelic_license_key }}
         level: machine
-
 
     #
     # - name: NewRelic | Install Infraestructure Windows Agent | 1. Add environment variable License
