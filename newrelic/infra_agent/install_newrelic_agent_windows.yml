@@ -24,14 +24,15 @@
         url: https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi
         dest: C:\Windows\temp\newrelic-infra.msi
       register: newrelic_get_status
-      when: stat_file.stat.exists == True
+      when: stat_file.stat.exists == False
+
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
       win_package:
         path: C:\Windows\temp\newrelic-infra.msi
         state: present
         arguments: GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
-      when: newrelic_get_status == True
+      when: newrelic_get_status.changed == True
 
     - name: NewRelic | Install Infraestructure Windows Agent | 4. Start Agent MSI
       win_shell: net start newrelic-infra
