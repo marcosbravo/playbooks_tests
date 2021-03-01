@@ -17,4 +17,4 @@
         name: newrelic-infra
         state:absent
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows | 3. Delete Folder Program Files
+    # - name: NewRelic | Uninstall Infraestructure Agent Windows | 3. Delete Folder Program Files
