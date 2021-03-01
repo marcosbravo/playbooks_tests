@@ -4,8 +4,6 @@
   hosts: all
   gather_facts: false
   tasks:
-  vars:
-    destpath: 'C:\Windows\temp\'
 
     # WINDOWS BLOCK
 
@@ -21,12 +19,12 @@
     - name:  NewRelic | Install Infraestructure Windows Agent | 2. Get MSI New Relic Agent
       win_get_url:
         url: https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi
-        dest: {{ destpath }}newrelic-infra.msi
+        dest: C:\Windows\temp\newrelic-infra.msi
       register: newrelic_get_status
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
       win_package:
-        path: { destpath }}newrelic-infra.msi
+        path: C:\Windows\temp\newrelic-infra.msi
         state: present
         arguments: GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
 
