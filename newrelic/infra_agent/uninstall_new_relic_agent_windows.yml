@@ -8,15 +8,13 @@
     # WINDOWS BLOCK
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
+      win_service:
+        name: newrelic-infra
+        state: stopped
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 2. Remove Program NewRelic
+      win_service:
+        name: newrelic-infra
+        state:absent
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 3. Delete Folder Program Files
-
-    - name: NewRelic | OS Ubuntu not contemplated
-      debug:
-        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered,  Ubuntu versions covered: 20 | 18 | 16 | 14 | 12
-              If it is a new version contact the administrator"
-      when:
-        - ansible_distribution_major_version not in ['20', '18', '16', '14', '12']
-        - ansible_distribution | lower == 'ubuntu'
