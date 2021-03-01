@@ -1,11 +1,15 @@
 ---
-  
+
 - name:
   hosts: all
   gather_facts: false
   tasks:
 
     # WINDOWS BLOCK
+
+    - name:
+        debug:
+          msg: "Empieza"
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
       win_package:
