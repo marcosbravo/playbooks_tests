@@ -8,8 +8,8 @@
     # WINDOWS BLOCK
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
-        debug:
-          msg: "Empieza"
+      debug:
+        msg: "Empieza"
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
       win_package:
