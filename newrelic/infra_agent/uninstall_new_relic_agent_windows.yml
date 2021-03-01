@@ -7,7 +7,7 @@
     # WINDOWS BLOCK
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
-      win_service:
+      ansible.windows.win_service:
         name: newrelic-infra
         state: status
       register: statusnr
