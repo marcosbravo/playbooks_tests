@@ -40,17 +40,23 @@
       # CENTOS BLOCK
 
     - name: NewRelic | Install Infraestructure Agent CentOS 7
-      include_tasks: ./centos/install_new_relic_agent_redhat.yml
+      include_tasks: ./centos/install_new_relic_agent_centos_7.yml
       when:
-        - ansible_distribution_major_version | lower == centos
-        - ansible_distribution | lower == 'redhat'
+        - ansible_distribution_major_version == '7'
+        - ansible_distribution | lower == 'centos'
+
+    - name: NewRelic | Install Infraestructure Agent CentOS 6
+      include_tasks: ./centos/install_new_relic_agent_centos_6.yml
+      when:
+        - ansible_distribution_major_version == '6'
+        - ansible_distribution | lower == 'centos'
 
     - name: NewRelic | OS CentOS not contemplated
       ansible.builtin.debug:
-        msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
+        msg: "Version CentOS {{ansible_distribution_major_version}} not covered,  CentOS versions covered: 7 | 6
               If it is a new version contact the administrator"
       when:
-        - ansible_distribution_major_version not in ['8', '7', '6']
+        - ansible_distribution_major_version not in ['7', '6']
         - ansible_distribution | lower == 'redhat'
 
       # AMAZON LINUX BLOCK
