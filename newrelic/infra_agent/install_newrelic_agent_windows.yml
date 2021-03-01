@@ -19,7 +19,7 @@
     - name:  NewRelic | Install Infraestructure Windows Agent | 2. Get MSI New Relic Agent
       win_get_url:
         url: https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi
-        dest: C:\tmp\newrelic-infra.msi
+        dest: '$env:TEMP/newrelic-infra.msi'
       register: newrelic_get_status
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
