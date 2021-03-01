@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
   vars:
-    destpath: C:\Windows\temp\
+    destpath: 'C:\Windows\temp\'
 
     # WINDOWS BLOCK
 
