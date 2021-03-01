@@ -31,7 +31,7 @@
         path: C:\Windows\temp\newrelic-infra.msi
         state: present
         arguments: GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
-        
-    - name: NewRelic | Install Infraestructure Windows Agent | 3. Start Agent MSI
+      when: newrelic_get_status == True
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 4. Start Agent MSI
       win_shell: net start newrelic-infra
-      state: present
