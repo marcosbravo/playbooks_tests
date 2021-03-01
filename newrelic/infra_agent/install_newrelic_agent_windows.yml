@@ -13,25 +13,26 @@
         name: LICENSE_KEY
         value: '{{ newrelic_license_key }}'
         level: machine
-    #
-    # - name: NewRelic | Install Infraestructure Windows Agent | 2. Download Agent MSI
-    #   win_shell: (New-Object System.Net.WebClient).DownloadFile("https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi", "$env:TEMP\newrelic-infra.msi");
+
+    - name: NewRelic | Install Infraestructure Windows Agent | 2.0 Check if is presente MSI New Relic Agent
+      win_stat: path= 'C:\Windows\temp\newrelic-infra.msi'
+      register: stat_file
+
     - name:  NewRelic | Install Infraestructure Windows Agent | 2. Get MSI New Relic Agent
       win_get_url:
         url: https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi
         dest: C:\Windows\temp\newrelic-infra.msi
       register: newrelic_get_status
+      when: stat_file.stat.exists == True
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
       win_package:
         path: C:\Windows\temp\newrelic-infra.msi
         state: present
         arguments: GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
-
-    #
-    # - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
-    #   win_package: msiexec.exe /qn /i "$env:TEMP\newrelic-infra.msi" GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}' | Out-Null;
+      register: agent_installed
 
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Start Agent MSI
       win_shell: net start newrelic-infra
+      state: present
