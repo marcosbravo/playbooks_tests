@@ -57,7 +57,7 @@
               If it is a new version contact the administrator"
       when:
         - ansible_distribution_major_version not in ['7', '6']
-        - ansible_distribution | lower == 'redhat'
+        - ansible_distribution | lower == 'centos'
 
       # AMAZON LINUX BLOCK
 
