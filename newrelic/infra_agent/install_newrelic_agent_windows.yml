@@ -11,7 +11,7 @@
       win_environment:
         state: present
         name: LICENSE_KEY
-        value: {{ newrelic_license_key }}
+        value: '{{ newrelic_license_key }}'
         level: machine
 
     #
