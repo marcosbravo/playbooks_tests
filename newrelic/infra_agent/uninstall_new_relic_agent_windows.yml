@@ -2,6 +2,7 @@
 - hosts: all
   become: yes
   gather_facts: false
+
   tasks:
 
     # WINDOWS BLOCK
@@ -14,4 +15,4 @@
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 2. Remove Program NewRelic
       win_service:
         name: newrelic-infra
-        state:absent
+        state: absent
