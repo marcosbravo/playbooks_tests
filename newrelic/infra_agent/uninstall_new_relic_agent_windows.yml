@@ -11,7 +11,10 @@
       debug:
         msg: "Empieza"
 
+    - name: NewRelic | Segundo
+
+
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
-      win_package:
+      win_file:
         path: C:\Windows\temp\newrelic-infra.msi
         state: absent
