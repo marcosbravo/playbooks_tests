@@ -15,7 +15,8 @@
         level: machine
 
     - name: NewRelic | Install Infraestructure Windows Agent | 2.0 Check if is presente MSI New Relic Agent
-      win_stat: path= 'C:\Windows\temp\newrelic-infra.msi'
+      win_stat:
+        path: 'C:\Windows\temp\newrelic-infra.msi'
       register: stat_file
 
     - name:  NewRelic | Install Infraestructure Windows Agent | 2. Get MSI New Relic Agent
