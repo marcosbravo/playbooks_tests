@@ -9,9 +9,11 @@
     - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
       win_service:
         name: newrelic-infra
-        state: stopped
+        state: status
+      register: statusnr
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows | 2. Remove Program NewRelic
-      win_service:
-        name: newrelic-infra
-        state: absent
+
+    # - name: NewRelic | Uninstall Infraestructure Agent Windows | 2. Remove Program NewRelic
+    #   win_service:
+    #     name: newrelic-infra
+    #     state: absent
