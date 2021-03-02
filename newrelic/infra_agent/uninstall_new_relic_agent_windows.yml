@@ -33,7 +33,7 @@
         state: absent
       when: nrmsi.stat.exists == True
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove MSI package if Exists
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove environment variable License
       win_environment:
         state: absent
         name: LICENSE_NEW_RELIC_KEY
