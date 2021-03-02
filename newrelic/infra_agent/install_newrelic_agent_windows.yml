@@ -10,7 +10,7 @@
     - name: NewRelic | Install Infraestructure Windows Agent | 1.0 Check New Relic Service is alredy present
       win_service:
         name: newrelic-infra
-        register: service_existence
+      register: service_existence
 
     - name: NewRelic | Install Infraestructure Windows Agent | Information
       debug:
@@ -27,11 +27,6 @@
         level: machine
       when: service_existence.state is not defined
 
-    # - name: NewRelic | Install Infraestructure Windows Agent | 2.0 Check if is presente MSI New Relic Agent
-    #   win_stat:
-    #     path: 'C:\Windows\temp\newrelic-infra.msi'
-    #   register: stat_file
-
     - name:  NewRelic | Install Infraestructure Windows Agent | 2. Get MSI New Relic Agent
       win_get_url:
         url: https://download.newrelic.com/infrastructure_agent/windows/newrelic-infra.msi
@@ -40,12 +35,15 @@
       when: service_existence.state is not defined
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
-      win_package:
-        path: C:\Windows\temp\newrelic-infra.msi
-        state: present
-        arguments: GENERATE_CONFIG=true LICENSE_NEW_RELIC_KEY='{{ newrelic_license_key }}'
-      register: nr_agent_installed
-      when: service_existence.state is not defined
+      win_shell: msiexec.exe /qn /i  C:\Windows\temp\newrelic-infra.msi GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
+
+    # - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
+    #   win_package:
+    #     path: C:\Windows\temp\newrelic-infra.msi
+    #     state: present
+    #     arguments: GENERATE_CONFIG=true LICENSE_NEW_RELIC_KEY='{{ newrelic_license_key }}'
+    #   register: nr_agent_installed
+    #   when: service_existence.state is not defined
 
     - name: NewRelic | Install Infraestructure Windows Agent | 4. Start Agent MSI
       win_service:
