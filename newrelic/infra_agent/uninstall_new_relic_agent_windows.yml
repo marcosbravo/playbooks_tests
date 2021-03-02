@@ -34,7 +34,7 @@
       when: nrmsi.stat.exists == True
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 4 Remove directory newrelic
-      win_files:
+      win_file:
         path: C:\Program Files\New Relic
         state: absent
 
