@@ -10,7 +10,7 @@
     - name: NewRelic | Install Infraestructure Windows Agent | 1.0 Check New Relic Service is alredy present
       win_service:
         name: newrelic-infra
-      register: service_existence
+        register: service_existence
 
     - name: NewRelic | Install Infraestructure Windows Agent | Information
       debug:
@@ -45,7 +45,7 @@
         state: present
         arguments: GENERATE_CONFIG=true LICENSE_NEW_RELIC_KEY='{{ newrelic_license_key }}'
       register: nr_agent_installed
-      # when: service_existence.state is not defined
+      when: service_existence.state is not defined
 
     - name: NewRelic | Install Infraestructure Windows Agent | 4. Start Agent MSI
       win_shell: net start newrelic-infra
