@@ -21,9 +21,3 @@
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 2. Uninstall New Relic Service
       win_shell: (Get-WmiObject -Class Win32_Product | Where-Object{$_.Name -eq "New Relic Infrastructure Agent"}).Uninstall()
       when: defined.state is defined
-
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 3. Uninstall New Relic Package
-      win_service:
-        name: newrelic-infra
-        state: absent
-      when: defined.state is defined
