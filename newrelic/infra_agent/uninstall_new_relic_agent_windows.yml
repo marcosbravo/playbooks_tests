@@ -23,14 +23,14 @@
       when: defined.state is defined
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 3.0 Check if New Relic MSI exists
-      win_file:
+      stat:
         path: C:\Windows\temp\newrelic-infra.msi
       register: nrmsi
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 3. Remove New Relic MSI
       win_file:
         path: C:\Windows\temp\newrelic-infra.msi
-      when: nrmsi.exists == True
+      when: nrmsi.stat.exists == True
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove MSI package if Exists
       win_environment:
