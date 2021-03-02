@@ -7,10 +7,20 @@
 
     # WINDOWS BLOCK
 
-    - name: NewRelic | Install Infraestructure Windows Agent | 1. Stop Agent MSI
-      win_shell: net stop newrelic-infra
+    - name: NewRelic | Uninstall Infraestructure Windows Agent | 1.0 Check if New Relic Service Exists
+      win_servce:
+        name: newrelic-infra
+        register: defined
+
+    - name: NewRelic | Uninstall Infraestructure Windows Agent | 1. Stop Agent MSI
+      win_servce:
+        win_service:
+          name: newrelic-infra
+          state: stopped
+      when: defined.state is defined
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 1. Uninstall New Relic Program
       win_service:
         name: newrelic-infra
         state: absent
+      when: defined.state is defined
