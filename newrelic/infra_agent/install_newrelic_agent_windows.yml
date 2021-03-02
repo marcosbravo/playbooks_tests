@@ -36,6 +36,7 @@
 
     - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
       win_shell: msiexec.exe /qn /i  C:\Windows\temp\newrelic-infra.msi GENERATE_CONFIG=true LICENSE_KEY='{{ newrelic_license_key }}'
+      when: service_existence.state is not defined
 
     # - name: NewRelic | Install Infraestructure Windows Agent | 3. Install Agent MSI
     #   win_package:
