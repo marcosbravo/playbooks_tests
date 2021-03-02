@@ -8,7 +8,7 @@
     # WINDOWS BLOCK
 
     - name: NewRelic | Uninstall Infraestructure Windows Agent | 1.0 Check if New Relic Service Exists
-      win_servce:
+      win_service:
         name: newrelic-infra
         register: defined
 
