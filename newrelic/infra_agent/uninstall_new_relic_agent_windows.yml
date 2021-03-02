@@ -16,10 +16,10 @@
       win_service:
         name: newrelic-infra
         state: stopped
-      when: defined.state is defined
+      when: defined.state is not defined
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 1. Uninstall New Relic Program
       win_service:
         name: newrelic-infra
         state: absent
-      when: defined.state is defined
+      when: defined.state is not defined
