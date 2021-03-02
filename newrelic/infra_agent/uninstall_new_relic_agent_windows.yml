@@ -7,11 +7,10 @@
 
     # WINDOWS BLOCK
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
-      debug:
-        msg: "Empieza"
+    - name: NewRelic | Install Infraestructure Windows Agent | 1. Stop Agent MSI
+      win_shell: net stop newrelic-infra
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows | 1. Stop Infraestructure Agent
-      win_file:
-        path: C:\Windows\temp\newrelic-infra.msi
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 1. Uninstall New Relic Program
+      win_service:
+        name: newrelic-infra
         state: absent
