@@ -33,7 +33,12 @@
         state: absent
       when: nrmsi.stat.exists == True
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove environment variable License
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4 Remove directory newrelic
+      win_stat:
+        path: C:\Program Files\New Relic
+        state: absent
+
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 5. Remove environment variable License
       win_environment:
         state: absent
         name: LICENSE_NEW_RELIC_KEY
