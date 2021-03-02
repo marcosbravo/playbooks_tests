@@ -27,16 +27,13 @@
         path: C:\Windows\temp\newrelic-infra.msi
       register: nrmsi
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 3 Check if New Relic MSI exists
-      win_file:
-        path: C:\Program Files\New Relic\newrelic-infra
-
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove New Relic MSI
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 3. Remove New Relic MSI
       win_file:
         path: C:\Windows\temp\newrelic-infra.msi
+        state: absent
       when: nrmsi.stat.exists == True
 
-    - name: NewRelic | Uninstall Infraestructure Agent Windows| 5. Remove MSI package if Exists
+    - name: NewRelic | Uninstall Infraestructure Agent Windows| 4. Remove MSI package if Exists
       win_environment:
         state: absent
         name: LICENSE_NEW_RELIC_KEY
