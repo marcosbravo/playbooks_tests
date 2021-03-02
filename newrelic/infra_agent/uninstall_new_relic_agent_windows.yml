@@ -13,10 +13,9 @@
         register: defined
 
     - name: NewRelic | Uninstall Infraestructure Windows Agent | 1. Stop Agent MSI
-      win_servce:
-        win_service:
-          name: newrelic-infra
-          state: stopped
+      win_service:
+        name: newrelic-infra
+        state: stopped
       when: defined.state is defined
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 1. Uninstall New Relic Program
