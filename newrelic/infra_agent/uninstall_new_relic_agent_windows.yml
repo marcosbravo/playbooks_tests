@@ -10,7 +10,7 @@
     - name: NewRelic | Uninstall Infraestructure Windows Agent | 1.0 Check if New Relic Service Exists
       win_service:
         name: newrelic-infra
-        register: defined
+      register: defined
 
     - name: NewRelic | Uninstall Infraestructure Windows Agent | 1. Stop Agent MSI
       win_service:
