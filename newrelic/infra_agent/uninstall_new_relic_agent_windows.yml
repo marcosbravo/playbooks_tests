@@ -40,5 +40,4 @@
       win_environment:
         state: absent
         name: LICENSE_NEW_RELIC_KEY
-        value: '{{ newrelic_license_key }}'
         level: machine
