@@ -23,7 +23,7 @@
       when: defined.state is defined
 
     - name: NewRelic | Uninstall Infraestructure Agent Windows| 3.0 Check if New Relic MSI exists
-      stat:
+      win_stat:
         path: C:\Windows\temp\newrelic-infra.msi
       register: nrmsi
 
