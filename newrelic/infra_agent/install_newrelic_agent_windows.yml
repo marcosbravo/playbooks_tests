@@ -17,7 +17,7 @@
         msg:
           - "Actually newrelic agent version is alredy Installed"
           - "If is not the latest version of agent, then Uninstall and Re-Install the latest agent of newrelic version"
-      when: service_existence.state is not defined
+      when: service_existence.state is defined
 
     - name: NewRelic | Install Infraestructure Windows Agent | 1. Set License New Relic environment variable
       win_environment:
