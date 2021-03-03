@@ -30,7 +30,7 @@
         - ansible_distribution | lower == 'redhat'
 
     - name: NewRelic | OS RedHat not contemplated
-      ansible.builtin.debug:
+      debug:
         msg: "Version RedHat {{ansible_distribution_major_version}} not covered,  RedHat versions covered: 8 | 7 | 6
               If it is a new version contact the administrator"
       when:
@@ -52,7 +52,7 @@
         - ansible_distribution | lower == 'centos'
 
     - name: NewRelic | OS CentOS not contemplated
-      ansible.builtin.debug:
+      debug:
         msg: "Version CentOS {{ansible_distribution_major_version}} not covered,  CentOS versions covered: 7 | 6
               If it is a new version contact the administrator"
       when:
@@ -75,7 +75,7 @@
         - ansible_distribution | lower == 'amazon'
 
     - name: NewRelic | OS Amazon Linux not contemplated
-      ansible.builtin.debug:
+      debug:
         msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1
               If it is a new version contact the administrator"
       when:
@@ -85,9 +85,9 @@
       # Block OS not contemplated
 
     - name: NewRelic | OS {{ansible_distribution}} not contemplated
-      ansible.builtin.debug:
+      debug:
         msg:
           - "Version {{ansible_distribution}} {{ansible_distribution_major_version}} not covered"
-          - "If it is a new Operation System contact the administrator"
+          - "If it is a new Operating System contact the administrator"
       when:
         - ansible_distribution | lower not in ['ubuntu', 'redhat', 'amazon', 'centos']
