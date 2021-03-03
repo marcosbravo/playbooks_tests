@@ -15,7 +15,6 @@
     regexp: '^license_key: {{ newrelic_license_key }}'
     line: 'license_key: {{ newrelic_license_key }}'
     backrefs: yes
-    state: present
 
 - name: NewRelic | Ubuntu {{ansible_distribution_major_version}} | 3. Add GPG key to the apt sources keyring
   apt_key:
