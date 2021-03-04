@@ -17,9 +17,11 @@
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.0 Check previously value of license if exists
   shell: "cat /etc/newrelic-infra.yml | awk -F': ' '{print $2}'"
   register: licvalue
-  licvaluekey : '{{ licvalue.stdout_lines }}'
   when: newrelic_license_previously.stdout.find('license_key') != -1
   changed_when: false
+
+- name: ASSIG
+  licvaluekey : '{{ licvalue.stdout_lines }}'
 
 - name: TEST
   debug:
