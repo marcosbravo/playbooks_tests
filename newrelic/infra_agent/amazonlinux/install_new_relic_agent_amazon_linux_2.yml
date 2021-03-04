@@ -12,6 +12,7 @@
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.0 Get license key in the config file
   shell: cat /etc/newrelic-infra.yml
   register: newrelic_license_previously
+  changed_when: false
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.0 Check previously value of license if exists
   shell: "cat /etc/newrelic-infra.yml | awk -F': ' '{print $2}'"
@@ -22,7 +23,7 @@
   shell: sed '/^license_key/d' /etc/newrelic-infra.yml
   when:
     - newrelic_license_previously.stdout.find('license_key') != -1
-    - licvalue != '{{ newrelic_license_key }}'
+    - licvalue != 'newrelic_license_key'
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.2 Add license key in the config file
   lineinfile:
