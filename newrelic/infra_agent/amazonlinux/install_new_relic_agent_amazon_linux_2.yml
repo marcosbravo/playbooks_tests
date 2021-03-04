@@ -25,7 +25,6 @@
     path: /etc/newrelic-infra.yml
     state: absent
     regexp: '^license_key: *'
-    line: 'license_key: {{ newrelic_license_key }}'
   when:
     - newrelic_license_previously.stdout.find('license_key') != -1
     - licvalue != 'newrelic_license_key'
