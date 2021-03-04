@@ -22,6 +22,9 @@
   when: newrelic_license_previously.stdout.find('license_key') != -1
   changed_when: false
 
+- name: latest
+  debug:
+    msg: '{{ nrcreate }}'
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.2 Remove previously license key in the config file
   lineinfile:
