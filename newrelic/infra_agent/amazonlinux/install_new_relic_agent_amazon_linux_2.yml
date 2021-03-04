@@ -20,12 +20,26 @@
   when: newrelic_license_previously.stdout.find('license_key') != -1
   changed_when: false
 
+
+- name: TEST
+  debug:
+    msg: '{{ licvalue }}'
+  # when: licvalue.stdout != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
+
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
   lineinfile:
     path: /etc/newrelic-infra.yml
     state: absent
     regexp: '^license_key: *'
   when: licvalue.stdout != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
+
+
+# - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
+#   shell: sed '/^license_key/d' /etc/newrelic-infra.yml
+#   when:
+#     - newrelic_license_previously.stdout.find('license_key') != -1
+#     - licvalue != 'newrelic_license_key'
+#   changed_when: false
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.2 Add license key in the config file
   lineinfile:
