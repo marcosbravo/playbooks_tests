@@ -28,7 +28,6 @@
   lineinfile:
     path: /etc/newrelic-infra.yml
     state: present
-    regexp: '^license_key: *'
     line: 'license_key: {{ newrelic_license_key }}'
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 3.0 Check If repository exists
