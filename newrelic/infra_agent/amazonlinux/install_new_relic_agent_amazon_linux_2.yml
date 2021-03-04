@@ -16,6 +16,7 @@
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
   when: newrelic_license_previously.stdout.find('license_key') != -1
   shell: sed '/^license_key/d' /etc/newrelic-infra.yml
+  warn: false
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.2 Add license key in the config file
   lineinfile:
