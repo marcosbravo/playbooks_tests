@@ -29,8 +29,7 @@
     state: absent
     regexp: '^license_key: *'
   when:
-    - licvalue.stdout_lines[0] != newrelic_license_key
-    - nrcreate is defined
+    - nrcreate is not defined
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.3 Add license key in the config file
   lineinfile:
