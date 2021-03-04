@@ -7,6 +7,7 @@
   file:
     path: /etc/newrelic-infra.yml
     state: touch
+    register: nrcreate
   when: not stat_result.stat.exists
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.0 Get license key in the config file
@@ -29,7 +30,7 @@
     regexp: '^license_key: *'
   when:
     - licvalue.stdout_lines[0] != newrelic_license_key
-    - licvalue is defined
+    - nrcreate is defined
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.3 Add license key in the config file
   lineinfile:
