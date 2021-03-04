@@ -23,7 +23,7 @@
 - name: TEST
   debug:
     msg: '{{ licvalue.stdout_lines }}'
-  when: licvalue != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
+  when: '{{ licvalue.stdout_lines }}' != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
 
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
   lineinfile:
