@@ -32,7 +32,7 @@
     state: absent
     regexp: '^license_key: *'
   when:
-    - nrcreate.rc != 0
+    - nrcreate.changed != false
     - licvalue.stdout_lines[0] != newrelic_license_key
 
 
