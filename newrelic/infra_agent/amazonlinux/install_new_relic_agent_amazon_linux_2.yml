@@ -20,13 +20,17 @@
   when: newrelic_license_previously.stdout.find('license_key') != -1
   changed_when: false
 
+- name: TEST
+  debug:
+    msg: "Hace la comparación"
+when: licvalue != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
+
 - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
   lineinfile:
     path: /etc/newrelic-infra.yml
     state: absent
     regexp: '^license_key: *'
-  when:
-    - licvalue != eu01xx119f7749aa5b4560a623bbfe86c11fNRAL
+  when: licvalue != 'eu01xx119f7749aa5b4560a623bbfe86c11fNRAL'
 
 
 # - name: NewRelic | Amazon Linux {{ansible_distribution_major_version}} | 2.1 Remove previously license key in the config file
