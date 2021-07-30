@@ -26,14 +26,24 @@
   debug:
     msg: "{{ list_upgradable_state.stdout}}"
 
+
+
+- name: Add line by line json output
+  lineinfile:
+    path: /tmp/somelog.json
+    line: "{{ item.split('/') | to_nice_json  }}"
+    #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
+  loop: "{{ list_upgradable_state.stdout_lines}}"
+
+
 ##################################
 
-- name: Load Variable for json
-  include_vars:
-    file: /tmp/var.json
-    name: imported_var
+- name: load var from file
+    include_vars:
+      file: /tmp/somelog.json
+      name: imported_var
 
-- debug:
+  - debug:
       var: imported_var
 
   - name: append more key/values
@@ -49,13 +59,6 @@
       dest: /tmp/final.json
 
 #################################
-
-- name: Add line by line json output
-  lineinfile:
-    path: /tmp/somelog.json
-    line: "{{ item.split('/') | to_nice_json  }}"
-    #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
-  loop: "{{ list_upgradable_state.stdout_lines}}"
 
 - name: Create a JSON information
   set_fact:
