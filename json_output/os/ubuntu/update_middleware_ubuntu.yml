@@ -36,9 +36,9 @@
     # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
   register: list_json
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
-#   debug:
-#     var: list_json
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
+  debug:
+    var: list_json
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
@@ -95,10 +95,10 @@
 #   set_fact:
 #     jsondata: "{{ jsondata1.split('/') }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.º print
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 print
   debug:
     msg: "{{ jsondata1 | type_debug }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.º print
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 print
   debug:
     msg: "{{jsondata1}}"
