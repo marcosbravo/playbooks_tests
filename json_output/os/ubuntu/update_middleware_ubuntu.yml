@@ -26,6 +26,30 @@
   debug:
     msg: "{{ list_upgradable_state.stdout}}"
 
+##################################
+
+- name: Load Variable for json
+  include_vars:
+    file: /tmp/var.json
+    name: imported_var
+
+- debug:
+      var: imported_var
+
+  - name: append more key/values
+    set_fact:
+      imported_var: "{{ imported_var | default([]) | combine({ 'hello': 'world' }) }}"
+
+  - debug:
+      var: imported_var
+
+  - name: write var to file
+    copy:
+      content: "{{ imported_var | to_nice_json }}"
+      dest: /tmp/final.json
+
+#################################
+
 - name: Add line by line json output
   lineinfile:
     path: /tmp/somelog.json
