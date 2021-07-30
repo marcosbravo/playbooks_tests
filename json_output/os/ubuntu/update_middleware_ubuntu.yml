@@ -32,7 +32,8 @@
 
 - name: append more key/values
   set_fact:
-    imported_var: "{{ upgr_lines | default([]) | combine({ 'hello': 'world' }) }}"
+    imported_var: "{{ list_upgradable_state.stdout_lines }}"
+    # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
 
 - name: write var to file
   copy:
