@@ -42,7 +42,7 @@
 
  - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
    copy:
-     content: upgr_lines
+     content: "{{ list_upgradable_state.stdout_lines }}"
      dest: /tmp/final.json
      remote_src: yes
 
