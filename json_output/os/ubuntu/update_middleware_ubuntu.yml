@@ -40,7 +40,7 @@
 
 - name: load var from file
     include_vars:
-      file: /tmp/somelog.json
+      file: /tmp/var.json
       name: imported_var
 
   - debug:
