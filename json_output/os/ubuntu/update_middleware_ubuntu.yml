@@ -29,9 +29,9 @@
 ##################################
 
 - name: load var from file
-    include_vars:
-      file: /tmp/var.json
-      name: imported_var
+  include_vars:
+    file: /tmp/var.json
+    name: imported_var
 
 - name: append more key/values
   set_fact:
