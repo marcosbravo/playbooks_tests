@@ -32,6 +32,7 @@
   include_vars:
     file: /tmp/var.json
     name: imported_var
+    remote_src: yes
 
 - name: append more key/values
   set_fact:
@@ -41,6 +42,7 @@
   copy:
     content: "{{ imported_var | to_nice_json }}"
     dest: /tmp/final.json
+    remote_src: yes
 
 #################################
 
