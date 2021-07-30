@@ -26,16 +26,6 @@
   debug:
     msg: "{{ list_upgradable_state.stdout}}"
 
-
-
-- name: Add line by line json output
-  lineinfile:
-    path: /tmp/somelog.json
-    line: "{{ item.split('/') | to_nice_json  }}"
-    #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
-  loop: "{{ list_upgradable_state.stdout_lines}}"
-
-
 ##################################
 
 - name: load var from file
@@ -43,22 +33,23 @@
       file: /tmp/var.json
       name: imported_var
 
-  - debug:
-      var: imported_var
+- name: append more key/values
+  set_fact:
+    imported_var: "{{ imported_var | default([]) | combine({ 'hello': 'world' }) }}"
 
-  - name: append more key/values
-    set_fact:
-      imported_var: "{{ imported_var | default([]) | combine({ 'hello': 'world' }) }}"
-
-  - debug:
-      var: imported_var
-
-  - name: write var to file
-    copy:
-      content: "{{ imported_var | to_nice_json }}"
-      dest: /tmp/final.json
+- name: write var to file
+  copy:
+    content: "{{ imported_var | to_nice_json }}"
+    dest: /tmp/final.json
 
 #################################
+
+- name: Add line by line json output
+  lineinfile:
+    path: /tmp/somelog.json
+    line: "{{ item.split('/') | to_nice_json  }}"
+    #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
+  loop: "{{ list_upgradable_state.stdout_lines}}"
 
 - name: Create a JSON information
   set_fact:
