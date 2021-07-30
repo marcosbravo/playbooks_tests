@@ -1,7 +1,7 @@
 - name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
   apt:
-    #upgrade: yes 
-    update_cache: yes 
+    #upgrade: yes
+    update_cache: yes
     cache_valid_time: 3600 #One hour
   register: update_state
 
@@ -24,7 +24,7 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 print
   debug:
     msg: "{{ list_upgradable_state.stdout}}"
-  
+
 # - name: write JSON to a file
 #   copy:
 #     content: "{{ list_upgradable_state.stdout_lines | to_nice_json }}"
@@ -38,11 +38,11 @@
 #     - "{{list_upgradable_state.stdout_lines}}"
 
 
-# - name: write JSON to a file 
+# - name: write JSON to a file
 #   copy:
 #     content: "{{ item.split('/') | to_nice_json }}"
 #     dest: /tmp/middleware.json
-#   with_lines: 
+#   with_lines:
 #     - "{{list_upgradable_state.stdout_lines}}"
   #cat "./files/lines"
 #crear json en base jmespah
@@ -50,8 +50,8 @@
 - name: Add first ips
   lineinfile:
     path: /tmp/somelog.json
-    #line: "{{ item.split('/') | to_nice_json  }}"
-    line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
+    line: "{{ item.split('/') | to_nice_json  }}"
+    #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
   loop: "{{ list_upgradable_state.stdout_lines}}"
 
 - name: Create a JSON information
@@ -65,7 +65,7 @@
 - name: Zip names and packages
   set_fact:
      pack: "{{ dict('packagues' | zip(packages_to_update)) }}"
-    
+
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4  json
   set_fact:
@@ -80,7 +80,7 @@
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6  json
 #   set_fact:
 #     jsondata: "{{ jsondata1.split('/') }}"
-  
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.º print
   debug:
     msg: "{{ jsondata1 | type_debug }}"
