@@ -17,9 +17,6 @@
   debug:
     var: list_upgradable_state.stdout_lines
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1.1 Print middleware update list
-  debug:
-    var: list_upgradable_state
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Update middleware list
   debug:
@@ -29,7 +26,7 @@
   debug:
     msg: "{{ list_upgradable_state.stdout}}"
 
-- name: Add first ips
+- name: Add line by line json output
   lineinfile:
     path: /tmp/somelog.json
     line: "{{ item.split('/') | to_nice_json  }}"
