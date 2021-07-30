@@ -19,30 +19,31 @@
   register: upgr_lines
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Update middleware list
-  debug:
-    msg: "{{ list_upgradable_state.stdout | type_debug }}"
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Update middleware list
+#   debug:
+#     msg: "{{ list_upgradable_state.stdout | type_debug }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 print
+#   debug:
+#     msg: "{{ list_upgradable_state.stdout}}"
+#
+# ##################################
+#
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Add item head
+#   set_fact:
+#     imported_var: "{{ list_upgradable_state.stdout_lines }}"
+#     # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 print
-  debug:
-    msg: "{{ list_upgradable_state.stdout}}"
-
-##################################
-
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Add item head
-  set_fact:
-    imported_var: "{{ list_upgradable_state.stdout_lines }}"
-    # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
-  debug:
-    var: list_json
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
+#   debug:
+#     var: list_json
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
-    content: "{{ upgr_lines }}"
+    content: "{{ upgr_lines | to_nice_json}}"
     dest: /tmp/final.json
+    remote_src: yes
 
 # - name: Delete first line
 #   lineinfile:
