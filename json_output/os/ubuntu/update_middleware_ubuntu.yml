@@ -45,11 +45,11 @@
     dest: /tmp/final.json
     remote_src: yes
 
-# - name: Delete first line
-#   lineinfile:
-#     path: /tmp/final.json
-#     state: absent
-#     regexp: 'Listing...'
+- name: Delete first line
+  lineinfile:
+    path: /tmp/final.json
+    state: absent
+    regexp: 'Listing...'
 
 
 
