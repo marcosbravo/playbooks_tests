@@ -45,11 +45,11 @@
     content: "{{ list_json }}"
     dest: /tmp/final.json
 
-- name: Delete first line
-  lineinfile:
-    path: /tmp/final.json
-    state: absent
-    regexp: 'Listing...'
+# - name: Delete first line
+#   lineinfile:
+#     path: /tmp/final.json
+#     state: absent
+#     regexp: 'Listing...'
 
 
 
