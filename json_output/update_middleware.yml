@@ -1,0 +1,126 @@
+---
+
+- name:
+  hosts: all
+  gather_facts: true
+
+  vars:
+    tomcat: tomcat8.service
+    
+  tasks:
+
+
+    # AMAZON LINUX BLOCK  --
+
+    - name: Update middleware | Amazon Linux {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/ami_linux/update_middleware_ami_linux_general.yml
+      when:
+        - ansible_distribution_major_version in ['2', '1']
+        - ansible_distribution | lower == 'amazon'
+
+    - name: Update middleware | OS Amazon Linux {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['2', '1']
+        - ansible_distribution | lower == 'amazon'
+
+    # DEBIAN BLOCK ++
+    - name: Update middleware | Debian {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/debian/update_middleware_debian_9.yml
+      when:
+        - ansible_distribution_major_version in ['9','10']
+        - ansible_distribution | lower == 'debian'
+
+    - name: Update middleware | OS Debian {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Debian {{ansible_distribution_major_version}} not covered, Debian versions covered: 9  
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['9','10']
+        - ansible_distribution | lower == 'debian'
+    #UBUNTU BLOCK ++
+    - name: Update middleware | Ubuntu {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/ubuntu/update_middleware_ubuntu.yml
+      when:
+        - ansible_distribution_major_version in ['14','16','18','20']
+        - ansible_distribution | lower == 'ubuntu'
+
+    - name: Update middleware | OS Ubuntu {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered, Ubuntu versions covered: 20 | 18 | 16 | 14  
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['14','16','18','20']
+        - ansible_distribution | lower == 'ubuntu'
+    
+    # REDHAT BLOCK --
+    - name: Update middleware | RedHat {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/redhat/update_middleware_redhat_general.yml
+      when:
+        - ansible_distribution_major_version in ['8','7','6']
+        - ansible_distribution | lower == 'redhat'
+    
+    - name: Update middleware | OS RedHat {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version RedHat {{ansible_distribution_major_version}} not covered, RedHat versions covered: 8 | 7 | 6 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8','7','6']
+        - ansible_distribution | lower == 'redhat'
+    
+    # CentOS BLOCK --
+    - name: Update middleware | CentOS {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/centos/update_middleware_centos_general.yml
+      when:
+        - ansible_distribution_major_version in ['8','7','6']
+        - ansible_distribution | lower == 'centos'
+    
+    - name: Update middleware | OS Centos {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Centos {{ansible_distribution_major_version}} not covered, Centos versions covered: 8 | 7 | 6 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8','7','6']
+        - ansible_distribution | lower == 'centos'
+
+    # Oracle BLOCK --
+    # - name: Update middleware | Oracle {{ansible_distribution_major_version}} | Install Update middleware
+    #   include_tasks: "./os/ "
+    #   when:
+    #     - ansible_distribution_major_version in ['8','7','6']
+    #     - ansible_distribution | lower == 'oracle'
+    
+    # - name: Update middleware | OS Oracle {{ansible_distribution_major_version}} not contemplated
+    #   debug:
+    #     msg: "Version Oracle {{ansible_distribution_major_version}} not covered, Oracle versions covered: 8 | 7 | 6 
+    #           If it is a new version contact the administrator"
+    #   when:
+    #     - ansible_distribution_major_version not in ['8','7','6']
+    #     - ansible_distribution | lower == 'oracle'
+
+    #SUSE BLOCK **
+
+    - name: Update middleware | Suse {{ansible_distribution_major_version}} | Install Update middleware
+      include_tasks: ./os/suse/update_middleware_suse_general.yml
+      when:
+        - ansible_distribution_major_version in ['11', '12', '15']
+        - ansible_os_family | lower == 'suse'
+    
+    - name: Update middleware | OS Suse {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Suse {{ansible_distribution_major_version}} not covered, Suse versions covered: 15 | 12 | 11 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['11', '12', '15']
+        - ansible_os_family | lower == 'suse'
+          
+    # DISTRIBUTION NOT CONTEMPLED
+
+    - name: Update middleware | OS {{ansible_distribution}}  {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "OS {{ansible_distribution}} {{ansible_distribution_major_version}} not contempled, 
+              If it is a new distribution contact the administrator"
+      when:
+        - ansible_distribution | lower not in ['amazon','redhat','ubuntu', 'debian','centos','sles']

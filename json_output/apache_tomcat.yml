@@ -1,0 +1,126 @@
+---
+
+- name:
+  hosts: all
+  gather_facts: true
+
+  vars:
+    tomcat: tomcat8.service
+    
+  tasks:
+
+
+    # AMAZON LINUX BLOCK  --
+
+    - name: Apache tomcat | Amazon Linux {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/ami_linux/apache_tomcat_ami_linux_general.yml
+      when:
+        - ansible_distribution_major_version in ['2', '1']
+        - ansible_distribution | lower == 'amazon'
+
+    - name: Apache tomcat | OS Amazon Linux {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Amazon Linux {{ansible_distribution_major_version}} not covered,  Amazon Linux versions covered: 2 | 1 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['2', '1']
+        - ansible_distribution | lower == 'amazon'
+
+    # DEBIAN BLOCK ++
+    - name: Apache tomcat | Debian {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/debian/apache_tomcat_debian_9.yml
+      when:
+        - ansible_distribution_major_version in ['9','10']
+        - ansible_distribution | lower == 'debian'
+
+    - name: Apache tomcat | OS Debian {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Debian {{ansible_distribution_major_version}} not covered, Debian versions covered: 9  
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['9','10']
+        - ansible_distribution | lower == 'debian'
+    #UBUNTU BLOCK ++
+    - name: Apache tomcat | Ubuntu {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/ubuntu/apache_tomcat_ubuntu.yml
+      when:
+        - ansible_distribution_major_version in ['14','16','18','20']
+        - ansible_distribution | lower == 'ubuntu'
+
+    - name: Apache tomcat | OS Ubuntu {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Ubuntu {{ansible_distribution_major_version}} not covered, Ubuntu versions covered: 20 | 18 | 16 | 14  
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['14','16','18','20']
+        - ansible_distribution | lower == 'ubuntu'
+    
+    # REDHAT BLOCK --
+    - name: Apache tomcat | RedHat {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/redhat/apache_tomcat_redhat_general.yml
+      when:
+        - ansible_distribution_major_version in ['8','7','6']
+        - ansible_distribution | lower == 'redhat'
+    
+    - name: Apache tomcat | OS RedHat {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version RedHat {{ansible_distribution_major_version}} not covered, RedHat versions covered: 8 | 7 | 6 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8','7','6']
+        - ansible_distribution | lower == 'redhat'
+    
+    # CentOS BLOCK --
+    - name: Apache tomcat | CentOS {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/centos/apache_tomcat_centos_general.yml
+      when:
+        - ansible_distribution_major_version in ['8','7','6']
+        - ansible_distribution | lower == 'centos'
+    
+    - name: Apache tomcat | OS Centos {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Centos {{ansible_distribution_major_version}} not covered, Centos versions covered: 8 | 7 | 6 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['8','7','6']
+        - ansible_distribution | lower == 'centos'
+
+    # Oracle BLOCK --
+    # - name: Apache tomcat | Oracle {{ansible_distribution_major_version}} | Install Apache tomcat
+    #   include_tasks: "./os/ "
+    #   when:
+    #     - ansible_distribution_major_version in ['8','7','6']
+    #     - ansible_distribution | lower == 'oracle'
+    
+    # - name: Apache tomcat | OS Oracle {{ansible_distribution_major_version}} not contemplated
+    #   debug:
+    #     msg: "Version Oracle {{ansible_distribution_major_version}} not covered, Oracle versions covered: 8 | 7 | 6 
+    #           If it is a new version contact the administrator"
+    #   when:
+    #     - ansible_distribution_major_version not in ['8','7','6']
+    #     - ansible_distribution | lower == 'oracle'
+
+    #SUSE BLOCK **
+
+    - name: Apache tomcat | Suse {{ansible_distribution_major_version}} | Install Apache tomcat
+      include_tasks: ./os/suse/apache_tomcat_suse_general.yml
+      when:
+        - ansible_distribution_major_version in ['11', '12', '15']
+        - ansible_os_family | lower == 'suse'
+    
+    - name: Apache tomcat | OS Suse {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "Version Suse {{ansible_distribution_major_version}} not covered, Suse versions covered: 15 | 12 | 11 
+              If it is a new version contact the administrator"
+      when:
+        - ansible_distribution_major_version not in ['11', '12', '15']
+        - ansible_os_family | lower == 'suse'
+          
+    # DISTRIBUTION NOT CONTEMPLED
+
+    - name: Apache tomcat | OS {{ansible_distribution}}  {{ansible_distribution_major_version}} not contemplated
+      debug:
+        msg: "OS {{ansible_distribution}} {{ansible_distribution_major_version}} not contempled, 
+              If it is a new distribution contact the administrator"
+      when:
+        - ansible_distribution | lower not in ['amazon','redhat','ubuntu', 'debian','centos','sles']
