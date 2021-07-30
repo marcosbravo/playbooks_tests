@@ -30,12 +30,17 @@
 ##################################
 
 
-- name: append more key/values
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Add item head
   set_fact:
-    imported_var: "{{ list_upgradable_state.stdout_lines | regex_replace('Listing...', 'Package | Upgradable Version | Actual Version')  }}"
+    imported_var: "{{ list_upgradable_state.stdout_lines | regex_replace('Listing...', 'Package | Upgradable Version | Actual Version' \n)  }}"
     # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
+  register: list_json
 
-- name: write var to file
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
+  debug:
+    var: list_json
+
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
     content: "{{ imported_var | to_nice_json }}"
     dest: /tmp/final.json
