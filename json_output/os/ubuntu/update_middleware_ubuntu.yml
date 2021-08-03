@@ -36,16 +36,16 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: PRINT json_output_file
-  debug:
-    msg: '{{ json_output_file }}'
-
 - name: Delete first line
   lineinfile:
     path: '{{ json_output_file }}'
     state: absent
     regexp: 'Listing...'
-  register: '{{ json_output_file_clean }}'
+  register: json_output_file_new
+
+- name: PRINT json_output_file_new
+  debug:
+    msg: json_output_file_new
 
 - name: Update middleware | 1.3
   lineinfile:
@@ -53,7 +53,8 @@
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-  loop: "{{ imported_var.packages_list }}"
+  loop: "{{ json_output_file_new.packages_list }}"
+  #loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
 #   Slurp:
