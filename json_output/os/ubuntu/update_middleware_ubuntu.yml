@@ -38,7 +38,7 @@
 
 - name: Delete first line
   lineinfile:
-    path: '{{ json_output_file }}'
+    path: '{{ json_output_file | to_nice_json}}'
     state: absent
     regexp: 'Listing...'
 
