@@ -48,7 +48,7 @@
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-  #loop: "{{ json_output_file.packages_list }}"
+  loop: "{{ json_output_file | to_nice_json}}"
 
 # - name: DELETE Listing on variable
 #   debug:
