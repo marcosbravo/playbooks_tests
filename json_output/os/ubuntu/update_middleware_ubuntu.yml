@@ -26,7 +26,7 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
   set_fact:
     #imported_var: "{{ upgr_lines | default([]) | combine({'ip_internal_address': ansible_all_ipv4_addresses }) }}"
-    imported_var: "{{ upgr_lines.ansible_facts | default([]) | combine({'changed': 'michael' }) }}"
+    imported_var: "{{ upgr_lines.ansible_facts | default([]) | combine({'instance_fqdn': ansible_fqdn }) }}"
    # imported_var2: "{{ imported_var | default([]) | combine({'fqdn': ansible_fqdn }) }}"
   #register: upgr_lines2
 
@@ -47,7 +47,7 @@
     path: '{{ json_output_file }}'
     state: present
     regexp: '/'
-    line: "{{ dict('ab' | zip( item.split('/'))), }}"
+    line: "{{ dict('ab' | zip( item.split('/'))) }}"
   loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
