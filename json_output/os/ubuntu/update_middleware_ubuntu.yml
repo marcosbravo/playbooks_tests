@@ -36,6 +36,10 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
+- name: DELETE Listing on variable
+  debug:
+    msg: "{{ imported_var | regex_replace("Listing....", "") }}"
+
 - name: Delete first line
   lineinfile:
     path: '{{ json_output_file }}'
