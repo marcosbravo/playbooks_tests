@@ -47,7 +47,7 @@
     path: '{{ json_output_file }}'
     state: present
     regexp: '/'
-    line: "{{ dict('ab' | zip( item.split('/'))) }}"
+    line: "{item}"
   loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
