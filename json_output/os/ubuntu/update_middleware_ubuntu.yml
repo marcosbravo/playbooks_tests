@@ -46,9 +46,6 @@
   lineinfile:
     path: '{{ json_output_file }}'
     state: present
-    keys_list:
-      - packages
-      - version
     regexp: '/'
     line: "{{ dict(keys_list | zip( item.split('/'))) }}"
   loop: "{{ imported_var.packages_list }}"
