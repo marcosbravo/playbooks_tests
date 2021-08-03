@@ -32,9 +32,15 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
-    content: "{{ imported_var | regex_replace('Listing....', '') |to_nice_json}}"
+    content: "{{ imported_var |to_nice_json}}"
     dest: '{{ json_output_file }}'
     remote_src: yes
+
+- name: Delete 'Listing' | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Delete Listing
+  lineinfile:
+    dest: '{{ json_output_file }}'
+    state: absent
+    regexp: 'Listing...' 
 
 # - name: DELETE Listing on variable
 #   debug:
