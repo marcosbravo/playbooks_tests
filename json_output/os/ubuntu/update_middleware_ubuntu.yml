@@ -42,13 +42,13 @@
     state: absent
     regexp: 'Listing...'
 
-# - name: Update middleware | 1.3
-#   lineinfile:
-#     path: '{{ json_output_file }}'
-#     state: present
-#     regexp: '/'
-#     line: "{{ dict('ab' | zip( item.split('/'))) }}"
-#   loop: "{{ imported_var.packages_list }}"
+- name: Update middleware | 1.3
+  lineinfile:
+    path: '{{ json_output_file }}'
+    state: present
+    regexp: '/'
+    line: "{{ dict('ab' | zip( item.split('/'))), }}"
+  loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
 #   Slurp:
