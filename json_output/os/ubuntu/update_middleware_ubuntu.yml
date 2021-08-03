@@ -16,89 +16,167 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
   debug:
     var: list_upgradable_state.stdout_lines
+  #register: upgr_lines
+
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
+  set_fact:
+    packages_list: "{{list_upgradable_state.stdout_lines}}"
   register: upgr_lines
 
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
+  set_fact:
+    #imported_var: "{{ upgr_lines | default([]) | combine({'ip_internal_address': ansible_all_ipv4_addresses }) }}"
+    imported_var: "{{ upgr_lines.ansible_facts | default([]) | combine({'changed': 'michael' }) }}"
+   # imported_var2: "{{ imported_var | default([]) | combine({'fqdn': ansible_fqdn }) }}"
+  #register: upgr_lines2
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Update middleware list
-#   debug:
-#     msg: "{{ list_upgradable_state.stdout | type_debug }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 print
-#   debug:
-#     msg: "{{ list_upgradable_state.stdout}}"
-#
-# ##################################
-#
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Add item head
-#   set_fact:
-#     imported_var: "{{ list_upgradable_state.stdout_lines }}"
-#     # imported_var: "{{ list_upgradable_state.stdout_lines | default([]) | combine({ 'hello': 'world' }) }}"
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
-#   debug:
-#     var: list_json
+
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
-    content: "{{ upgr_lines | to_nice_json}}"
-    dest: /tmp/final.json
+    content: "{{ imported_var | to_nice_json}}"
+    dest: '{{ json_output_file }}'
     remote_src: yes
 
 - name: Delete first line
   lineinfile:
-    path: /tmp/final.json
+    path: '{{ json_output_file }}'
     state: absent
     regexp: 'Listing...'
 
+- name: Update middleware | 1.3
+  lineinfile:
+    path: '{{ json_output_file }}'
+    state: present
+    regexp: '/'
+    line: "{{ dict('ab' | zip( item.split('/'))) }}"
+  loop: "{{ imported_var.packages_list }}"
 
+# - name: load var from file
+#   Slurp:
+#     src: '{{ json_output_file }}'
+#   register: imported_var_json
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
+# - name: Print imported_var_json
+#   debug:
+#     msg: "{{ imported_var_json|b64decode|from_json }}"
+
+- name: PRINT ALL FACTS
+  debug:
+    var: ansible_facts
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Update middleware list
+#   debug:
+#     msg: "{{ list_upgradable_state.stdout | type_debug }}"
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 print
+#   debug:
+#     msg: "{{ list_upgradable_state.stdout}}"
+
+# - name: write JSON to a file
 #   copy:
-#     content: "{{ imported_var | to_nice_json }}"
-#     dest: /tmp/final.json
-#     remote_src: yes
+#     content: "{{ list_upgradable_state.stdout_lines | to_nice_json }}"
+#     dest:'{{json_output_file}}'
+#comentario
+# - name: write JSON to a file middleware
+#   copy:
+#     content: "{{ item.split('/') | to_nice_json }}"
+#     dest: /tmp/middleware.json
+#   with_items:
+#     - "{{list_upgradable_state.stdout_lines}}"
 
-#################################
 
-# - name: Add line by line json output
+# - name: write JSON to a file
+#   copy:
+#     content: "{{ item.split('/') | to_nice_json }}"
+#     dest: /tmp/middleware.json
+#   with_lines:
+#     - "{{list_upgradable_state.stdout_lines}}"
+  #cat "./files/lines"
+#crear json en base jmespah
+#--------------
+# - name: create file json
+#   copy:
+#     content: ""
+#     dest: '{{ json_output_file }}'
+
+# - name: Add first packages
 #   lineinfile:
-#     path: /tmp/somelog.json
+#     path: '{{ json_output_file }}'
 #     line: "{{ item.split('/') | to_nice_json  }}"
-#     #line: "{{ dict([name , package] | zip({{ item.split('/')}})) }}"
-#   loop: "{{ list_upgradable_state.stdout_lines}}"
-#
+#   loop: "{{ list_upgradable_state.stdout_lines }}"
+
+# - name: Add first packages
+#   lineinfile:
+#     path: '{{ json_output_file }}'
+#     #line: "{{ item.split('/') | to_nice_json  }}"
+#     line: "{{ dict('abcdefghi' | zip( item.split('/'))) }}"
+#   loop: "{{ list_upgradable_state.stdout_lines }}"
+
+# #----------------
+# - name: Delete first line
+#   lineinfile:
+#     path: '{{ json_output_file }}'
+#     state: absent
+#     regexp: 'Listing...'
+
+
 # - name: Create a JSON information
 #   set_fact:
 #      packages_to_update: "{{ list_upgradable_state | json_query(\"stdout_lines[]\") }}"
-#
+
 # - name: Create a JSON information
 #   set_fact:
 #      packages_to_update: "{{ list_upgradable_state | json_query(\"stdout_lines[]\") }}"
-#
+
 # - name: Zip names and packages
 #   set_fact:
 #      pack: "{{ dict('packagues' | zip(packages_to_update)) }}"
-#
-#
+
+
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4  json
 #   set_fact:
 #     jsondata1: "{{ item.split('/')}}" #"{{list_upgradable_state.stdout_lines | items2dict }}"
 #   with_items:
 #     - "{{list_upgradable_state.stdout_lines}}"
-#
+
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 print
 #   debug:
 #     msg: "{{jsondata1}}"
-#
+
 # # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6  json
 # #   set_fact:
 # #     jsondata: "{{ jsondata1.split('/') }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 print
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.º print
 #   debug:
 #     msg: "{{ jsondata1 | type_debug }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 print
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.º print
 #   debug:
 #     msg: "{{jsondata1}}"
+
+
+
+  # with_items:
+  #   - '{{ list_upgradable_state.stdout_lines | items2dict  | from_json }}'
+  # ansible.builtin.debug:
+  #   msg: '{{ item }}'
+  # loop: '{{ list_upgradable_state.stdout |from_json }}' # | from_yaml_all | list }}
+  # debug:
+  #   msg: "item"
+  # loop: "{{list_upgradable_state | from_json}}"
+
+  #apt:
+    #name: {{item.0}}
+    #upgrade: yes
+  #with_subelements:
+    #-  list_upgradable_state
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Check if Update middleware is installed
+#   debug:
+#     msg: "{{services_state.ansible_facts.services}}"
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 update packages that are in a lower version to the most current existing one
+#   apt:
+#     upgrade:yes
+#     state: latest
