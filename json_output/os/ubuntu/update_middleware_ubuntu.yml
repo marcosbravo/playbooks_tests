@@ -40,7 +40,15 @@
   lineinfile:
     dest: '{{ json_output_file }}'
     state: absent
-    regexp: 'Listing...' 
+    regexp: 'Listing...'
+
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file }}'
+    state: present
+    regexp: '/'
+    line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
+  loop: "{{ json_output_file.packages_list }}"
 
 # - name: DELETE Listing on variable
 #   debug:
@@ -54,13 +62,7 @@
 #     dest: '{{ json_output_file }}'
 #     remote_src: yes
 
-# - name: Update middleware | 1.3
-#   lineinfile:
-#     path: '{{ json_output_file }}'
-#     state: present
-#     regexp: '/'
-#     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-#   loop: "{{ myvar.packages_list }}"
+
 
 
 
