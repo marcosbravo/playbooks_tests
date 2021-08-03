@@ -44,6 +44,7 @@
 - name: PRINT new_variable
   debug:
     msg: '{{ new_variable | to_nice_json}}'
+  register: myvar
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
@@ -51,11 +52,11 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: Delete first line
-  lineinfile:
-    path: '{{ json_output_file }}'
-    state: absent
-    regexp: 'Listing...'
+# - name: Delete first line
+#   lineinfile:
+#     path: '{{ json_output_file }}'
+#     state: absent
+#     regexp: 'Listing...'
 
 - name: Update middleware | 1.3
   lineinfile:
@@ -63,7 +64,7 @@
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-  loop: "{{ new_variable.packages_list }}"
+  loop: "{{ myvar.packages_list }}"
   #loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
