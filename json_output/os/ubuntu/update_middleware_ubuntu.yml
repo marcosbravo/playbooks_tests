@@ -41,10 +41,11 @@
     path: '{{ json_output_file }}'
     state: absent
     regexp: 'Listing...'
+  register: json_output_file_clean
 
 - name: Update middleware | 1.3
   lineinfile:
-    path: '{{ json_output_file }}'
+    path: '{{ json_output_file_clean }}'
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
