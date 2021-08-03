@@ -41,10 +41,6 @@
     msg: "{{ imported_var | regex_replace('Listing....', '') }}"
   register: new_variable
 
-- name: PRINT new_variable
-  debug:
-    msg: '{{ new_variable | to_nice_json}}'
-  register: myvar
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
@@ -52,19 +48,23 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-# - name: Delete first line
+# - name: Update middleware | 1.3
 #   lineinfile:
 #     path: '{{ json_output_file }}'
-#     state: absent
-#     regexp: 'Listing...'
+#     state: present
+#     regexp: '/'
+#     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
+#   loop: "{{ myvar.packages_list }}"
 
-- name: Update middleware | 1.3
-  lineinfile:
-    path: '{{ json_output_file }}'
-    state: present
-    regexp: '/'
-    line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-  loop: "{{ myvar.packages_list }}"
+
+
+
+
+
+
+
+
+
   #loop: "{{ imported_var.packages_list }}"
 
 # - name: load var from file
