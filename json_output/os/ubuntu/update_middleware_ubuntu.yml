@@ -38,7 +38,7 @@
 
 - name: DELETE Listing on variable
   debug:
-    msg: "{{ imported_var | regex_replace("Listing....", "") }}"
+    msg: "{{ imported_var | regex_replace('Listing....', '') }}"
 
 - name: Delete first line
   lineinfile:
