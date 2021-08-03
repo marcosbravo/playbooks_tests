@@ -42,7 +42,7 @@
     state: absent
     regexp: 'Listing...'
 
-- name: PRINT json_output_file_new
+- name: PRINT json_output_file
   debug:
     msg: '{{ json_output_file }}'
 
