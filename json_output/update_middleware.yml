@@ -4,7 +4,7 @@
   hosts: all
   gather_facts: true
 
- vars:
+  vars:
     json_output_file: /tmp/system_packages_upgradables.json
 
   tasks:
