@@ -7,8 +7,8 @@
   vars:
     json_output_file: /tmp/system_packages_upgradables.json
     keys_list:
-      - packages
-      - version
+      - package_name
+      - version_upgradable
 
   tasks:
 
