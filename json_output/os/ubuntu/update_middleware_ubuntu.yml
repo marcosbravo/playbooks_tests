@@ -38,13 +38,13 @@
 
 - name: Delete first line
   lineinfile:
-    path: '{{ json_output_file | to_nice_json}}'
+    path: '{{ json_output_file }}'
     state: absent
     regexp: 'Listing...'
 
 - name: PRINT json_output_file
   debug:
-    msg: '{{ json_output_file }}'
+    msg: '{{ json_output_file | to_nice_json}}'
 
 - name: Update middleware | 1.3
   lineinfile:
