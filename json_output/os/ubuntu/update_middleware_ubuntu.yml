@@ -27,7 +27,7 @@
   set_fact:
     #imported_var: "{{ upgr_lines | default([]) | combine({'ip_internal_address': ansible_all_ipv4_addresses }) }}"
     imported_var: "{{ upgr_lines.ansible_facts | default([]) | combine({'instance_fqdn': ansible_fqdn }) }}"
-    imported_var_new: "{{ upgr_lines.ansible_facts | default([]) | combine({'instance_id': '11111' }) | combine({'instance_id': '2222' }) }}"
+    imported_var_new: "{{ upgr_lines.ansible_facts | default([]) | combine({'instance_id': '11111', 'instance_id': '2222' }) |  }}"
    # imported_var2: "{{ imported_var | default([]) | combine({'fqdn': ansible_fqdn }) }}"
   #register: upgr_lines2
 
