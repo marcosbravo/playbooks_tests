@@ -36,15 +36,15 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: DELETE Listing on variable
-  debug:
-    msg: "{{ imported_var | regex_replace('Listing....', '') }}"
-  register: new_variable
+# - name: DELETE Listing on variable
+#   debug:
+#     msg: "{{ imported_var | regex_replace('Listing....', '') }}"
+#   register: new_variable
 
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
-    content: "{{ new_variable | to_nice_json}}"
+    content: "{{ imported_var | regex_replace('Listing....', '') | to_nice_json }}"
     dest: '{{ json_output_file }}'
     remote_src: yes
 
