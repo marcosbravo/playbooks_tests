@@ -55,6 +55,13 @@
 # - name: Create and Add items to dictionary
 #   set_fact:
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+  include_tasks:
+    file: slurp.yml
+
+- name: debug Slurp
+  debug:
+    msg: "{{ remote_content }}"
 
 - name: tsting
   set_fact:
