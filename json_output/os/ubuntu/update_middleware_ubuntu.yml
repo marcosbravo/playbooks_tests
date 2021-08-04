@@ -67,7 +67,7 @@
 
 - name: Populate genders
   set_fact:
-    genders: "{{ genders | default({}) | combine( {item.item.name: item.stdout} ) }}"
+    genders: "{{ genders | default({}) }}"
   with_items: "{{ imported_var_new }}"
 
 - name: tipo de mi variable newlist
