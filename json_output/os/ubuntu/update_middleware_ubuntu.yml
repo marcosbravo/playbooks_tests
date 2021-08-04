@@ -68,7 +68,7 @@
   set_fact:
     newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
   loop:
-    - {regex: '/', replace: "#"}
+    - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
 
