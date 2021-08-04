@@ -31,6 +31,10 @@
   set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
+- name: Replace double quotes with single quotes in variable
+  debug:
+    msg: "{{ imported_var_new | regex_replace("'\", \'\"')  }}"
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
     content: "{{ imported_var_new  | to_nice_json}}"
@@ -51,11 +55,11 @@
 
 - name: decode remote content
   set_fact:
-    remote_content: "{{file_content.content | b64decode }}"
+    remote_content: "{{ file_content.content | b64decode }}"
 
 - name: OUTPUT CONTENT
   debug:
-    msg: "content of remote file: {{remote_content | list}}"
+    msg: "content of remote file: {{ remote_content }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Convert lines to dict
   lineinfile:
