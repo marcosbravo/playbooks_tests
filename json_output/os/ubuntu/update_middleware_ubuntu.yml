@@ -77,16 +77,16 @@
 
 - name:
   debug:
-    msg: "{{ remote_content.packages_list }}" 
+    msg: "{{ remote_content.packages_list.actual_version }}" 
 
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    dest: '{{ json_output_file}}'
-    state: present
-    regexp: 'all'
-    line: "\t{{ dict(keys_list_two | zip( item.split('all'))) }}, "
-  loop: "{{ remote_content.packages_list }}"
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   lineinfile:
+#     dest: '{{ json_output_file}}'
+#     state: present
+#     regexp: 'all'
+#     line: "\t{{ dict(keys_list_two | zip( item.split('all'))) }}, "
+#   loop: "{{ remote_content.packages_list }}"
 
 #
 #
