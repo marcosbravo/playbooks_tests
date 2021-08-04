@@ -74,11 +74,15 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | default({}) | regex_replace(item.regex, item.replace )}}"
+    newlistvan: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
   loop:
     - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
+
+- name: map
+  set_fact:
+    newlist: "{{ newlistvan | default({}) }}"    
 
 - name: tipo de mi variable newlist
   debug:
