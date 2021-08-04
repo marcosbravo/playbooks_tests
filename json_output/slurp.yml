@@ -5,4 +5,4 @@
 
 - name: Decode content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.2 Decode content in variable
   set_fact:
-    remote_content: "{{ file_content.content | b64decode }}"
+    remote_content: "{{ file_content.content | b64decode | to_nice_json}}"
