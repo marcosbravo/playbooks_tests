@@ -44,6 +44,10 @@
     regexp: 'Listing...'
   loop: "{{ imported_var_new.packages_list }}"
 
+- name: Slurp
+  tasks:
+    - include: slurp.yml
+##################################################################
 - name: Store content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.1 Store content in variable
   slurp:
     src: '{{ json_output_file}}'
@@ -52,6 +56,7 @@
 - name: Decode content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.2 Decode content in variable
   set_fact:
     remote_content: "{{ file_content.content | b64decode }}"
+##################################################################3
 
 # - name: OUTPUT CONTENT
 #   debug:
@@ -64,15 +69,6 @@
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
   loop: "{{ remote_content.packages_list}}"
-
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    dest: '{{ json_output_file}}'
-    state: present
-    regexp: '['
-    line: "\t{{ dict(keys_list | zip( item.split('['))) }}, "
-  loop: "{{ remote_content.packages_list.repository}}"
-
 
 - name: Replace Single Quotes with Double | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Replace Single Quotes with Double
   replace:
