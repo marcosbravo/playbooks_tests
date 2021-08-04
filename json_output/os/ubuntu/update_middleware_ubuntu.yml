@@ -72,10 +72,6 @@
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
 
-- name: setting
-
-
-
 - name: tipo de mi variable newlist
   debug:
     msg: "{{ newlist | type_debug }}"
