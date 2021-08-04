@@ -59,6 +59,10 @@
     replace: ';'
   loop: "{{ remote_content.packages_list}}"
 
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+  include_tasks:
+    file: slurp.yml
+
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     dest: '{{ json_output_file}}'
