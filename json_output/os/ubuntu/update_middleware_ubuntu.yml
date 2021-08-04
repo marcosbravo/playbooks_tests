@@ -35,7 +35,7 @@
 - name: TYPE OF imported_var
   debug:
     msg: "{{ imported_var | type_debug }}"
-    
+
 - name: TYPE OF imported_var_new
   debug:
     msg: "{{ imported_var_new| type_debug }}"
@@ -111,7 +111,7 @@
     state: present
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
     #line: '{"package": "{{ item.split("#")[0] }}", "actual_version": "{{ item.split("#")[1] }}", "upgradable_version": "3" }'
-  loop: "{{ imported_var_new.packages_list }}"
+  loop: "{{ imported_var.packages_list }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
@@ -119,7 +119,7 @@
     state: absent
     regexp: 'Listing...'
     #line: '{"package": "{{ item.split("#")[0] }}", "actual_version": "{{ item.split("#")[1] }}", "upgradable_version": "3" }'
-  loop: "{{ imported_var_new.packages_list }}"
+  loop: "{{ imported_var.packages_list }}"
 
 
 
