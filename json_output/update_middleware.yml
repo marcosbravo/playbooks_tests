@@ -9,7 +9,8 @@
     json_output_file_clean: /tmp/system_packages_upgradables_clean.json
     keys_list:
       - package_name
-      - actual_version
+      - upgradable_version
+      - is_upgradable
 
   tasks:
 
