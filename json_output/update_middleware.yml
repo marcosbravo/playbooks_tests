@@ -15,7 +15,6 @@
       - upgradable_version
 
   tasks:
-    - include: slurp.yml
 
     # AMAZON LINUX BLOCK  --
 
