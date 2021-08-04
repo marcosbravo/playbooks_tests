@@ -58,7 +58,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new.packages_list | regex_replace('/', '#') }}"
+    newlist: "{{ imported_var_new.packages_list | regex_replace('/ | amd64', '#') }}"
 
 - name:
   debug:
@@ -68,7 +68,7 @@
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
-    line: '{"package": "{{ item.split }}", "actual_version": "tes", "upgradable_version": "3" }'
+    line: '{"package": "{{ item.split('#') }}", "actual_version": "tes", "upgradable_version": "3" }'
   loop: "{{ newlist }}"
 
 - name: Print
