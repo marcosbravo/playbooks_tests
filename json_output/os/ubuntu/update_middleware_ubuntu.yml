@@ -74,7 +74,7 @@
 
 - name: combinar
   set_fact:
-    mira: "{{ imported_var_new | default({}) }}"
+    mira: "{{ newlist | default({}) }}"
 
 
 - name: tipo de mi variable newlist
