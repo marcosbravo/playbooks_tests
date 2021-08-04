@@ -60,13 +60,13 @@
   set_fact:
     newlist: "{{ imported_var_new.packages_list | regex_replace(item.regex, item.replace) }}"
   loop:
-    - {regex: "\\/", replace: "#"}
+    - {regex: '/', replace: '#'}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
 
 - name:
   debug:
-    msg: "{{ newlist | to_nice_json}}"
+    msg: "{{ newlist }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
