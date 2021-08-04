@@ -104,10 +104,6 @@
 
 
 
-- name:
-  debug:
-    msg: "{{ imported_var_new }}"
-
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
 #   copy:
 #     content: "{{ newlist  | to_nice_json}}"
