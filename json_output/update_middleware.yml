@@ -10,11 +10,6 @@
     keys_list:
       - package_name
       - actual_version
-      - actual_version
-      - upgradable_version
-    keys_list_two:
-      - actual_version
-      - upgradable_version
 
   tasks:
 
