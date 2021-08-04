@@ -52,36 +52,47 @@
   debug:
     msg: "{{ remote_content }}"
 
-- name: Transform lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  replace :
-    path: '{{ json_output_file}}'
-    regexp: '/'
-    replace: ';'
-  loop: "{{ remote_content.packages_list}}"
+- name: Create and Add items to dictionary
+  set_fact:
+    userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-  include_tasks:
-    file: slurp.yml
-
-- name: Task | 1.5
+- name: Print
   debug:
-    msg: "{{ remote_content.packages_list }}"
+    msg: userdata
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Convert lines to dict
-  lineinfile:
-    dest: '{{ json_output_file}}'
-    state: present
-    regexp: ';'
-    line: "\t{{ dict(keys_list_two | zip( item.split(';'))) }}, "
-  loop: "{{ remote_content.packages_list}}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-  include_tasks:
-    file: slurp.yml
 
-- name: Task | 1.7
-  debug:
-    msg: "{{ remote_content.packages_list }}"
+
+# - name: Transform lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   replace :
+#     path: '{{ json_output_file}}'
+#     regexp: '/'
+#     replace: ';'
+#   loop: "{{ remote_content.packages_list}}"
+#
+# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+#   include_tasks:
+#     file: slurp.yml
+#
+# - name: Task | 1.5
+#   debug:
+#     msg: "{{ remote_content.packages_list }}"
+
+            # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Convert lines to dict
+            #   lineinfile:
+            #     dest: '{{ json_output_file}}'
+            #     state: present
+            #     regexp: ';'
+            #     line: "\t{{ dict(keys_list_two | zip( item.split(';'))) }}, "
+            #   loop: "{{ remote_content.packages_list}}"
+            #
+            # - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+            #   include_tasks:
+            #     file: slurp.yml
+            #
+            # - name: Task | 1.7
+            #   debug:
+            #     msg: "{{ remote_content.packages_list }}"
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
