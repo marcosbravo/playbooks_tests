@@ -58,9 +58,9 @@
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
-    dest: '{{ json_output_file}}'
+    path: '{{ json_output_file}}'
     state: present
-    line: '{"package": item.split("/")[0], "actual_version": "2", "upgradable_version": "3" }'
+    line: '{"package": "{{ item.line.split("/")[0] }}", "actual_version": "2", "upgradable_version": "3" }'
   loop: "{{ imported_var_new.packages_list }}"
 
 - name: Print
