@@ -44,9 +44,9 @@
     regexp: 'Listing...'
   loop: "{{ imported_var_new.packages_list }}"
 
-# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-#   include_tasks:
-#     file: slurp.yml
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+  include_tasks:
+    file: slurp.yml
 #
 # - name: Debug 1
 #   debug:
@@ -58,7 +58,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | to_nice_json | regex_replace(item.regex, item.replace)}}"
+    newlist: "{{ remote_content | regex_replace(item.regex, item.replace)}}"
   loop:
     - {regex: '/', replace: "#"}
     - {regex: "amd64", replace: "#"}
@@ -66,18 +66,14 @@
 
 - name:
   debug:
-    msg: "{{ newlist }}"
-
-- name:
-  debug:
-    msg: "{{ imported_var_new | to_nice_json }}"
+    msg: "{{ remote_content }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
     line: '{"package": "{{ item.split("/")[0] }}", "actual_version": "tes", "upgradable_version": "3" }'
-  loop: "{{ newlist }}"
+  loop: "{{ remote_content }}"
 
 - name: Print
   debug:
