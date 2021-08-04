@@ -32,8 +32,8 @@
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
 - name: Replace double quotes with single quotes in variable
-  debug:
-    msg: "{{ imported_var_new | regex_replace("'\", \'\"')  }}"
+  set_fact:
+    imported_var_new: "{{ imported_var_new | regex_replace("'\", \'\"')  }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
