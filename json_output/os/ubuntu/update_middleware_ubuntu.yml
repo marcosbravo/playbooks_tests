@@ -81,7 +81,7 @@
     state: present
     regexp: 'all'
     line: "\t{{ dict(keys_list_two | zip( item.split('all'))) }}, "
-  loop: "{{ remote_content.packages_list.actual_version}}"
+  loop: "{{ remote_content.packages_list }}"
 
 #
 #
