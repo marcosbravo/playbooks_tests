@@ -78,7 +78,7 @@
 
 - name: tsting2
   set_fact:
-    newlist: "{{ newlist | regex_replace('/', '#' )}}"
+    newlist: "{{ newlist | regex_replace(' ', '#' )}}"
 
 # - name: tsting2
 #   set_fact:
