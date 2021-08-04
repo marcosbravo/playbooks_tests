@@ -60,6 +60,10 @@
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 
+- name: tipo de mi variable
+  debug:
+    msg: "{{ imported_var_new | type_debug }}"
+
 - name: tsting
   set_fact:
     imported_var_new: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
