@@ -62,7 +62,7 @@
   loop:
     - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
-    - {regex: "[", replace: "#"}
+    - {regex: "\[", replace: "#"}
 
 - name:
   debug:
