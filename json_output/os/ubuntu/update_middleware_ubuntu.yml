@@ -45,8 +45,7 @@
   loop: "{{ imported_var_new.packages_list }}"
 
 - name: Slurp
-  tasks:
-    - include: slurp.yml
+  import_playbook: slurp.yml
 ##################################################################
 - name: Store content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.1 Store content in variable
   slurp:
