@@ -23,11 +23,11 @@
     packages_list: "{{list_upgradable_state.stdout_lines}}"
   register: upgr_lines
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
   set_fact:
     imported_var: "{{ upgr_lines.ansible_facts | default({}) | combine({'instance_id': '11111'}) }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2.1 Add k/v 2
   set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
@@ -42,6 +42,14 @@
     dest: '{{ json_output_file }}'
     state: absent
     regexp: 'Listing...'
+
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file}}'
+    state: present
+    regexp: '/'
+    line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
+  loop: "{{ imported_var_new | to_nice_json }}"
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
