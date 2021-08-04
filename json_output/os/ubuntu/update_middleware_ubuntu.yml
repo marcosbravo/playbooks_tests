@@ -45,12 +45,34 @@
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
   lineinfile:
-    path: '{{ json_output_file}}'
+    dest: '{{ json_output_file}}'
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-    when: "{{ imported_var_new.packages_list.package_name }}" != "Listing..."
   loop: "{{ imported_var_new.packages_list }}"
+
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
+  lineinfile:
+    dest: '{{ json_output_file}}'
+    state: absent
+    regexp: '^Listing...'
+    line: "{{ item.line }}"
+  loop: "{{ imported_var_new.packages_list }}"
+
+
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
+#   lineinfile:
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '/'
+#     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
+#   loop: "{{ imported_var_new.packages_list }}"
+
+
+
+
+
+
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Convert lines to dict
