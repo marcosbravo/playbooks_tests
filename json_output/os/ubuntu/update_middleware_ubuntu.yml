@@ -73,7 +73,7 @@
     path: '{{ json_output_file}}'
     state: present
     line: '{"package": "{{ item.split("/")[0] }}", "actual_version": "tes", "upgradable_version": "3" }'
-  loop: "{{ remote_content }}"
+  loop: "{{ remote_content.packages_list }}"
 
 - name: Print
   debug:
