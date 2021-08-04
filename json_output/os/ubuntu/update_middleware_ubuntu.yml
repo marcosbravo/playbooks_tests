@@ -62,7 +62,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
+    imported_var_new: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
   loop:
     - {regex: '/', replace: "#"}
     - {regex: "amd64", replace: "#"}
@@ -70,7 +70,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
-    content: "{{ newlist  | to_nice_json}}"
+    content: "{{ imported_var_new }}"
     dest: '{{ json_output_file }}'
     remote_src: yes
 
@@ -78,7 +78,7 @@
 
 - name:
   debug:
-    msg: "{{ newlist | to_nice_json }}"
+    msg: "{{ imported_var_new }}"
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
 #   copy:
