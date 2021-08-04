@@ -37,6 +37,9 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
+- name: Debug imported_var_new to_nice_json
+  debug:
+    msg: "{{ imported_var_new  | to_nice_json}}"
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
 #     dest: '{{ json_output_file}}'
@@ -55,13 +58,7 @@
 # - name: Create and Add items to dictionary
 #   set_fact:
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-  include_tasks:
-    file: slurp.yml
 
-- name: debug Slurp
-  debug:
-    msg: "{{ remote_content | to_nice_json }}"
 
 - name: tsting
   set_fact:
@@ -71,9 +68,17 @@
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
 
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
+  copy:
+    content: "{{ newlist  | to_nice_json}}"
+    dest: '{{ json_output_file }}'
+    remote_src: yes
+
+
+
 - name:
   debug:
-    msg: "{{ newlist }}"
+    msg: "{{ newlist | to_nice_json }}"
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
 #   copy:
