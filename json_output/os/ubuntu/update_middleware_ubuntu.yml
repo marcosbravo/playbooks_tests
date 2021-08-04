@@ -58,7 +58,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace) }}"
+    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace) | to_nice_json}}"
   loop:
     - {regex: '/', replace: "#"}
     - {regex: "amd64", replace: "#"}
