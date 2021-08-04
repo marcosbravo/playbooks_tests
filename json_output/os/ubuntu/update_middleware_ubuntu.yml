@@ -72,7 +72,7 @@
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
-    line: '{"package": "{{ item.split('#') }}", "actual_version": "tes", "upgradable_version": "3" }'
+    line: '{"package": "{{ item.split('/')[0] }}", "actual_version": "tes", "upgradable_version": "3" }'
   loop: "{{ newlist }}"
 
 - name: Print
