@@ -57,7 +57,8 @@
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 - name: tsting
-  set_fact: newlist = "{{ imported_var_new.packages_list | regex_replace("/|all", "#") }}"
+  set_fact:
+    newlist: "{{ imported_var_new.packages_list | regex_replace("/|all", "#") }}"
 
 - name:
   debug:
