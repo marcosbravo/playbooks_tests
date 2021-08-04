@@ -48,6 +48,10 @@
   include_tasks:
     file: slurp.yml
 
+- name: Debug 1
+  debug:
+    msg: "{{ remote_content }}"
+
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     dest: '{{ json_output_file}}'
@@ -59,6 +63,10 @@
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
   include_tasks:
     file: slurp.yml
+
+- name: Debug 2
+  debug:
+    msg: "{{ remote_content }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Convert lines to dict
   lineinfile:
