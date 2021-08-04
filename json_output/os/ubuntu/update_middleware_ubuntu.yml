@@ -31,14 +31,6 @@
   set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
-- name: Replace double quotes with single quotes in variable
-  set_fact:
-    imported_var_new: "{{ imported_var_new | regex_replace(\"'\", '\"') }}"
-
-- name: OUTPUT QUOTAS
-  debug:
-    msg: "{{ imported_var_new }}"
-
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
     content: "{{ imported_var_new  | to_nice_json}}"
@@ -73,6 +65,12 @@
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
   loop: "{{ remote_content.packages_list}}"
 
+
+- name: replace
+  replace:
+    path: '{{ json_output_file}}'
+    regexp: \"'\"
+    replace: '\"'
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
 #   copy:
