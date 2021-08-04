@@ -60,40 +60,29 @@
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 
-- name: tipo de mi variable uno
+- name: tipo de mi variable "imported_var_new"
   debug:
     msg: "{{ imported_var_new | type_debug }}"
 
-
-- name: Populate genders
+- name: definir
   set_fact:
-    genders: "{{ genders | default({}) }}"
-  with_items: "{{ imported_var_new }}"
+    newlist: {}
 
-- name: tipo de mi variable newlist
+- name: tipo de variable de "newlist" fijado a dict
   debug:
-    msg: "{{ genders | type_debug }}"
-
-
-
-
+    msg: "{{ newlist | type_debug }}"
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
+    newlist: "{{ imported_var_new | default({}) | regex_replace(item.regex, item.replace )}}"
   loop:
     - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
 
-- name: combinar
-  set_fact:
-    mira: "{{ newlist | default({}) }}"
-
-
 - name: tipo de mi variable newlist
   debug:
-    msg: "{{ mira | type_debug }}"
+    msg: "{{ newlist | type_debug }}"
 
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
