@@ -64,6 +64,20 @@
   debug:
     msg: "{{ imported_var_new | type_debug }}"
 
+
+- name: Populate genders
+  set_fact:
+    genders: "{{ genders | default({}) | combine( {item.item.name: item.stdout} ) }}"
+  with_items: "{{ imported_var_new }}"
+
+- name: tipo de mi variable newlist
+  debug:
+    msg: "{{ genders | type_debug }}"
+
+
+
+
+
 - name: tsting
   set_fact:
     newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
