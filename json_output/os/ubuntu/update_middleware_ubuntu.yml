@@ -49,7 +49,7 @@
     state: present
     regexp: '/'
     line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
-  when: "{{ imported_var_new.packages_list.package_name }}" != "Listing..."
+    when: "{{ imported_var_new.packages_list.package_name }}" != "Listing..."
   loop: "{{ imported_var_new.packages_list }}"
 
 
