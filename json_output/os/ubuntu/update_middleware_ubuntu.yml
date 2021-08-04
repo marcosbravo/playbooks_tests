@@ -26,22 +26,15 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
   set_fact:
     imported_var: "{{ upgr_lines.ansible_facts | combine({'instance_id': '11111'}) }}"
-
-- name: YYY
-  debug:
-    msg: '{{ imported_var }}'
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
-  set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '2222'}) }}"
 
-- name: XXX
-  debug:
-    msg: '{{ imported_var_new }}'
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
+#   set_fact:
+#     imported_var_new: "{{ imported_var | combine({'instance_ad': '2222'}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
   copy:
-    content: "{{ imported_var_new |to_nice_json}}"
+    content: "{{ imported_var_new | to_nice_json}}"
     dest: '{{ json_output_file }}'
     remote_src: yes
 
