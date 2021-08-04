@@ -1,16 +1,8 @@
----
+- name: Store content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.1 Store content in variable
+  slurp:
+    src: '{{ json_output_file}}'
+  register: file_content
 
-- name:
-  hosts: all
-  gather_facts: true
-
-  tasks:
-
-    - name: Store content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.1 Store content in variable
-      slurp:
-        src: '{{ json_output_file}}'
-      register: file_content
-
-    - name: Decode content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.2 Decode content in variable
-      set_fact:
-        remote_content: "{{ file_content.content | b64decode }}"
+- name: Decode content in variable | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4.2 Decode content in variable
+  set_fact:
+    remote_content: "{{ file_content.content | b64decode }}"
