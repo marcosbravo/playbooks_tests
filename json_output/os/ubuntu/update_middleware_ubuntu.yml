@@ -65,7 +65,7 @@
 
 - name: Task | 1.5
   debug:
-    msg: "{{ remote_content.packages_list.actual_version }}"
+    msg: "{{ remote_content.packages_list }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Convert lines to dict
   lineinfile:
@@ -73,7 +73,7 @@
     state: present
     regexp: ';'
     line: "\t{{ dict(keys_list | zip( item.split(';'))) }}, "
-  loop: "{{ remote_content.packages_list}}"
+  loop: "{{ remote_content.packages_list.actual_version}}"
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
   include_tasks:
@@ -81,7 +81,7 @@
 
 - name: Task | 1.7
   debug:
-    msg: "{{ remote_content.packages_list.actual_version }}"
+    msg: "{{ remote_content.packages_list }}"
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
