@@ -44,24 +44,24 @@
     regexp: 'Listing...'
   loop: "{{ imported_var_new.packages_list }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-  include_tasks:
-    file: slurp.yml
+# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+#   include_tasks:
+#     file: slurp.yml
+#
+# - name: Debug 1
+#   debug:
+#     msg: "{{ remote_content }}"
 
-- name: Debug 1
-  debug:
-    msg: "{{ remote_content }}"
-
-- name: Create and Add items to dictionary
-  set_fact:
-    userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
+# - name: Create and Add items to dictionary
+#   set_fact:
+#     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     dest: '{{ json_output_file}}'
     state: present
     line: "{{ default({}) | combine ({ 'paquete' : zip( item.split('/')[0]))  }) }}"
-  loop: "{{ remote_content.packages_list }}"
+  loop: {{ imported_var_new.packages_list }}
 
 - name: Print
   debug:
