@@ -42,7 +42,7 @@
     dest: '{{ json_output_file}}'
     state: absent
     regexp: 'Listing...'
-  loop: "{{ imported_var_new.packages_list | to_nice_json }}"
+  loop: "{{ imported_var_new.packages_list }}"
 
 # - name: Delete 'Listing' | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Delete Listing
 #   lineinfile:
