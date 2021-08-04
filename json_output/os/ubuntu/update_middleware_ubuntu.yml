@@ -60,7 +60,7 @@
   lineinfile:
     dest: '{{ json_output_file}}'
     state: present
-    line: "{{ default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
+    line: "{{ default({}) | combine ({ 'paquete' : zip( item.split('/')[0]))  }) }}"
   loop: "{{ remote_content.packages_list }}"
 
 - name: Print
