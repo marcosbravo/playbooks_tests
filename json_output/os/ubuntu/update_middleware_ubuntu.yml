@@ -69,8 +69,8 @@
 - name: replace
   replace:
     path: '{{ json_output_file}}'
-    regexp: \"'\"
-    replace: '\"'
+    regexp: "'"
+    replace: '"'
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
 #   copy:
