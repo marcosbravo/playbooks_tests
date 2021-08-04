@@ -11,6 +11,7 @@
       - package_name
       - upgradable_version
       - is_upgradable
+      - actual_version
 
   tasks:
 
