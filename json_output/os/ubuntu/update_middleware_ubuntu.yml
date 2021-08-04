@@ -39,7 +39,7 @@
 
 - name: Debug imported_var_new to_nice_json
   debug:
-    msg: "{{ imported_var_new  | to_nice_json}}"
+    msg: "{{ imported_var_new  | to_json}}"
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
 #     dest: '{{ json_output_file}}'
