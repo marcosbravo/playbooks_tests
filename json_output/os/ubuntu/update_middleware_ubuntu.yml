@@ -58,7 +58,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new.packages_list | regex_replace('/ | amd64', '#') }}"
+    newlist: "{{ imported_var_new.packages_list | regex_replace('\/ | amd64', '#') }}"
 
 - name:
   debug:
