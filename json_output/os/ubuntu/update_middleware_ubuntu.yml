@@ -56,7 +56,7 @@
     dest: '{{ json_output_file}}'
     state: absent
     regexp: '^Listing...'
-    line: "{{ item.line }}"
+    line: "{{ item }}"
   loop: "{{ imported_var_new.packages_list }}"
 
 
