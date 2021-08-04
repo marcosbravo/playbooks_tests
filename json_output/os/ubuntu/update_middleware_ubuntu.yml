@@ -74,7 +74,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | regex_replace('from', '#' )}}"
+    newlist: "{{ imported_var_new | regex_replace('from:', '#' )}}"
 
 - name: definir
   set_fact:
