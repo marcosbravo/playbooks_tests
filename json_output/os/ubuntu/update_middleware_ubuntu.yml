@@ -51,7 +51,7 @@
 
 - name: decode remote content
   set_fact:
-    remote_content: "{{file_content.content | b64decode | to_nice_json }}"
+    remote_content: "{{file_content.content | b64decode | to_nice_json}}"
 
 - name: OUTPUT CONTENT
   debug:
