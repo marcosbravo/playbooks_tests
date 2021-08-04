@@ -31,6 +31,15 @@
   set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
+
+- name: TYPE OF imported_var
+  debug:
+    msg: "{{ imported_var | type_debug }}"
+    
+- name: TYPE OF imported_var_new
+  debug:
+    msg: "{{ imported_var_new| type_debug }}"
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
     content: "{{ imported_var_new  | to_nice_json}}"
