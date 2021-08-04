@@ -74,7 +74,7 @@
 
 - name: tsting
   set_fact:
-    newlistvan: "{{ imported_var_new | regex_replace('amd64', 'pulpo' )}}"
+    newlistvan: "{{ imported_var_new | regex_replace('amd64 | upgradable from:', 'pulpo' )}}"
   # loop:
   #   - {regex: "/", replace: "#"}
   #   - {regex: "amd64", replace: "#"}
