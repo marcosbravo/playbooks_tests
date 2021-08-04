@@ -66,11 +66,14 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace ) | from_yaml | to_json | from_json}}"
+    newlist: "{{ imported_var_new | regex_replace(item.regex, item.replace )}}"
   loop:
     - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
+
+- name: convert
+  set_fact: "{{ newlist | to_json | from_json }}"
 
 - name: tipo de mi variable newlist
   debug:
