@@ -60,7 +60,7 @@
 #     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 
-- name: tipo de mi variable
+- name: tipo de mi variable uno
   debug:
     msg: "{{ imported_var_new | type_debug }}"
 
