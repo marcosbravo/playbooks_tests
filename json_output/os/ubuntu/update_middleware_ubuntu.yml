@@ -25,8 +25,8 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
   set_fact:
-    imported_var: "{{ upgr_lines.ansible_facts | combine({'instance_id': '11111'}) }}"
-    imported_var_new: "{{ imported_var | default([]) | combine({'instance_ad': '2222'}) }}"
+    imported_var: "{{ upgr_lines.ansible_facts | default({}) | combine({'instance_id': '11111'}) }}"
+    imported_var_new: "{{ imported_var | default({}) | combine({'instance_ad': '2222'}) }}"
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add ipv
 #   set_fact:
