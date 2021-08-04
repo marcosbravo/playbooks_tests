@@ -58,7 +58,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ remote_content | regex_replace(item.regex, item.replace)}}"
+    newlist: "{{ remote_content | regex_replace(item.regex, item.replace | to_nice_json)}}"
   loop:
     - {regex: '/', replace: "#"}
     - {regex: "amd64", replace: "#"}
