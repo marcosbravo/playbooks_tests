@@ -82,7 +82,7 @@
 
 - name: tsting2
   set_fact:
-    newlist2: "{{ newlist | regex_replace('amd64', '#' )}}"
+    newlist: "{{ newlist | regex_replace('amd64', '#' )}}"
 
 # - name: tsting2
 #   set_fact:
