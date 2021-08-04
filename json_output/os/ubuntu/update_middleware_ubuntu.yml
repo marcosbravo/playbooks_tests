@@ -57,11 +57,29 @@
   debug:
     msg: "content of remote file: {{remote_content}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
-  copy:
-    content: "{{ remote_content | to_nice_json}}"
-    dest: '{{ json_output_file }}'
-    remote_src: yes
+
+
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Convert lines to dict
+  lineinfile:
+    dest: '{{ json_output_file}}'
+    state: present
+    regexp: '/'
+    line: "\t{{ dict(keys_list | zip( item.split('/'))) }}, "
+  loop: "{{ remote_content.packages_list }}"
+
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
+#   copy:
+#     content: "{{ remote_content | to_nice_json}}"
+#     dest: '{{ json_output_file }}'
+#     remote_src: yes
+
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Add item head
+#   copy:
+#     content: "{{ remote_content | to_nice_json}}"
+#     dest: '{{ json_output_file }}'
+#     remote_src: yes
 
 # - name: Delete 'Listing' | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Delete Listing
 #   lineinfile:
