@@ -44,12 +44,18 @@
     regexp: 'Listing...'
   loop: "{{ imported_var_new.packages_list }}"
 
-- set_fact:
-    system_packages_upgradables_content: "{{ lookup('file', /tmp/system_packages_upgradables.json) }}"
+- name: get contnte
+  slurp:
+    src: '{{ json_output_file}}'
+  register: file_content
 
-- name: debug system_packages_upgradables
+- name: decode remote content
+  set_fact:
+    remote_content: "{{file_content.content | b64decode}}"
+
+- name: OUTPUT CONTENT
   debug:
-    msg: "{{ system_packages_upgradables_content }}"
+    msg: "content of remote file: {{remote_content}}"
 
 # - name: Delete 'Listing' | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Delete Listing
 #   lineinfile:
