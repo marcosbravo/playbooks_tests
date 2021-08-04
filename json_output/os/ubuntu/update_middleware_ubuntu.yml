@@ -66,11 +66,13 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ default({}) | imported_var_new | regex_replace(item.regex, item.replace )}}"
+    newlist: "{{ imported_var_new | default({}) | regex_replace(item.regex, item.replace )}}"
   loop:
     - {regex: "/", replace: "#"}
     - {regex: "amd64", replace: "#"}
     - {regex: "\\[", replace: "#"}
+
+- name: setting
 
 
 
