@@ -72,8 +72,8 @@
     dest: '{{ json_output_file}}'
     state: present
     regexp: ';'
-    line: "\t{{ dict(keys_list | zip( item.split(';'))) }}, "
-  loop: "{{ remote_content.packages_list.actual_version}}"
+    line: "\t{{ dict(keys_list_two | zip( item.split(';'))) }}, "
+  loop: "{{ remote_content.packages_list}}"
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
   include_tasks:
