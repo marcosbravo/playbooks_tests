@@ -58,7 +58,11 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_new.packages_list | regex_replace('/ | amd64', '#') }}"
+    newlist: "{{ imported_var_new.packages_list | regex_replace(item.regex, item.replace) }}"
+  loop:
+    - {regex: "/", replace: "#"}
+    - {regex: "amd64", replace: "#"}
+    - {regex: "[", replace: "#"}
 
 - name:
   debug:
