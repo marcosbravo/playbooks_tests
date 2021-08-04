@@ -60,7 +60,7 @@
   lineinfile:
     dest: '{{ json_output_file}}'
     state: present
-    line: {{"package": zip( item.split('/'))), "actual_version": zip( item.split('/'))), "upgradable_version": zip( item.split('/'))) }}
+    line: "{"package": zip( item.split('/'))), "actual_version": zip( item.split('/'))), "upgradable_version": zip( item.split('/'))) }"
   loop: "{{ imported_var_new.packages_list }}"
 
 - name: Print
