@@ -78,7 +78,7 @@
 
 - name: tsting2
   set_fact:
-    newlistvan: "{{ imported_var_new | regex_replace(' ', '#' )}}"
+    newlistvan: "{{ newlistvan | regex_replace(' ', '#' )}}"
   # loop:
   #   - {regex: "/", replace: "#"}
   #   - {regex: "amd64", replace: "#"}
