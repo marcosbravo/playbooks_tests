@@ -124,16 +124,17 @@
   debug:
     msg: "{{newlist | type_debug}}"
 
-- name: poner orden dict 
-  with_dict: "{{ newlist | sort  }}"
+- name: poner orden dict
+  set_fact:
+    vamosaver: "{{ newlist | dict2items }}"
 
 - name: tipo de mi variable newlist 2
   debug:
-    msg: "{{newlist | type_debug}}"
+    msg: "{{vamosaver | type_debug}}"
 
 - name: tipo de mi variable newlist ORDENADA
   debug:
-    msg: "{{newlist}}"
+    msg: "{{vamosaver}}"
 
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
