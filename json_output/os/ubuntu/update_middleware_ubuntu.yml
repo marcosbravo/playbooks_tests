@@ -142,14 +142,38 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
+- name: tipo de mi variable newlist FINAL2
+  debug:
+    msg: "{{newlist | type_debug}}"
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: present
-    regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_upgradables_list | sort(attribute='package_name') }}}"
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   lineinfile:
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '#'
+#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+#   loop: "{{ newlist.packages_upgradables_list | sort(attribute='package_name') }}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
 #   lineinfile:
