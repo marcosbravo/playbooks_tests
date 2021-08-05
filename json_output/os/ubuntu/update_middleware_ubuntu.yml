@@ -143,9 +143,11 @@
   debug:
     msg: "{{newlist | type_debug}}"
 
-- name: poner orden dict
-  set_fact:
-    vamosaver: "{{ newlist | dict2items }}"
+
+
+# - name: poner orden dict
+#   set_fact:
+#     vamosaver: "{{ newlist | dict2items }}"
 
 - name: poner orden dict
   set_fact:
