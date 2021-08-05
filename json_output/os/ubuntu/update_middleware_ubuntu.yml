@@ -133,15 +133,19 @@
 
 - name: tsting4
   set_fact:
-    newlist: "{{ newlist | regex_replace('all', '#' )}}"
+    newlistnew: "{{ newlist | regex_replace('all', '#' )}}"
 
 - name: NEWLIST CONTENIDO
   debug:
-    msg: "{{newlist}}"
+    msg: "{{newlistnew}}"
 
 - name: NEWLIST TIPO
   debug:
-    msg: "{{newlist | type_debug}}"
+    msg: "{{newlistnew | type_debug}}"
+
+- name:
+  set_fact:
+    newlist: {}
 
 # - name: poner orden dict
 #   set_fact:
@@ -149,7 +153,7 @@
 
 - name: NEWLIST TO DICT
   set_fact:
-    newlist: "{{ newlist | items2dict }}"
+    newlist: "{{ newlistnew }}"
 
 - name: tipo de mi variable newlist , es dict??
   debug:
