@@ -85,7 +85,7 @@
 
 - name: print magic
   debug:
-    msg: "{{ imported_var_last_magic }}"
+    msg: "{{ imported_magic }}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
