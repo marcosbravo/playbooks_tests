@@ -63,17 +63,17 @@
 #     userdata: "{{ imported_var_new.packages_upgradables_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 
-- name: tipo de mi variable "imported_var_new"
-  debug:
-    msg: "{{ imported_var_last | type_debug }}"
-
-- name: definir
-  set_fact:
-    newlist: {}
-
-- name: tipo de variable de "newlist" fijado a dict
-  debug:
-    msg: "{{ newlist | type_debug }}"
+# - name: tipo de mi variable "imported_var_new"
+#   debug:
+#     msg: "{{ imported_var_last | type_debug }}"
+#
+# - name: definir
+#   set_fact:
+#     newlist: {}
+#
+# - name: tipo de variable de "newlist" fijado a dict
+#   debug:
+#     msg: "{{ newlist | type_debug }}"
 
 - name: tsting
   set_fact:
@@ -117,13 +117,13 @@
     remote_src: yes
 
 
-# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-#   lineinfile:
-#     path: '{{ json_output_file}}'
-#     state: present
-#     regexp: '#'
-#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-#   loop: "{{ newlist.packages_upgradables_list }}"
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file}}'
+    state: present
+    regexp: '#'
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+  loop: "{{ newlist.packages_upgradables_list }}"
 #
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
 #   lineinfile:
