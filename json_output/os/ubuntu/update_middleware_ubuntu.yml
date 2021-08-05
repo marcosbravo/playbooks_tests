@@ -93,6 +93,10 @@
   set_fact:
     newlist: "{{ newlist | regex_replace('/', '#' )}}"
 
+- name: tsting4
+  set_fact:
+    newlist: "{{ newlist | regex_replace('all', '#' )}}"
+
 - name: tipo de mi variable newlist
   debug:
     msg: "{{newlist | type_debug}}"
