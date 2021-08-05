@@ -142,30 +142,6 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: tipo de mi variable newlist FINAL2
-  debug:
-    msg: "{{newlist | type_debug}}"
-
-- name: poner orden dict
-  set_fact:
-    newlist: "{{ newlist | dictsort }}"
-
-- name: poner orden dict
-  debug:
-    msg: "{{ newlist | type_debug}}"
-
-- name: poner orden dict
-  debug:
-    msg: "{{ newlist }}"
-
-- name: poner orden dict
-  set_fact:
-    newlist: "{{ newlist | items2dict }}"
-
-- name: poner orden dict
-  debug:
-    msg: "{{ newlist | type_debug}}"
-
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     path: '{{ json_output_file}}'
@@ -175,13 +151,17 @@
   loop: "{{ newlist.packages_upgradables_list}}"
 
 
-# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-#   include_tasks:
-#     file: slurp.yml
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+  include_tasks:
+    file: slurp.yml
 
+- name: type remote file_content
+  debug:
+    msg: "{{ remote_content | type_debug }}"
 
-
-
+- name: type remote file_content
+  debug:
+    msg: "{{ remote_content }}"
 
 
 
