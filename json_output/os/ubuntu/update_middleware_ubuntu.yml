@@ -94,12 +94,12 @@
   set_fact:
     apps2: "{{ newlist + [ item ] }}"
   loop: "{{ apps }}"
-  when: item.name != 'C'
+  when: item.packages_upgradables_list != 'Listing...'
 
 
 - name: Debug filterd
   debug:
-    msg: "{{ newlistfiltered }}"
+    msg: "{{ apps2 }}"
 #####################################
 
 - name: Debug SEGUNDOKEY
