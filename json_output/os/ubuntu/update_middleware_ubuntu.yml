@@ -23,6 +23,7 @@
     packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
   register: upgr_lines
 
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
   set_fact:
     imported_var: "{{ upgr_lines.ansible_facts | default({}) | combine({'instance_id': '11111'}) }}"
@@ -59,13 +60,17 @@
 #   debug:
 #     msg: "{{ imported_var_new| type_debug }}"
 
+- name: Debug PRIMERKEY
+  debug:
+    msg: "{{ imported_var_last }}"
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
     content: "{{ imported_var_last  | to_nice_json}}"
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: Debug imported_var_last to_nice_json
+- name: Debug SEGUNDOKEY
   debug:
     msg: "{{ imported_var_last }}"
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
@@ -154,12 +159,7 @@
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ newlist.packages_upgradables_list }}"
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
-  lineinfile:
-    dest: '{{ json_output_file}}'
-    state: absent
-    regexp: 'Listing...'
-  loop: "{{ newlist.packages_upgradables_list }}"
+
 
 
 
