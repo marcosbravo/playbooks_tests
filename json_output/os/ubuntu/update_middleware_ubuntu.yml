@@ -111,7 +111,6 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-    #line: '{"package": "{{ item.split("#")[0] }}", "actual_version": "{{ item.split("#")[1] }}", "upgradable_version": "3" }'
   loop: "{{ newlist.packages_list | list }}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
