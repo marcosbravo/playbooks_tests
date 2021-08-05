@@ -37,27 +37,27 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 4
   set_fact:
-    imported_var_new_4: "{{ imported_var_3 | combine({'distribution': ansible_distribution }) }}"
+    imported_var_4: "{{ imported_var_3 | combine({'distribution': ansible_distribution }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 5
   set_fact:
-    imported_var_new_5: "{{ imported_var_4 | combine({'distribution_version': ansible_distribution_version }) }}"
+    imported_var_5: "{{ imported_var_4 | combine({'distribution_version': ansible_distribution_version }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 6
   set_fact:
-    imported_var_new_6: "{{ imported_var_5 | combine({'FQDN': ansible_fqdn}) }}"
+    imported_var_6: "{{ imported_var_5 | combine({'FQDN': ansible_fqdn}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 7
   set_fact:
-    imported_var_new_last: "{{ imported_var_6 | combine({'instance_id': instance_id }) }}"
+    imported_var_last: "{{ imported_var_6 | combine({'instance_id': instance_id }) }}"
 
-- name: TYPE OF imported_var
-  debug:
-    msg: "{{ imported_var | type_debug }}"
-
-- name: TYPE OF imported_var_new
-  debug:
-    msg: "{{ imported_var_new| type_debug }}"
+# - name: TYPE OF imported_var
+#   debug:
+#     msg: "{{ imported_var | type_debug }}"
+#
+# - name: TYPE OF imported_var_new
+#   debug:
+#     msg: "{{ imported_var_new| type_debug }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
