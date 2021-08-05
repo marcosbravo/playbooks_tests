@@ -38,9 +38,9 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-# - name: Debug SEGUNDOKEY
-#   debug:
-#     msg: "{{ imported_var_last }}"
+- name: Debug SEGUNDOKEY
+  debug:
+    msg: "{{ imported_var_last }}"
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
