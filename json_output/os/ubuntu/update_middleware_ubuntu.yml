@@ -81,11 +81,11 @@
 
 - name: magic remove
   set_fact:
-    imported_magic: "{{ imported_var_last.packages_upgradables_list | reject('equalto', 'Listing...') | list }}"
+    imported_var_last: "{{ imported_var_last.packages_upgradables_list | reject('equalto', 'Listing...') | list }}"
 
 - name: print magic
   debug:
-    msg: "{{ imported_magic }}"
+    msg: "{{ imported_var_last }}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
