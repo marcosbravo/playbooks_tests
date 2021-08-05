@@ -33,7 +33,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 3
   set_fact:
-    imported_var_new: "{{ imported_var | combine({'execution_date_time': ansible_date_time.date ansible_date_time.time }) }}"
+    imported_var_new: "{{ imported_var | combine({'execution_date_time': ansible_date_time.date,ansible_date_time.time }) }}"
 
 - name: TYPE OF imported_var
   debug:
