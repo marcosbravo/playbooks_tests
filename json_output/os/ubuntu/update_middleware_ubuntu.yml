@@ -146,14 +146,22 @@
   debug:
     msg: "{{newlist | type_debug}}"
 
+- name: poner orden dict
+  set_fact:
+    newlist: "{{ newlist | dictsort }}"
+
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_upgradables_list | dictsort) }}}"
+  loop: "{{ newlist.packages_upgradables_list | sort }}"
 
+
+# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+#   include_tasks:
+#     file: slurp.yml
 
 
 
