@@ -28,10 +28,6 @@
   include_tasks:
     file: combine_parameters.yaml
 
-# - name: Debug PRIMERKEY
-#   debug:
-#     msg: "{{ imported_var_last }}"
-
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
     content: "{{ imported_var_last  | to_nice_json}}"
@@ -41,7 +37,6 @@
 - name: Debug SEGUNDOKEY
   debug:
     msg: "{{ imported_var_last }}"
-
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
@@ -94,12 +89,20 @@
 - name: DEBUGEAR
   debug:
     msg: "{{ newlist }}"
+##################################3
+- name:
+  set_fact:
+    newlistfiltered: "{{ newlist | reject('Listing')}}"
+
+
+- name: Debug filterd
+  debug:
+    msg: "{{ newlistfiltered }}"
+#####################################
 
 - name: Debug SEGUNDOKEY
   debug:
     msg: "{{ newlist | type_debug }}"
-
-
 
 
 # - name: poner orden dict
@@ -141,62 +144,6 @@
 #     regexp: 'Listing...'
 #   loop: "{{ newlist.packages_upgradables_list }}"
 
-
-
-
-
-
-
-
-
-# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-#   include_tasks:
-#     file: slurp.yml
-#
-#
-# - name: Create
-#   set_fact:
-#     newremote: {}
-#
-# - name: type remote file_content
-#   debug:
-#     msg: "{{ newremote | type_debug }}"
-#
-# - name: type remote file_content
-#   set_fact:
-#     newremote: "{{ remote_content }}"
-#
-# - name: type remote file_content
-#   debug:
-#     msg: "{{ newremote | type_debug }}"
-#
-# - name: type remote file_content
-#   debug:
-#     msg: "{{ newremote }}"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-#   lineinfile:
-#     path: '{{ json_output_file}}'
-#     state: absent
-#     regexp: 'Listing...'
-#     #line: '{"package": "{{ item.split("#")[0] }}", "actual_version": "{{ item.split("#")[1] }}", "upgradable_version": "3" }'
-#   loop: "{{ newlist.packages_upgradables_list }}"
 
 
 # - name: Print all available facts
