@@ -155,8 +155,8 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_upgradables_list | sort }}"
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) | sort}}, "
+  loop: "{{ newlist.packages_upgradables_list}}"
 
 
 # - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
