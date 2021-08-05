@@ -154,12 +154,6 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: absent
-    regexp: "Listing...",
-  loop: "{{ newlist.packages_upgradables_list }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
@@ -167,6 +161,13 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+  loop: "{{ newlist.packages_upgradables_list }}"
+
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file}}'
+    state: absent
+    regexp: "Listing...",
   loop: "{{ newlist.packages_upgradables_list }}"
 
 
