@@ -13,14 +13,22 @@
   command:  apt list --upgradable
   register: list_upgradable_state
 
+- name:
+  debug:
+    msg: "{{ list_upgradable_state }}"
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
   debug:
     var: list_upgradable_state.stdout_lines
   #register: upgr_lines
 
+
+
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
   set_fact:
     packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
+  when:
   register: upgr_lines
 
 
