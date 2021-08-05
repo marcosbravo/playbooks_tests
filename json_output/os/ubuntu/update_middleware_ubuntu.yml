@@ -90,11 +90,13 @@
   debug:
     msg: "{{ newlist }}"
 ##################################3
+# - name:
+#   set_fact:
+#     apps2: "{{ newlist.packages_upgradables_list[:-1] }}"
+
 - name:
   set_fact:
-    apps2: "{{ newlist.packages_upgradables_list[:-1] }}"
-
-
+    apps2: "{{ newlist | reject('search', 'Listing') | list }}"
 
 - name: Debug APPS2
   debug:
