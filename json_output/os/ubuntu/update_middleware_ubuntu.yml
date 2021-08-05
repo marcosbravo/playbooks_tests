@@ -170,11 +170,11 @@
 
 - name: type remote file_content
   debug:
-    msg: "{{ remote_content | type_debug }}"
+    msg: "{{ newremote | type_debug }}"
 
 - name: type remote file_content
   debug:
-    msg: "{{ remote_content }}"
+    msg: "{{ newremote }}"
 
 
 
