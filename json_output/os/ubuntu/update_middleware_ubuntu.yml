@@ -1,4 +1,4 @@
-- name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | {{ansible_host}} | 0.0 Update apt packages if it is older than cache_valid_time
+- name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
   apt:
     #upgrade: yes
     update_cache: yes
@@ -46,6 +46,10 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 6
   set_fact:
     imported_var_new: "{{ imported_var | combine({'FQDN': ansible_fqdn}) }}"
+
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 7
+  set_fact:
+    imported_var_new: "{{ imported_var | combine({'instance_id': instance_id }) }}"
 
 - name: TYPE OF imported_var
   debug:
@@ -143,4 +147,4 @@
 
 - name: Print all available facts
   debug:
-    var: ec2_instance_info
+    var: ansible_facts
