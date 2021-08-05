@@ -92,7 +92,9 @@
 ##################################3
 - name:
   set_fact:
-    newlistfiltered: "{{ newlist | reject('search', 'Listing')}}"
+    apps2: "{{ newlist + [ item ] }}"
+  loop: "{{ apps }}"
+  when: item.name != 'C'
 
 
 - name: Debug filterd
