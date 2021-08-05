@@ -81,7 +81,7 @@
 
 - name: magic remove
   set_fact:
-    imported_var_last: "{{ imported_var_last.packages_upgradables_list | reject('equalto', 'Listing...') | list }}"
+    imported_var_last: "{{ imported_var_last | reject('equalto', 'Listing...') | list }}"
 
 - name: print magic
   debug:
@@ -133,19 +133,9 @@
 
 - name: tsting4
   set_fact:
-    newlistnew: "{{ newlist | regex_replace('all', '#' )}}"
+    newlist: "{{ newlist | regex_replace('all', '#' )}}"
 
-- name: NEWLIST CONTENIDO
-  debug:
-    msg: "{{newlistnew}}"
 
-- name: NEWLIST TIPO
-  debug:
-    msg: "{{newlistnew | type_debug}}"
-
-- name:
-  set_fact:
-    newlist: {}
 
 # - name: poner orden dict
 #   set_fact:
@@ -153,7 +143,7 @@
 
 - name: NEWLIST TO DICT
   set_fact:
-    newlist: "{{ newlistnew }}"
+    newlist: "{{ newlist }}"
 
 - name: tipo de mi variable newlist , es dict??
   debug:
