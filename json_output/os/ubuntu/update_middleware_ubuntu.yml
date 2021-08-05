@@ -142,7 +142,7 @@
 
 - name: Reverse Lookup
   set_fact:
-    reverse_lookup_dict: "{{ newlist | default({}) | combine({item.value.b: item.key} }}"
+    reverse_lookup_dict: "{{ newlist | default({}) | combine({item.value.b: item.key}) }}"
   loop: "{{lookup('dict', newlist)}}"
 
 - name: asdf
