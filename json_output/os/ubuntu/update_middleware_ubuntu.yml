@@ -1,4 +1,4 @@
-- name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
+- name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | {{ansible_host}} | 0.0 Update apt packages if it is older than cache_valid_time
   apt:
     #upgrade: yes
     update_cache: yes
