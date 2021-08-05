@@ -113,7 +113,7 @@
 
 - name: Debug TERCER KEY
   debug:
-    msg: "{{ newlist | type_debug }}"
+    msg: "{{ newlist }}"
 # - name: poner orden dict
 #   set_fact:
 #     vamosaver: "{{ newlist | dict2items }}"
