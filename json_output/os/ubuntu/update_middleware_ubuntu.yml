@@ -18,56 +18,19 @@
     var: list_upgradable_state.stdout_lines
   #register: upgr_lines
 
-
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
   set_fact:
     packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
   register: upgr_lines
 
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
   include_tasks:
     file: combine_parameters.yaml
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
-#   set_fact:
-#     imported_var: "{{ upgr_lines.ansible_facts | default({}) | combine({'instance_id': '11111'}) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2.1 Add k/v 2
-#   set_fact:
-#     imported_var_2: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 3
-#   set_fact:
-#     imported_var_3: "{{ imported_var_2 | combine({'execution_date_time': ansible_date_time.date+' '+ansible_date_time.time }) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 4
-#   set_fact:
-#     imported_var_4: "{{ imported_var_3 | combine({'distribution': ansible_distribution }) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 5
-#   set_fact:
-#     imported_var_5: "{{ imported_var_4 | combine({'distribution_version': ansible_distribution_version }) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 6
-#   set_fact:
-#     imported_var_6: "{{ imported_var_5 | combine({'fqdn': ansible_fqdn}) }}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 7
-#   set_fact:
-#     imported_var_last: "{{ imported_var_6 | combine({'instance_id': instance_id }) }}"
-
-# - name: TYPE OF imported_var
+# - name: Debug PRIMERKEY
 #   debug:
-#     msg: "{{ imported_var | type_debug }}"
-#
-# - name: TYPE OF imported_var_new
-#   debug:
-#     msg: "{{ imported_var_new| type_debug }}"
-
-- name: Debug PRIMERKEY
-  debug:
-    msg: "{{ imported_var_last }}"
+#     msg: "{{ imported_var_last }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
@@ -75,9 +38,9 @@
     dest: '{{ json_output_file }}'
     remote_src: yes
 
-- name: Debug SEGUNDOKEY
-  debug:
-    msg: "{{ imported_var_last }}"
+# - name: Debug SEGUNDOKEY
+#   debug:
+#     msg: "{{ imported_var_last }}"
 
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
@@ -154,20 +117,20 @@
     remote_src: yes
 
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: present
-    regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_upgradables_list }}"
-
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file }}'
-    state: absent
-    regexp: 'Listing...'
-  loop: "{{ newlist.packages_upgradables_list }}"
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   lineinfile:
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '#'
+#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+#   loop: "{{ newlist.packages_upgradables_list }}"
+#
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   lineinfile:
+#     path: '{{ json_output_file }}'
+#     state: absent
+#     regexp: 'Listing...'
+#   loop: "{{ newlist.packages_upgradables_list }}"
 
 
 
