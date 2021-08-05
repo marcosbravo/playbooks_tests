@@ -94,7 +94,7 @@
   set_fact:
     apps2: "{{ newlist }}"
   loop: "{{ newlist.packages_upgradables_list }}"
-  when: "newlist.packages_upgradables_list != 'Listing...'
+  when: newlist.packages_upgradables_list != 'Listing...'
 
 
 - name: Debug filterd
