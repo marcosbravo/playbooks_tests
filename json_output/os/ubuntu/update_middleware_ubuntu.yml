@@ -92,7 +92,7 @@
 ##################################3
 - name:
   set_fact:
-    newlistfiltered: "{{ newlist | reject('Listing')}}"
+    newlistfiltered: "{{ newlist | reject('search', 'Listing')}}"
 
 
 - name: Debug filterd
