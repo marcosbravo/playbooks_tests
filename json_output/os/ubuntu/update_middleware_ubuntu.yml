@@ -81,7 +81,7 @@
 
 - name: magic remove
   set_fact:
-    imported_magic: "{{ imported_var_last.packages_upgradables_list | reject('Listing...') | list }}"
+    imported_magic: "{{ imported_var_last.packages_upgradables_list | reject('equalto', 0) | list }}"
 
 - name: print magic
   debug:
