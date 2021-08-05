@@ -112,7 +112,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
   set_fact:
-    apps3: "{{ apps2 | default([]) | combine({'instance_id': '11111'}) }}"
+    apps3: "{{ apps3 | combine({'instance_id': '11111'}) }}"
 
 - name: Debug APPS3
   debug:
