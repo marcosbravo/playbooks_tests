@@ -31,9 +31,9 @@
   set_fact:
     imported_var_new: "{{ imported_var | combine({'instance_ad': '3333'}) }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | {{ansible_date_time.time}}|  1.2.1 Add k/v 3
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  1.2.1 Add k/v 3
   set_fact:
-    imported_var_new: "{{ imported_var | combine({'execution_date_time': '3333'}) }}"
+    imported_var_new: "{{ imported_var | combine({'execution_date_time': {{ansible_date_time.time}} }) }}"
 
 - name: TYPE OF imported_var
   debug:
