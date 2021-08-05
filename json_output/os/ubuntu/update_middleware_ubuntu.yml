@@ -152,7 +152,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist }}"
+  loop: "{{ newlist.packages_upgradables_list | reverse}}"
 
 
 # - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
