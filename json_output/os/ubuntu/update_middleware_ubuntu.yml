@@ -152,12 +152,12 @@
 
 - name: poner orden dict
   set_fact:
-    newlist: "{{ newlist | dictsort }}"
+    newlist: "{{ newlist | items2dict }}"
 
 
 - name: poner orden dict
   debug:
-    msg: "{{ newlist | items2dict }}"
+    msg: "{{ newlist | type_debug}}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
