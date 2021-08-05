@@ -79,13 +79,6 @@
   debug:
     msg: "{{ imported_var_last }}"
 
-- name: magic remove
-  set_fact:
-    imported_var_last: "{{ imported_var_last | reject('equalto', 'Listing...') | list }}"
-
-- name: print magic
-  debug:
-    msg: "{{ imported_var_last }}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
 #   lineinfile:
