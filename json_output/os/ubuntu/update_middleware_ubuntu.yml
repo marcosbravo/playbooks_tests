@@ -103,16 +103,16 @@
     msg: "{{ apps2 }}"
 
 - name: Debug APPS2
-  debug:
-    msg: "{{ apps2 | items2dict }}"
+  set_fact:
+    apps3: "{{ apps2 | items2dict }}"
 
 - name: Debug APPS2
   debug:
-    msg: "{{ apps2 | type_debug }}"
+    msg: "{{ apps3 | type_debug }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
   set_fact:
-    apps3: "{{ apps2 | default({}) | combine({'instance_id': '11111'}) }}"
+    apps3: "{{ apps3 | default({}) | combine({'instance_id': '11111'}) }}"
 
 - name: Debug APPS3
   debug:
