@@ -135,25 +135,23 @@
   set_fact:
     newlist: "{{ newlist | regex_replace('all', '#' )}}"
 
-- name: tipo de mi variable newlist
+- name: NEWLIST CONTENIDO
   debug:
     msg: "{{newlist}}"
 
-- name: tipo de mi variable newlist
+- name: NEWLIST TIPO
   debug:
     msg: "{{newlist | type_debug}}"
-
-
 
 # - name: poner orden dict
 #   set_fact:
 #     vamosaver: "{{ newlist | dict2items }}"
 
-- name: poner orden dict
+- name: NEWLIST TO DICT
   set_fact:
     newlist: "{{ newlist | items2dict }}"
 
-- name: tipo de mi variable newlist FINAL
+- name: tipo de mi variable newlist , es dict??
   debug:
     msg: "{{newlist | type_debug}}"
 
