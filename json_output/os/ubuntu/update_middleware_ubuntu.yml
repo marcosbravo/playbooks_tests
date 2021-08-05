@@ -77,7 +77,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ imported_var_last | regex_replace('from:', '#' )}}"
+    newlist: "{{ imported_var_last.packages_upgradables_list | regex_replace('from:', '#' )}}"
 
 - name: tsting2
   set_fact:
