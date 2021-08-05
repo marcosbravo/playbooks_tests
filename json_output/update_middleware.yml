@@ -3,7 +3,7 @@
 - name:
   hosts: all
   gather_facts: true
-  ec2_instance_facts: true
+  ec2_instance_info: true
 
   vars:
     json_output_file: /tmp/system_packages_upgradables.json
