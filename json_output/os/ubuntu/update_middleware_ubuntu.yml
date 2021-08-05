@@ -167,7 +167,7 @@
   lineinfile:
     path: '{{ json_output_file}}'
     state: absent
-    regexp: "Listing...",
+    regexp: 'Listing...',
   loop: "{{ newlist.packages_upgradables_list }}"
 
 
