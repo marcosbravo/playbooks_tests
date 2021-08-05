@@ -104,7 +104,7 @@
 
 - name: Debug APPS2
   set_fact:
-    apps3: {{ apps2 }}
+    apps3: "{{ apps2 }}"
 
 - name: Debug APPS2
   debug:
