@@ -20,7 +20,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
   set_fact:
-    packages_list: "{{list_upgradable_state.stdout_lines}}"
+    key_parameter_package: "{{list_upgradable_state.stdout_lines}}"
   register: upgr_lines
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
@@ -57,7 +57,7 @@
 #     dest: '{{ json_output_file}}'
 #     state: absent
 #     regexp: 'Listing...'
-#   loop: "{{ imported_var_new.packages_list }}"
+#   loop: "{{ imported_var_new.key_parameter_package }}"
 
 # - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
 #   include_tasks:
@@ -69,7 +69,7 @@
 
 # - name: Create and Add items to dictionary
 #   set_fact:
-#     userdata: "{{ imported_var_new.packages_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
+#     userdata: "{{ imported_var_new.key_parameter_package | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
 
 
 - name: tipo de mi variable "imported_var_new"
@@ -118,7 +118,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_list | list }}"
+  loop: "{{ newlist.key_parameter_package | list }}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
 #   lineinfile:
@@ -126,7 +126,7 @@
 #     state: absent
 #     regexp: 'Listing...'
 #     #line: '{"package": "{{ item.split("#")[0] }}", "actual_version": "{{ item.split("#")[1] }}", "upgradable_version": "3" }'
-#   loop: "{{ newlist.packages_list }}"
+#   loop: "{{ newlist.key_parameter_package }}"
 
 
 - name: Print all available facts
