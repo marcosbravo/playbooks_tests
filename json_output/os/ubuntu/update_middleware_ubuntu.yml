@@ -102,6 +102,10 @@
   debug:
     msg: "{{ apps2 }}"
 
+- name: Debug APPS2
+  debug:
+    msg: "{{ apps2 | type_debug}}"
+
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
   set_fact:
     apps3: "{{ apps2 | default({}) | combine({'instance_id': '11111'}) }}"
