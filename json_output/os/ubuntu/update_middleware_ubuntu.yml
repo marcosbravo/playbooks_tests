@@ -151,9 +151,16 @@
     newlist: "{{ newlist | dictsort }}"
 
 - name: poner orden dict
+  debug:
+    msg: "{{ newlist | type_debug}}"
+
+- name: poner orden dict
+  debug:
+    msg: "{{ newlist }}"
+
+- name: poner orden dict
   set_fact:
     newlist: "{{ newlist | items2dict }}"
-
 
 - name: poner orden dict
   debug:
