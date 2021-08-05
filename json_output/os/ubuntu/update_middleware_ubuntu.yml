@@ -159,10 +159,14 @@
 - name: Create
   set_fact:
     newremote: {}
-    
+
+- name: type remote file_content
+  debug:
+    msg: "{{ newremote | type_debug }}"
+
 - name: type remote file_content
   set_fact:
-    newremote: "{{ remote_content |to_nice_json }}"
+    newremote: "{{ remote_content }}"
 
 - name: type remote file_content
   debug:
