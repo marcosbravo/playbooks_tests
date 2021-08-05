@@ -122,7 +122,7 @@
 
 - name: tipo de mi variable newlist SORT
   debug:
-    msg: "{{newlist | SORT}}"
+    msg: "{{newlist | sort}}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
   copy:
@@ -148,6 +148,6 @@
 #   loop: "{{ newlist.packages_upgradables_list }}"
 
 
-- name: Print all available facts
-  debug:
-    var: ansible_facts
+# - name: Print all available facts
+#   debug:
+#     var: ansible_facts
