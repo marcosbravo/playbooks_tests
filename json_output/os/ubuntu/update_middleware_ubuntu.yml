@@ -151,7 +151,7 @@
 
 - name: poner orden dict
   set_fact:
-    newlist: "{{ vamosaver | items2dict }}"
+    newlist: "{{ newlist | items2dict }}"
 
 - name: tipo de mi variable newlist FINAL
   debug:
