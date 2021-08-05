@@ -93,7 +93,7 @@
 - name:
   set_fact:
     apps2: "{{ newlist }}"
-  loop: "{{ newlist }}"
+  loop: "{{ newlist.packages_upgradables_list }}"
   when: "{{ newlist.packages_upgradables_list != 'Listing...' }}"
 
 
