@@ -81,7 +81,7 @@
 
 - name: magic remove
   set_fact:
-    imported_var_last_magic: {{ imported_var_last.packages_upgradables_list | reject('search','1') | list }}
+    imported_magic: "{{ imported_var_last.packages_upgradables_list | reject('search','1') | list }}"
 
 - name: print magic
   debug:
