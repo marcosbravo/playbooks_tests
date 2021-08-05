@@ -155,6 +155,15 @@
   include_tasks:
     file: slurp.yml
 
+
+- name: Create
+  set_fact:
+    newremote: {}
+    
+- name: type remote file_content
+  set_fact:
+    newremote: "{{ remote_content |to_nice_json }}"
+
 - name: type remote file_content
   debug:
     msg: "{{ remote_content | type_debug }}"
