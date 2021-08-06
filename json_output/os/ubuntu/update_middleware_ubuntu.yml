@@ -70,15 +70,31 @@
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ newlist }}"
 
+- name: Store content remote_sr
+  command: cat "{{ json_output_file }}"
+  register: content
+
+- name: print
+  debug:
+    msg: "{{ content }}"
+
+- name:
+  set_fact:
+    finaldict: {}
+
+- name:
+  set_fact:
+    finaldict: "{{ content }}"
+
+- name: print
+  debug:
+    msg: "{{ finaldict | type_debug }}"
 
 
+- name: print
+  debug:
+    msg: "{{ finaldict | type_debug }}"
 
-
-
-
-
-
--
 
 
 
