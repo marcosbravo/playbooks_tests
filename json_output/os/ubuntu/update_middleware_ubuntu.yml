@@ -67,7 +67,13 @@
 - name: make a list
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
-- debug: var=packages_list
+- name:
+  debug:
+    msg: "{{packages_list}}"
+
+- name:
+  debug:
+    msg: "{{packages_list | type_debug}}"
 
 # - name: tstingB
 #   set_fact:
