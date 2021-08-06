@@ -161,7 +161,7 @@
     regexp: 'Listing...'
 
 - name: Get
-  command:  cat /tmp/system_packages_upgradables.json
+  shell:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
 - name: Tipo de catcommand.stdout_lines
