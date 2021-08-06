@@ -168,16 +168,20 @@
   debug:
     msg: "{{catcommand.stdout_lines | type_debug}}"
 
-- set_fact: Replace
-    first_list: "{{ catcommand.stdout_lines | default([]) + [item] }}"
-  with_items: "{{ catcommand.stdout_lines }}"
+- name:
+  set_fact:
+    hil: "{{catcommand.stdout_lines}}"
+#
+# - set_fact: Replace
+#     first_list: "{{ catcommand.stdout_lines | default([]) + [item] }}"
+#   with_items: "{{ catcommand.stdout_lines }}"
 
 - name:
   debug:
-    msg: "{{first_list | type_debug}}"
+    msg: "{{hil | type_debug}}"
 - name:
   debug:
-    msg: "{{first_list}}"
+    msg: "{{hil}}"
 # - name:
 #   debug:
 #     msg: "{{ catcommand.stdout | from_json}}"
