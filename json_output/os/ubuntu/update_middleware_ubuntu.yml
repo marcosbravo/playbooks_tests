@@ -139,14 +139,14 @@
   loop: "{{ packages_list  }}"
 
 
-- name: LIST ACTUAL
-  debug:
-    msg: "{{upgradable_packages.ansible_facts}}"
+# - name: LIST ACTUAL
+#   debug:
+#     msg: "{{upgradable_packages.ansible_facts}}"
 
 
-- name:
-  debug:
-    msg: "{{ finalvariable }}"
+# - name:
+#   debug:
+#     msg: "{{ finalvariable }}"
 
 - name: Explicitly specifying named matched groups
   replace:
