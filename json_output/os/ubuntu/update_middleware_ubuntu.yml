@@ -60,10 +60,10 @@
 
 
 
-- name: Display users
+- name: Display LOOP LISTSS
   debug:
     msg: "{{ item }}"
-  loop: "{{ upgradable_packages.ansible_facts }}"
+  loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
 # - name: tstingB
 #   set_fact:
