@@ -11,182 +11,182 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.0 Check middleware update list
   command:  apt list --upgradable
-  register: list_upgradable_state
+  register: list_upgradable_packages
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
   debug:
-    var: list_upgradable_state.stdout_lines
+    var: list_upgradable_packages.stdout_lines
   #register: upgr_lines
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
-  set_fact:
-    packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
-  register: upgr_lines
-
-
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
-  include_tasks:
-    file: combine_parameters.yaml
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
-  copy:
-    content: "{{ imported_var_last  | to_nice_json}}"
-    dest: '{{ json_output_file }}'
-    remote_src: yes
-
-- name: Debug SEGUNDOKEY
-  debug:
-    msg: "{{ imported_var_last }}"
-
-# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
-#   lineinfile:
-#     dest: '{{ json_output_file}}'
-#     state: absent
-#     regexp: 'Listing...'
-#   loop: "{{ imported_var_new.{{ packages_upgradables_list }} }}"
-
-# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
+#   set_fact:
+#     packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
+#   register: upgr_lines
+#
+#
+# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
 #   include_tasks:
-#     file: slurp.yml
+#     file: combine_parameters.yaml
 #
-# - name: Debug 1
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
+#   copy:
+#     content: "{{ imported_var_last  | to_nice_json}}"
+#     dest: '{{ json_output_file }}'
+#     remote_src: yes
+#
+# - name: Debug SEGUNDOKEY
 #   debug:
-#     msg: "{{ remote_content }}"
-
-# - name: Create and Add items to dictionary
+#     msg: "{{ imported_var_last }}"
+#
+# # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Convert lines to dict
+# #   lineinfile:
+# #     dest: '{{ json_output_file}}'
+# #     state: absent
+# #     regexp: 'Listing...'
+# #   loop: "{{ imported_var_new.{{ packages_upgradables_list }} }}"
+#
+# # - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+# #   include_tasks:
+# #     file: slurp.yml
+# #
+# # - name: Debug 1
+# #   debug:
+# #     msg: "{{ remote_content }}"
+#
+# # - name: Create and Add items to dictionary
+# #   set_fact:
+# #     userdata: "{{ imported_var_new.packages_upgradables_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
+#
+#
+# # - name: tipo de mi variable "imported_var_new"
+# #   debug:
+# #     msg: "{{ imported_var_last | type_debug }}"
+# #
+# # - name: definir
+# #   set_fact:
+# #     newlist: {}
+# #
+# # - name: tipo de variable de "newlist" fijado a dict
+# #   debug:
+# #     msg: "{{ newlist | type_debug }}"
+#
+# - name: tsting
 #   set_fact:
-#     userdata: "{{ imported_var_new.packages_upgradables_list | default({}) | combine ({ 'paquete' : item.split('/')[0] }) }}"
-
-
-# - name: tipo de mi variable "imported_var_new"
-#   debug:
-#     msg: "{{ imported_var_last | type_debug }}"
+#     newlist: "{{ imported_var_last | regex_replace('from:', '#' )}}"
 #
-# - name: definir
+# - name: tsting2
 #   set_fact:
-#     newlist: {}
+#     newlist: "{{ newlist | regex_replace('amd64', '#' )}}"
 #
-# - name: tipo de variable de "newlist" fijado a dict
+# - name: tsting3
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace('/', '#' )}}"
+#
+# - name: tsting4
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace('all', '#' )}}"
+#
+# - name: DEBUGEAR
 #   debug:
-#     msg: "{{ newlist | type_debug }}"
-
-- name: tsting
-  set_fact:
-    newlist: "{{ imported_var_last | regex_replace('from:', '#' )}}"
-
-- name: tsting2
-  set_fact:
-    newlist: "{{ newlist | regex_replace('amd64', '#' )}}"
-
-- name: tsting3
-  set_fact:
-    newlist: "{{ newlist | regex_replace('/', '#' )}}"
-
-- name: tsting4
-  set_fact:
-    newlist: "{{ newlist | regex_replace('all', '#' )}}"
-
-- name: DEBUGEAR
-  debug:
-    msg: "{{ newlist }}"
-##################################3
+#     msg: "{{ newlist }}"
+# ##################################3
+# # - name:
+# #   set_fact:
+# #     apps2: "{{ newlist.packages_upgradables_list[:-1] }}"
+#
 # - name:
 #   set_fact:
-#     apps2: "{{ newlist.packages_upgradables_list[:-1] }}"
-
-- name:
-  set_fact:
-    apps2: "{{ newlist.packages_upgradables_list | reject('search', 'Listing') | list }}"
-
-- name: Debug APPS2
-  debug:
-    msg: "{{ apps2 }}"
-
-- name: Debug APPS2
-  set_fact:
-    apps3: "{{ apps2 }}"
-
-- name: Debug APPS2
-  debug:
-    msg: "{{ apps3 | type_debug }}"
-
-- name: Debug APPS3 Inicial
-  debug:
-    msg: "{{ apps3 }}"
-
-- name: SET Dict APPS4
-  set_fact:
-    apps4: {}
-
-- name: Debug APPS4 Type
-  debug:
-    msg: "{{ apps4 | type_debug }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
-  set_fact:
-    apps4: "{{ apps3 }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
-  set_fact:
-    apps4: "{{ apps4 | default ({}) | combine({'instance_id': '11111'}) }}"
-
-- name: Debug APPS4
-  debug:
-    msg: "{{ apps4 }}"
-#####################################
-
-- name: Debug SEGUNDOKEY
-  debug:
-    msg: "{{ newlist | type_debug }}"
-
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
-  include_tasks:
-    file: combine_parameters.yaml
-
-- name: Debug TERCER KEY
-  debug:
-    msg: "{{ newlist }}"
-# - name: poner orden dict
-#   set_fact:
-#     vamosaver: "{{ newlist | dict2items }}"
-
-
-# - name: tipo de mi variable newlist , es dict??
-#   debug:
-#     msg: "{{imported_var_last | type_debug}}"
+#     apps2: "{{ newlist.packages_upgradables_list | reject('search', 'Listing') | list }}"
 #
-# - name: tipo de mi variable newlist FINAL
+# - name: Debug APPS2
 #   debug:
-#     msg: "{{imported_var_last}}"
+#     msg: "{{ apps2 }}"
 #
-# - name: set
+# - name: Debug APPS2
 #   set_fact:
-#     newlist: "{{ imported_var_last }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
-  copy:
-    content: "{{ newlist | to_nice_json}}"
-    dest: '{{ json_output_file }}'
-    remote_src: yes
-
-
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: present
-    regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist.packages_upgradables_list }}"
+#     apps3: "{{ apps2 }}"
+#
+# - name: Debug APPS2
+#   debug:
+#     msg: "{{ apps3 | type_debug }}"
+#
+# - name: Debug APPS3 Inicial
+#   debug:
+#     msg: "{{ apps3 }}"
+#
+# - name: SET Dict APPS4
+#   set_fact:
+#     apps4: {}
+#
+# - name: Debug APPS4 Type
+#   debug:
+#     msg: "{{ apps4 | type_debug }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
+#   set_fact:
+#     apps4: "{{ apps3 }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Add k/v 1
+#   set_fact:
+#     apps4: "{{ apps4 | default ({}) | combine({'instance_id': '11111'}) }}"
+#
+# - name: Debug APPS4
+#   debug:
+#     msg: "{{ apps4 }}"
+# #####################################
+#
+# - name: Debug SEGUNDOKEY
+#   debug:
+#     msg: "{{ newlist | type_debug }}"
+#
+# - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
+#   include_tasks:
+#     file: combine_parameters.yaml
+#
+# - name: Debug TERCER KEY
+#   debug:
+#     msg: "{{ newlist }}"
+# # - name: poner orden dict
+# #   set_fact:
+# #     vamosaver: "{{ newlist | dict2items }}"
+#
+#
+# # - name: tipo de mi variable newlist , es dict??
+# #   debug:
+# #     msg: "{{imported_var_last | type_debug}}"
+# #
+# # - name: tipo de mi variable newlist FINAL
+# #   debug:
+# #     msg: "{{imported_var_last}}"
+# #
+# # - name: set
+# #   set_fact:
+# #     newlist: "{{ imported_var_last }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Add item head
+#   copy:
+#     content: "{{ newlist | to_nice_json}}"
+#     dest: '{{ json_output_file }}'
+#     remote_src: yes
+#
 #
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
 #   lineinfile:
-#     path: '{{ json_output_file }}'
-#     state: absent
-#     regexp: 'Listing...'
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '#'
+#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
 #   loop: "{{ newlist.packages_upgradables_list }}"
-
-
-
-# - name: Print all available facts
-#   debug:
-#     var: ansible_facts
+# #
+# # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+# #   lineinfile:
+# #     path: '{{ json_output_file }}'
+# #     state: absent
+# #     regexp: 'Listing...'
+# #   loop: "{{ newlist.packages_upgradables_list }}"
+#
+#
+#
+# # - name: Print all available facts
+# #   debug:
+# #     var: ansible_facts
