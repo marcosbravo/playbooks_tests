@@ -82,7 +82,7 @@
 
 - name: NUEVO DICT
   debug:
-    msg: "{{nuevodict}}"
+    msg: "{{nuevodict | replace('\\','\n')}}"
 
 - name: NUEVO DICT TYPE
   debug:
