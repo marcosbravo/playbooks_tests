@@ -43,12 +43,9 @@
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
-
 - name: Volcamos a dict la lista
   set_fact:
-    upgradable_packages_dict: "{{ upgradable_packages | default ({}) | [{'name': item}] }}"
-   with_items:
-        - "{{ upgradable_packages}}"
+    upgradable_packages_dict: "{{ upgradable_packages | default ({}) }}"
 
 
 
