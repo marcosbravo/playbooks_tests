@@ -82,11 +82,16 @@
 
 - name: NUEVO DICT
   debug:
-    msg: "{{nuevodict | replace('\\','\n')}}"
+    msg: "{{nuevodict}}"
 
 - name: NUEVO DICT TYPE
   debug:
     msg: "{{nuevodict | type_debug}}"
+
+- name:
+  set_fact:
+    nuevodict: "{{ nuevodict | replace('\\','\n') }}"
+
 
 
 
