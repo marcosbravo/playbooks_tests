@@ -143,9 +143,6 @@
   debug:
     msg: "{{upgradable_packages.ansible_facts}}"
 
-- name:
-  set_fact:
-    finalvariable: {"packages_listing": ["one", "two"]}
 
 - name:
   debug:
@@ -163,7 +160,7 @@
 
 - name:
   debug:
-    msg: "{{catcommand.stdout_lines.split('\n')}}"
+    msg: "{{catcommand.stdout_lines | items2dict}"
 
 # - name:
 #   debug:
