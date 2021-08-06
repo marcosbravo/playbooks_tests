@@ -71,12 +71,9 @@
 #   loop: "{{ newlist }}"
 
 - name: Store content remote_sr
-  command: cat "{{ json_output_file }}"
+  command: cat /tmp/test.json
   register: content
 
-- name: print
-  debug:
-    msg: "{{ content.stdout }}"
 
 - name:
   set_fact:
