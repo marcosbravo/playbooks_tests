@@ -151,6 +151,14 @@
   debug:
     msg: "{{ finalvariable }}"
 
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
+  include_tasks:
+    file: slurp.yml
+
+- name:
+  debug:
+    msg: "{{remote_content}}"
+
 
 
 # - name: tstingB
