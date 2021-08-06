@@ -170,7 +170,12 @@
 
 - name:
   set_fact:
-    hil: '{{catcommand.stdout_lines | replace("\\t", "") | replace("\\s", "")  }}'
+    hil: "{{catcommand.stdout_lines | replace('\\t', '') }}"
+
+- name:
+  set_fact:
+    hil: '{{hil | regex_replace("\", '') }}'
+
 
 - name:
   debug:
@@ -185,12 +190,12 @@
 #     hil: "{{ hil | replace('\\', 'T' )}}"
 
 
-- name:
-  debug:
-    msg: "{{hil | type_debug}}"
-- name:
-  debug:
-    msg: "{{hil}}"
+# - name:
+#   debug:
+#     msg: "{{hil | type_debug}}"
+# - name:
+#   debug:
+#     msg: "{{hil}}"
 # - name:
 #   debug:
 #     msg: "{{ catcommand.stdout | from_json}}"
