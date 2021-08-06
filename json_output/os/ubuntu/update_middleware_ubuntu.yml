@@ -67,13 +67,16 @@
 
 - name: set fact
   set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
-  with_items: "{{ upgradable_packages}}"
-  #with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
-  register: foo_result
+  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
+  register: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
 
 - name: PRINT foo_result
   debug:
-    msg: "{{foo_result}}"
+    msg: "{{ upgradable_packages}}"
+
+# - name: PRINT foo_result
+#   debug:
+#     msg: "{{foo_result}}"
 
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
 #   set_fact:
