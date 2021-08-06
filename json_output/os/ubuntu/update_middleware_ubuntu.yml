@@ -47,10 +47,14 @@
   set_fact:
     upgradable_packages_dict: "{{ upgradable_packages | default ({}) }}"
 
+- name: TIPO (Lista)
+  debug:
+    msg: "{{ upgradable_packages_dict | type_debug }}"
 
 
-
-
+- name: CONTENIDO 3
+  debug:
+    msg: "{{ upgradable_packages_dict }}"
 
 
 
