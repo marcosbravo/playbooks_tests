@@ -45,7 +45,7 @@
 
 - name: Volcamos a dict la lista
   set_fact:
-    upgradable_packages_dict: "{{ upgradable_packages | default ({}) | item }}"
+    upgradable_packages_dict: "{{ upgradable_packages | default ([]) }}"
   with_items:
     - "{{ upgradable_packages}}"
 
