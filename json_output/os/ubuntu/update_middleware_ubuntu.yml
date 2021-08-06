@@ -65,9 +65,9 @@
   register: foo_result
 
 - name: make a list
-  set_fact: foo="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
+  set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
-- debug: var=foo
+- debug: var=packages_list
 
 # - name: tstingB
 #   set_fact:
