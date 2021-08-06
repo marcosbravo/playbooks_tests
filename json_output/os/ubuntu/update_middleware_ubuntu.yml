@@ -88,9 +88,6 @@
   debug:
     msg: "{{nuevodict | type_debug}}"
 
-- name:
-  set_fact:
-    nuevodict: "{{ nuevodict | replace('\\','\n') }}"
 
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
