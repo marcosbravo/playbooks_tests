@@ -5,17 +5,26 @@
     cache_valid_time: 3600 #One hour
   register: update_state
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
-  debug:
-    var: update_state
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
+#   debug:
+#     var: update_state
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.0 Check middleware update list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.0 Get List Packages Upgradables
   command:  apt list --upgradable
   register: list_upgradable_packages
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
   debug:
     var: list_upgradable_packages.stdout_lines
+  register: upgradable_packages
+
+- name: TIPO
+  debug:
+    msg: "{{ upgradable_packages | type_debug }}"
+
+- name: CONTENIDO
+  debug:
+    msg: "{{ upgradable_packages | type_debug }}"
   #register: upgr_lines
 #
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
