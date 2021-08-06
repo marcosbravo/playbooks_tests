@@ -53,7 +53,7 @@
 
 - name: Volcamos a dict la lista
   set_fact:
-    upg: "{{ upgradable_packages | default ([]) }}"
+    upg: "{{ upgradable_packages | default ({}) }}"
   loop:
     - "{{ upgradable_packages }}"
 
