@@ -126,7 +126,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ upgradable_packages_jaist }}"
+  loop: "{{ upgradable_packages_jai }}"
 
 
 
