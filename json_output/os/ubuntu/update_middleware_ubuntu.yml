@@ -62,7 +62,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ upgradable_packages | regex_replace('s*', '#') }}"
+    newlist: "{{ upgradable_packages | replace('', '#') }}"
 
 # - name: tstingB
 #   set_fact:
