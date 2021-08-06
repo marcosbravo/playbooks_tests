@@ -62,7 +62,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ upgradable_packages.packages_upgradables_list | replace(' ', '#') }}"
+    newlist: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | replace(' ', '#') }}"
   loop: "{{ upgradable_packages }}"
 
 # - name: tstingB
