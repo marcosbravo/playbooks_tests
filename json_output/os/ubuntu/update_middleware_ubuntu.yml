@@ -43,6 +43,9 @@
   debug:
     msg: "{{upgradable_packages.ansible_facts}}"
 
+- name:
+  debug:
+    msg: "{{upgradable_packages.ansible_facts | type_debug}}"
 
 
 - name: tsting
