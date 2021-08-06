@@ -68,11 +68,11 @@
 - name: set fact
   set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
-  register: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
+  register: foo_result
 
 - name: PRINT foo_result
   debug:
-    msg: "{{ upgradable_packages}}"
+    msg: "{{ foo_result}}"
 
 # - name: PRINT foo_result
 #   debug:
@@ -145,8 +145,14 @@
 
 - name:
   set_fact:
-    finalvariable: {}
+    finalvariable: {"packages_listing: []"}
 
+- name:
+  set_fact: "{{ finalvariable.packages_listing }}" = ["one", "two"]
+
+- name:
+  debug:
+    msg: "{{ finalvariable.packages_listing }}"
 
 
 
