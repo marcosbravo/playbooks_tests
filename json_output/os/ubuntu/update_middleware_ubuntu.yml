@@ -62,13 +62,13 @@
   debug:
     msg: "{{ newlist | type_debug}}"
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: present
-    regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ newlist }}"
+# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+#   lineinfile:
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '#'
+#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+#   loop: "{{ newlist }}"
 
 - name: Store content remote_sr
   command: cat "{{ json_output_file }}"
@@ -76,7 +76,7 @@
 
 - name: print
   debug:
-    msg: "{{ content.stdout | from_json}}"
+    msg: "{{ content.stdout | from_json }}"
 
 - name:
   set_fact:
