@@ -126,7 +126,7 @@
 
 - name: NUEVO DICT
   debug:
-    msg: "{{nuevodict | to_nice_json}}"
+    msg: "{{nuevodict}}"
 
 
 ######################################################
