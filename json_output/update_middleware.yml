@@ -9,7 +9,9 @@
     json_output_file_clean: /tmp/system_packages_upgradables_clean.json
     keys_list:
       - package_name
+      - repository
       - upgradable_version
+      - arquitecture
       - is_upgradable
       - actual_version
     key_parameter_package:
