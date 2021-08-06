@@ -77,7 +77,7 @@
 
 - name: PRINT NEWVAR
   debug:
-    msg: "{{ tmpnewvar.results.ansible_facts }}"
+    msg: "{{ tmpnewvar.results }}"
 
 
 
