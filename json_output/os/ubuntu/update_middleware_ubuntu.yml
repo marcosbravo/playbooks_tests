@@ -47,6 +47,10 @@
   set_fact:
     upg: {}
 
+- name: TIPO (dict)
+  debug:
+    msg: "{{ upg | type_debug }}"
+
 - name: Volcamos a dict la lista
   set_fact:
     upg: "{{ upgradable_packages | default ([]) | }}"
