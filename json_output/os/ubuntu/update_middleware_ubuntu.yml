@@ -99,11 +99,11 @@
 - name: make a list
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
-- name:
+- name: PACKAGEs LIST
   debug:
     msg: "{{packages_list}}"
 
-- name:
+- name: PACKAGEs TYPE
   debug:
     msg: "{{packages_list | type_debug}}"
 
