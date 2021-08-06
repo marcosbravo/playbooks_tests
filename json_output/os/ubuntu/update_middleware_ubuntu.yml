@@ -177,6 +177,11 @@
 #   with_items: "{{ catcommand.stdout_lines }}"
 
 - name:
+  set_fact:
+    hil: "{{ hil | regex_replace('\\', '' )}}"
+
+
+- name:
   debug:
     msg: "{{hil | type_debug}}"
 - name:
