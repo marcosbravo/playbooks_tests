@@ -54,11 +54,11 @@
 
 - name: CONTENIDO 3
   debug:
-    msg: "{{ upgradable_packages }}"
+    msg: "{{ upgradable_packages_dict }}"
 
 - name: TIPO (???)
   debug:
-    msg: "{{ upgradable_packages | type_debug }}"
+    msg: "{{ upgradable_packages_dict | type_debug }}"
 
 
 
