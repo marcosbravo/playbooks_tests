@@ -47,17 +47,6 @@
   debug:
     msg: "{{upgradable_packages.ansible_facts | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-  set_fact:
-    upgradable_packagesnew: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | reject('search', 'Listing...') }}"
-
-- name:
-  debug:
-    msg: "{{upgradable_packagesnew}}"
-
-- name: LAST POINT
-  debug:
-    msg: "{{upgradable_packagesnew | type_debug}}"
 
 
 
