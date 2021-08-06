@@ -145,7 +145,7 @@
 
 - name:
   set_fact:
-    finalvariable: {"packages_listing": ["one", "two"]"}
+    finalvariable: {"packages_listing": ["one", "two"]}
 
 - name:
   debug:
