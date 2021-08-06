@@ -172,9 +172,9 @@
   set_fact:
     hil: "{{catcommand.stdout_lines | replace('\\t', '') }}"
 
-- name:
+- name: limpiar espacio blanco
   set_fact:
-    hil: '{{hil | regex_replace("\", "") }}'
+    hil: '{{hil | replace("\", "") }}'
 
 
 - name:
