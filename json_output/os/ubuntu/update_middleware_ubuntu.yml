@@ -171,14 +171,18 @@
 - name:
   set_fact:
     hil: "{{catcommand.stdout_lines}}"
+
+- name:
+  debug:
+    msg: "{{hil}}"
 #
 # - set_fact: Replace
 #     first_list: "{{ catcommand.stdout_lines | default([]) + [item] }}"
 #   with_items: "{{ catcommand.stdout_lines }}"
 
-- name:
+- name: replace slahs
   set_fact:
-    hil: "{{ hil | replace('\\', ' ' )}}"
+    hil: "{{ hil | replace('\\', 'T' )}}"
 
 
 - name:
