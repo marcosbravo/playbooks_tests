@@ -77,6 +77,18 @@
 - name:
   debug:
     msg: "{{content.stdout | from_json }}"
+
+- name:
+  set_fact:
+    finaldict: "{{content.stdout | from_json }}"
+
+- name:
+  debug:
+    msg: "{{finaldict | type_debug }}"
+
+- name:
+  debug:
+    msg: "{{finaldict}}"
 # - name:
 #   set_fact:
 #     finaldict: {}
