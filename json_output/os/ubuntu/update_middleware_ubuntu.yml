@@ -174,11 +174,11 @@
 
 - name:
   set_fact:
-    qsera: "{{catcommand.stdout_lines}}"
+    qsera: "{{catcommand.stdout_lines | to_json}}"
 
 - name:
   debug:
-    msg: "{{qsera | type_debug}}"  
+    msg: "{{qsera | type_debug}}"
 # - name:
 #   debug:
 #     msg: "{{ catcommand.stdout | from_json}}"
