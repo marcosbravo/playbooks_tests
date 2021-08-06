@@ -151,14 +151,13 @@
   debug:
     msg: "{{ finalvariable }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | IMP. Slurp
-  include_tasks:
-    file: slurp.yml
+- name: Get
+  command:  cat /tmp/system_packages_upgradables.json
+  register: catcommand
 
 - name:
   debug:
-    msg: "{{remote_content}}"
-
+    msg:"{{ catcommand.stdout | from_json}}"
 
 
 # - name: tstingB
