@@ -165,6 +165,14 @@
   debug:
     msg: "{{miracle}}"
 
+- name:
+  set_fact:
+    "{{upgradable_packages.ansible_facts.packages_upgradables_list}}": "{{miracle}}"
+
+- name:
+  debug:
+    msg: "{{miracle}}" 
+
 # - name: tstingB
 #   set_fact:
 #     newlist: "{{ newlist | regex_replace(' ', '#' )}}"
