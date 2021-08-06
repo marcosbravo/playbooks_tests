@@ -63,6 +63,7 @@
 - name: tsting
   set_fact:
     newlist: "{{ upgradable_packages | replace(' ', '#') }}"
+  loop: "{{ upgradable_packages }}"
 
 # - name: tstingB
 #   set_fact:
