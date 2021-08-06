@@ -121,11 +121,11 @@
 
 - name: CONTENIDO I
   debug:
-    msg: "{{ upgradable_packages_jai }}"
+    msg: "{{packages_list }}"
 
 - name: CONTENIDO II
   debug:
-    msg: "{{ upgradable_packages_jai | type_debug}}"
+    msg: "{{ packages_list | type_debug}}"
 
 
 
@@ -136,7 +136,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ upgradable_packages_jai  }}"
+  loop: "{{ packages_list  }}"
 
 
 - name: LIST ACTUAL
