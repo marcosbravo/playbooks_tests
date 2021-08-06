@@ -159,7 +159,7 @@
   register: catcommand
 
 - name: Get
-  command:  sed -i'/Listing/ d' /tmp/system_packages_upgradables.json
+  command:  sed -i '/Listing/ d' /tmp/system_packages_upgradables.json
   register: catcommand
 
 - name:
