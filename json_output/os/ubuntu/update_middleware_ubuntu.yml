@@ -72,7 +72,7 @@
 
 - name: asdfasdfasdf
   set_fact:
-    new_list: "{{ foo_result | reject('search', 'Listing') | list }}"
+    new_list: "{{ foo_result | reject('search', 'Listing') | dict }}"
   register: nueva
 
 - name: make a list
