@@ -64,9 +64,9 @@
   set_fact:
     newlist: "{{ upgradable_packages| regex_replace('/', '#' )}}"
 
-- name: tstingB
-  set_fact:
-    newlist: "{{ newlist | regex_replace(' ', '#' )}}"
+# - name: tstingB
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace(' ', '#' )}}"
 
 # - name: tsting2
 #   set_fact:
@@ -80,7 +80,7 @@
 #   set_fact:
 #     newlist: "{{ newlist | regex_replace('all', '#' )}}"
 
-- name:
+- name: IMPRESION NEWLIST!!
   debug:
     msg: "{{ newlist }}"
 
