@@ -84,7 +84,7 @@
 
 - name:
   set_fact:
-    finaldict: "{{ content }}"
+    finaldict: "{{ content.stdout }}"
 
 - name: print
   debug:
@@ -93,7 +93,7 @@
 
 - name: print
   debug:
-    msg: "{{ finaldict | type_debug }}"
+    msg: "{{ finaldict }}"
 
 
 
