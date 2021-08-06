@@ -120,6 +120,8 @@
     msg: "{{ upgradable_packages_jai | type_debug}}"
 
 
+
+
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     path: '{{ json_output_file}}'
@@ -128,7 +130,17 @@
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ upgradable_packages_jai  }}"
 
+- name: convert to dict
+  set_fact:
+    nuevo: "{{upgradable_packages_jai | items2dict }}"
 
+- name:
+  debug:
+    msg: "{{ nuevo }}"
+
+- name:
+  debug:
+    msg: "{{ nuevo | type_debug}}"
 
 
 # - name: tstingB
