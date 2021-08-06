@@ -43,11 +43,16 @@
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
+
+- name:
+  set_fact:
+    upg: {}
+
 - name: Volcamos a dict la lista
   set_fact:
-    upgradable_packages_dict: "{{ upgradable_packages | default ([]) }}"
+    upg: "{{ upgradable_packages | default ([]) }}"
   with_items:
-    - "{{ upgradable_packages}}"
+    - "{{ upgradable_packages }}"
 
 - name: TIPO (Lista)
   debug:
