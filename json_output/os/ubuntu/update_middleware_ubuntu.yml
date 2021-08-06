@@ -151,13 +151,22 @@
   debug:
     msg: "{{ finalvariable }}"
 
+- name: Explicitly specifying named matched groups
+  replace:
+    path: /tmp/system_packages_upgradables.json
+    regexp: "'"
+    replace: "\""
+
 - name: Get
   command:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
+
+
 - name:
   debug:
     msg: "{{ catcommand.stdout | from_json}}"
+
 
 
 # - name: tstingB
