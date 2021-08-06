@@ -13,6 +13,7 @@
       - upgradable_version
       - arquitecture
       - is_upgradable
+      - from
       - actual_version
     key_parameter_package:
       - packages_upgradables_list

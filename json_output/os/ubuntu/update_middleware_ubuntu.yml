@@ -134,13 +134,14 @@
   set_fact:
     nuevo: "{{upgradable_packages_jai | items2dict }}"
 
-- name:
-  debug:
-    msg: "{{ nuevo }}"
+- name: list packages_list
+  set_fact:
+    packages_list: []
 
-- name:
-  debug:
-    msg: "{{ nuevo | type_debug}}"
+- name: list packages_list
+  set_fact:
+    packages_list: "{{ upgradable_packages_jai }}"
+
 
 
 # - name: tstingB
