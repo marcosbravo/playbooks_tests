@@ -179,6 +179,10 @@
 - name:
   debug:
     msg: "{{qsera | type_debug}}"
+
+- set_fact:
+    first_list: "{{ catcommand.stdout_lines | default({}) + [item] }}"
+  with_items: "{{ catcommand.stdout_lines }}"
 # - name:
 #   debug:
 #     msg: "{{ catcommand.stdout | from_json}}"
