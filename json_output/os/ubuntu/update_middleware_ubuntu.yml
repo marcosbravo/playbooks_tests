@@ -168,8 +168,8 @@
   debug:
     msg: "{{catcommand.stdout_lines | type_debug}}"
 
-- set_fact:
-    first_list: "{{ catcommand.stdout_lines | default({}) + item }}"
+- set_fact: Replae
+    first_list: "{{ catcommand.stdout_lines | default([]) + item }}"
   with_items: "{{ catcommand.stdout_lines }}"
 
 - name:
