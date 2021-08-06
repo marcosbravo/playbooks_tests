@@ -28,10 +28,10 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Clean Upgradable Packages Log Items on List
   set_fact:
-    upgradable_packages: "{{ upgradable_packages | reject('search', 'Listing...') | list }}"
+    upgradable_packages: "{{ upgradable_packages.list_upgradable_packages.stdout_lines | reject('search', 'Listing...') | list }}"
 
 
-- name: CONTENIDO
+- name: CONTENIDO 2
   debug:
     msg: "{{ upgradable_packages }}"
 
