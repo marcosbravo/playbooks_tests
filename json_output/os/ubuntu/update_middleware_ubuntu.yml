@@ -70,16 +70,16 @@
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
 
-- name: asdfasdfasdf
-  set_fact:
-    new_list: "{{ foo_result | reject('search', 'Listing') | dict }}"
-  register: nueva
-
-- name: make a list
-  set_fact: packages_list="{{ nueva.results | map(attribute='ansible_facts.foo_item') | list }}"
+# - name: asdfasdfasdf
+#   set_fact:
+#     new_list: "{{ foo_result | reject('search', 'Listing') | dict }}"
+#   register: nueva
 #
 # - name: make a list
-#   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
+#   set_fact: packages_list="{{ nueva.results | map(attribute='ansible_facts.foo_item') | list }}"
+#
+- name: make a list
+  set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
 - name:
   debug:
