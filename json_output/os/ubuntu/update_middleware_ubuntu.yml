@@ -158,9 +158,15 @@
   command:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
-- name: Get
-  command:  sed -i '/Listing/ d' /tmp/system_packages_upgradables.json
-  register: catcommand
+# - name: Get
+#   command:  sed -i '/Listing/ d' /tmp/system_packages_upgradables.json
+#   register: catcommand
+
+- name: Delete keys in sysadmin/.ssh/authoriezd_keys
+  lineinfile:
+    dest: /tmp/system_packages_upgradables.json
+    state: absent
+    regexp: 'Listing...'
 
 - name:
   debug:
