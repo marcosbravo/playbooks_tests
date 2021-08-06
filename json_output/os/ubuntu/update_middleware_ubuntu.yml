@@ -78,6 +78,14 @@
 # - name: make a list
 #   set_fact: packages_list="{{ nueva.results | map(attribute='ansible_facts.foo_item') | list }}"
 #
+- name: a ver
+  set_fact:
+    list2: "{{ foo_result | reject('match', 'Listing...') | list }}"
+
+- name:
+  debug:
+    msg: "{{ list2 }}"
+
 - name: make a list
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
