@@ -157,7 +157,7 @@
 
 - name:
   debug:
-    msg: "{{ catcommand.stdout }}"
+    msg: "{{ catcommand.stdout | from_json}}"
 
 
 # - name: tstingB
