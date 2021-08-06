@@ -62,19 +62,19 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ upgradable_packages | regex_replace('from:', '#' )}}"
+    newlist: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | regex_replace('from:', '#' )}}"
 
-- name: tsting2
-  set_fact:
-    newlist: "{{ newlist | regex_replace('amd64', '#' )}}"
-
-- name: tsting3
-  set_fact:
-    newlist: "{{ newlist | regex_replace('/', '#' )}}"
-
-- name: tsting4
-  set_fact:
-    newlist: "{{ newlist | regex_replace('all', '#' )}}"
+# - name: tsting2
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace('amd64', '#' )}}"
+#
+# - name: tsting3
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace('/', '#' )}}"
+#
+# - name: tsting4
+#   set_fact:
+#     newlist: "{{ newlist | regex_replace('all', '#' )}}"
 
 - name:
   debug:
