@@ -65,6 +65,17 @@
     msg: "{{ item }}"
   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
+- name: Display LOOP LISTSS
+  set_fact:
+    newvar: "{{ item | regex_replace(' ', '#' ) }}"
+  loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+
+- name: PRINT NEWVAR
+  debug:
+    msg: "{{ newvar }}" 
+
+
+
 # - name: tstingB
 #   set_fact:
 #     newlist: "{{ newlist | regex_replace(' ', '#' )}}"
