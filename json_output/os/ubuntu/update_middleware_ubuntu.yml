@@ -170,7 +170,7 @@
 
 - name:
   set_fact:
-    hil: "{{catcommand.stdout_lines | regex_findall('\t') | regex_replace(' ')}}"
+    hil: "{{catcommand.stdout_lines | regex_findall('\t') | regex_replace('R')}}"
 
 - name:
   debug:
