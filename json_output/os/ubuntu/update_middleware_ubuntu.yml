@@ -30,10 +30,6 @@
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-#   set_fact:
-#     upgradable_packages: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | reject('search', 'Listing') | list }}"
-
 
 - name: obtener el upgradable_packages.ansible_facts
   set_fact:
@@ -53,56 +49,19 @@
     msg: "{{ item }}"
   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
-# - name: Display LOOP LISTSS
-#   set_fact:
-#     newvar: "{{ item | regex_replace(' ', '#') }}"
-#   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-#
-# - name: Display LOOP LISTSS
-#   set_fact:
-#     newvar: "{{ item | regex_replace(' ', '' ) }}"
-#   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-
-
 
 - name: set fact
   set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
 
-- name: PRINT foo_result
-  debug:
-    msg: "{{ foo_result}}"
-
 # - name: PRINT foo_result
 #   debug:
-#     msg: "{{foo_result}}"
-
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-#   set_fact:
-#     upgradable_packages: "{{ foo_result.packages_upgradables_list | reject('search', 'Listing') | list }}"
+#     msg: "{{ foo_result}}"
 #
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
+# - name: el tipo de foo_result
 #   debug:
-#     msg: "{{upgradable_packages}}"
-#
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-#   debug:
-#     msg: "{{upgradable_packages| type_debug}}"
-
-# - name: asdfasdfasdf
-#   set_fact:
-#     new_list: "{{ foo_result | reject('search', 'Listing') | dict }}"
-#   register: nueva
-#
-# - name: make a list
-#   set_fact: packages_list="{{ nueva.results | map(attribute='ansible_facts.foo_item') | list }}"
-#
-
-
-- name: el tipo de foo_result
-  debug:
-    msg: "{{ foo_result | type_debug }}"
+#     msg: "{{ foo_result | type_debug }}"
 
 - name: make a list
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
@@ -115,9 +74,6 @@
   debug:
     msg: "{{packages_list | type_debug}}"
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-#   set_fact:
-#     upgradable_packages_jai: "{{ packages_list | reject('search', 'Listing') | list }}"
 
 
 - name: Nuevo dict2
