@@ -119,6 +119,18 @@
 #   set_fact:
 #     upgradable_packages_jai: "{{ packages_list | reject('search', 'Listing') | list }}"
 
+
+- name: Nuevo dict2
+  set_fact:
+    nuevodict: '{"packages_list": "{{packages_list}}" }'
+
+- name: NUEVO DICT
+  debug:
+    msg: "{{nuevodict}}"
+
+
+######################################################
+
 - name: CONTENIDO I
   debug:
     msg: "{{packages_list }}"
