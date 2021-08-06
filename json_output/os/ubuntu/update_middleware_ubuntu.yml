@@ -56,11 +56,11 @@
 
 - name:
   debug:
-    msg: "{{ newlsit }}"
+    msg: "{{ newlist }}"
 
 - name:
   debug:
-    msg: "{{ newlsit | type_debug}}"
+    msg: "{{ newlist | type_debug}}"
 
 
 
