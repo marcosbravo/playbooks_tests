@@ -145,14 +145,11 @@
 
 - name:
   set_fact:
-    finalvariable: {"packages_listing: []"}
-
-- name:
-  set_fact: "{{ finalvariable.packages_listing }}" = ["one", "two"]
+    finalvariable: {"packages_listing: ["one", "two"]"}
 
 - name:
   debug:
-    msg: "{{ finalvariable.packages_listing }}"
+    msg: "{{ finalvariable }}"
 
 
 
