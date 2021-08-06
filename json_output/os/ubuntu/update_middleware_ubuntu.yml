@@ -48,19 +48,7 @@
     msg: "{{upgradable_packages.ansible_facts | type_debug}}"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-- name: Display LOOP LISTSS
+- name: Display LOOP LISTS
   debug:
     msg: "{{ item }}"
   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
@@ -69,28 +57,17 @@
   set_fact:
     newvar: "{{ item | regex_replace(' ', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-  register: tmpnewvar
-
-- name: PRINT NEWVAR
-  debug:
-    msg: "{{ newvar }}"
-
-- name: PRINT NEWVAR
-  debug:
-    msg: "{{ tmpnewvar.results }}"
 
 
-- name:
-  debug:
-    msg: "{{ item.ansible_facts }}"
-  with_items: "{{ tmpnewvar.results }}"
-  register: other
+- name: set fact
+  set_fact: foo_item="{{ item | regex_replace(' ', '#' ) }}"
+  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+  register: foo_result
 
-- name: OTHER
-  debug:
-    msg: "{{other}}"
+- name: make a list
+  set_fact: foo="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
-
+ - debug: var=foo
 
 # - name: tstingB
 #   set_fact:
@@ -124,25 +101,7 @@
 #     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
 #   loop: "{{ newlist }}"
 
-- name: Store content remote_sr
-  command: cat /tmp/test.json
-  register: content
 
-- name:
-  debug:
-    msg: "{{content.stdout | from_json }}"
-
-- name:
-  set_fact:
-    finaldict: "{{content.stdout | from_json }}"
-
-- name:
-  debug:
-    msg: "{{finaldict | type_debug }}"
-
-- name:
-  debug:
-    msg: "{{finaldict}}"
 # - name:
 #   set_fact:
 #     finaldict: {}
