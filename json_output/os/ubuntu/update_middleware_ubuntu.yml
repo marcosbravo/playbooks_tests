@@ -130,17 +130,6 @@
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ upgradable_packages_jai  }}"
 
-- name: convert to dict
-  set_fact:
-    nuevo: "{{upgradable_packages_jai | items2dict }}"
-
-- name: list packages_list
-  set_fact:
-    packages_list: []
-
-- name: list packages_list
-  set_fact:
-    packages_list: "{{ upgradable_packages_jai }}"
 
 
 
