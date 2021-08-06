@@ -111,11 +111,11 @@
   set_fact:
     upgradable_packages_jai: "{{ packages_list | reject('search', 'Listing') | list }}"
 
-- name:
+- name: CONTENIDO I
   debug:
     msg: "{{ upgradable_packages_jai }}"
 
-- name:
+- name: CONTENIDO II
   debug:
     msg: "{{ upgradable_packages_jai | type_debug}}"
 
@@ -126,7 +126,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-  loop: "{{ upgradable_packages_jai }}"
+  loop: "{{ upgradable_packages_jai  }}"
 
 
 
