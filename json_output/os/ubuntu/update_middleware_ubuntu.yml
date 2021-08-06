@@ -93,7 +93,13 @@
     nuevodict: "{{ nuevodict | replace('\\','\n') }}"
 
 
-
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file}}'
+    state: present
+    regexp: '#'
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+  loop: "{{ nuevodict }}"
 
 ######################################################
 
@@ -105,59 +111,63 @@
   debug:
     msg: "{{ packages_list | type_debug}}"
 
+########################################################
 
 
-
-# - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+# - name: Explicitly specifying named matched groups
+#   replace:
+#     path: /tmp/system_packages_upgradables.json
+#     regexp: "'"
+#     replace: "\""
+#
+# - name: Delete Listing
 #   lineinfile:
-#     path: '{{ json_output_file}}'
-#     state: present
-#     regexp: '#'
-#     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
-#   loop: "{{ packages_list  }}"
-
-
-# - name: LIST ACTUAL
+#     dest: /tmp/system_packages_upgradables.json
+#     state: absent
+#     regexp: 'Listing...'
+#
+# - name: Get
+#   shell:  cat /tmp/system_packages_upgradables.json
+#   register: catcommand
+#
+# - name: Tipo de catcommand.stdout_lines
 #   debug:
-#     msg: "{{upgradable_packages.ansible_facts}}"
-
-
+#     msg: "{{catcommand.stdout_lines | type_debug}}"
+#
+# - name:
+#   set_fact:
+#     hil: "{{catcommand.stdout_lines | replace('\\t', '') }}"
+#
+# - name: limpiar espacio blanco
+#   set_fact:
+#     hil: '{{ hil | replace("\\\\", "A") }}'
+#
+#
 # - name:
 #   debug:
-#     msg: "{{ finalvariable }}"
+#     msg: "{{hil}}"
 
-- name: Explicitly specifying named matched groups
-  replace:
-    path: /tmp/system_packages_upgradables.json
-    regexp: "'"
-    replace: "\""
-
-- name: Delete Listing
-  lineinfile:
-    dest: /tmp/system_packages_upgradables.json
-    state: absent
-    regexp: 'Listing...'
-
-- name: Get
-  shell:  cat /tmp/system_packages_upgradables.json
-  register: catcommand
-
-- name: Tipo de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand.stdout_lines | type_debug}}"
-
-- name:
-  set_fact:
-    hil: "{{catcommand.stdout_lines | replace('\\t', '') }}"
-
-- name: limpiar espacio blanco
-  set_fact:
-    hil: '{{ hil | replace("\\\\", "A") }}'
+###############################################
 
 
-- name:
-  debug:
-    msg: "{{hil}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 # - set_fact: Replace
 #     first_list: "{{ catcommand.stdout_lines | default([]) + [item] }}"
