@@ -70,6 +70,10 @@
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
 
+- name: PRINT foo_result
+  debug:
+    msg: "{{foo_result}}"
+
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
 #   set_fact:
 #     upgradable_packages: "{{ foo_result.packages_upgradables_list | reject('search', 'Listing') | list }}"
@@ -137,41 +141,10 @@
 
 - name:
   set_fact:
-    miracle: [{'package_name': 'apt', 'repository': 'bionic-updates', 'upgradable_version': '1.6.14', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.13]'},
-        {'package_name': 'apt-utils', 'repository': 'bionic-updates', 'upgradable_version': '1.6.14', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.13]'},
-        {'package_name': 'cloud-init', 'repository': 'bionic-updates', 'upgradable_version': '21.2-3-g899bfaa9-0ubuntu2~18.04.1', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '21.1-19-gbad84ad4-0ubuntu1~18.04.1]'},
-        {'package_name': 'gzip', 'repository': 'bionic-updates', 'upgradable_version': '1.6-5ubuntu1.1', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6-5ubuntu1]'},
-        {'package_name': 'initramfs-tools', 'repository': 'bionic-updates', 'upgradable_version': '0.130ubuntu3.13', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '0.130ubuntu3.11]'},
-        {'package_name': 'initramfs-tools-bin', 'repository': 'bionic-updates', 'upgradable_version': '0.130ubuntu3.13', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '0.130ubuntu3.11]'},
-        {'package_name': 'initramfs-tools-core', 'repository': 'bionic-updates', 'upgradable_version': '0.130ubuntu3.13', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '0.130ubuntu3.11]'},
-        {'package_name': 'libapt-inst2.0', 'repository': 'bionic-updates', 'upgradable_version': '1.6.14', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.13]'},
-        {'package_name': 'libapt-pkg5.0', 'repository': 'bionic-updates', 'upgradable_version': '1.6.14', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.13]'},
-        {'package_name': 'libpam-modules', 'repository': 'bionic-updates', 'upgradable_version': '1.1.8-3.6ubuntu2.18.04.3', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.1.8-3.6ubuntu2.18.04.2]'},
-        {'package_name': 'libpam-modules-bin', 'repository': 'bionic-updates', 'upgradable_version': '1.1.8-3.6ubuntu2.18.04.3', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.1.8-3.6ubuntu2.18.04.2]'},
-        {'package_name': 'libpam-runtime', 'repository': 'bionic-updates', 'upgradable_version': '1.1.8-3.6ubuntu2.18.04.3', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.1.8-3.6ubuntu2.18.04.2]'},
-        {'package_name': 'libpam0g', 'repository': 'bionic-updates', 'upgradable_version': '1.1.8-3.6ubuntu2.18.04.3', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.1.8-3.6ubuntu2.18.04.2]'},
-        {'package_name': 'linux-base', 'repository': 'bionic-updates', 'upgradable_version': '4.5ubuntu1.6', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '4.5ubuntu1.2]'},
-        {'package_name': 'python-apt-common', 'repository': 'bionic-updates', 'upgradable_version': '1.6.5ubuntu0.6', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.5ubuntu0.5]'},
-        {'package_name': 'python3-apt', 'repository': 'bionic-updates', 'upgradable_version': '1.6.5ubuntu0.6', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1.6.5ubuntu0.5]'},
-        {'package_name': 'python3-distupgrade', 'repository': 'bionic-updates', 'upgradable_version': '1:18.04.44', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1:18.04.42]'},
-        {'package_name': 'snapd', 'repository': 'bionic-updates', 'upgradable_version': '2.49.2+18.04', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '2.48.3+18.04]'},
-        {'package_name': 'sosreport', 'repository': 'bionic-updates', 'upgradable_version': '4.1-1ubuntu0.18.04.3', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '4.1-1ubuntu0.18.04.1]'},
-        {'package_name': 'squashfs-tools', 'repository': 'bionic-updates', 'upgradable_version': '1:4.3-6ubuntu0.18.04.2', 'arquitecture': 'amd64', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1:4.3-6ubuntu0.18.04.1]'},
-        {'package_name': 'ubuntu-advantage-tools', 'repository': 'bionic-updates', 'upgradable_version': '27.2.2~18.04.1', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '17]'},
-        {'package_name': 'ubuntu-release-upgrader-core', 'repository': 'bionic-updates', 'upgradable_version': '1:18.04.44', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '1:18.04.42]'},
-        {'package_name': 'update-notifier-common', 'repository': 'bionic-updates', 'upgradable_version': '3.192.1.11', 'arquitecture': 'all', 'is_upgradable': '[upgradable', 'from': 'from:', 'actual_version': '3.192.1.9]'}]
+    finalvariable: {}
 
-- name: LIST mia
-  debug:
-    msg: "{{miracle}}"
 
-- name:
-  set_fact:
-    "{{upgradable_packages.ansible_facts.packages_upgradables_list}}": "{{miracle}}"
 
-- name:
-  debug:
-    msg: "{{miracle}}" 
 
 # - name: tstingB
 #   set_fact:
