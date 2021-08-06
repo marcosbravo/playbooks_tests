@@ -84,6 +84,11 @@
   debug:
     msg: "{{ item.ansible_facts }}"
   with_items: "{{ tmpnewvar.results }}"
+  register: other
+
+- name: OTHER
+  debug:
+    msg: "{{other}}"
 
 
 
