@@ -53,10 +53,10 @@
     msg: "{{ item }}"
   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
-- name: Display LOOP LISTSS
-  set_fact:
-    newvar: "{{ item | regex_replace(' ', '#') }}"
-  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }} =! 'Listing...'"
+# - name: Display LOOP LISTSS
+#   set_fact:
+#     newvar: "{{ item | regex_replace(' ', '#') }}"
+#   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 #
 # - name: Display LOOP LISTSS
 #   set_fact:
