@@ -15,12 +15,12 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
   debug:
-    var: list_upgradable_packages.stdout_lines
+    var: "{{ list_upgradable_packages.stdout_lines }}"
   register: upgradable_packages
 
 - name: CONTENIDO
   debug:
-    msg: "{{ upgradable_packages.ansible_facts }}"
+    msg: "{{ upgradable_packages }}"
 
 - name: TIPO
   debug:
@@ -28,7 +28,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Clean Upgradable Packages Log Items on List
   set_fact:
-    upgradable_packages: "{{ upgradable_packages.ansible_facts | reject('search', 'Listing...') | list }}"
+    upgradable_packages: "{{ upgradable_packages | reject('search', 'Listing...') | list }}"
 
 
 - name: CONTENIDO 2
