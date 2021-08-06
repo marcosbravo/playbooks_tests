@@ -73,9 +73,13 @@
 - name: asdfasdfasdf
   set_fact:
     new_list: "{{ foo_result | reject('search', 'Listing') | list }}"
+  register: nueva
 
 - name: make a list
-  set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
+  set_fact: packages_list="{{ nueva.results | map(attribute='ansible_facts.foo_item') | list }}"
+#
+# - name: make a list
+#   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
 - name:
   debug:
@@ -101,13 +105,13 @@
 #   set_fact:
 #     newlist: "{{ newlist | regex_replace('all', '#' )}}"
 
-- name: IMPRESION NEWLIST!!
-  debug:
-    msg: "{{ newlist }}"
-
-- name:
-  debug:
-    msg: "{{ newlist | type_debug}}"
+# - name: IMPRESION NEWLIST!!
+#   debug:
+#     msg: "{{ newlist }}"
+#
+# - name:
+#   debug:
+#     msg: "{{ newlist | type_debug}}"
 
 # - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
 #   lineinfile:
