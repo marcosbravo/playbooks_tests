@@ -69,7 +69,7 @@
   set_fact:
     newvar: "{{ item | regex_replace(' ', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-  register: tmpnewvar.ansible_facts
+  register: tmpnewvar
 
 - name: PRINT NEWVAR
   debug:
