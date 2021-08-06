@@ -163,7 +163,7 @@
 
 - name:
   debug:
-    msg: "{{catcommand}}"
+    msg: "{{catcommand.stdout_lines}}"
 
 # - name:
 #   debug:
