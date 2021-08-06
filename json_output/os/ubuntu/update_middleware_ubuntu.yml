@@ -107,6 +107,17 @@
   debug:
     msg: "{{packages_list | type_debug}}"
 
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
+  set_fact:
+    upgradable_packages_jai: "{{ packages_list | reject('search', 'Listing') | list }}"
+
+- name:
+  debug:
+    msg: "{{ upgradable_packages_jai }}"
+
+- name:
+  debug:
+    msg: "{{ upgradable_packages_jai | type_debug}}"
 # - name: tstingB
 #   set_fact:
 #     newlist: "{{ newlist | regex_replace(' ', '#' )}}"
