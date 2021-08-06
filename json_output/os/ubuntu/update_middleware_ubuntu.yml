@@ -43,7 +43,6 @@
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
-
 - name:
   set_fact:
     upg: {}
@@ -56,12 +55,11 @@
 
 - name: TIPO (Lista)
   debug:
-    msg: "{{ upgradable_packages_dict | type_debug }}"
-
+    msg: "{{ upg | type_debug }}"
 
 - name: CONTENIDO 3
   debug:
-    msg: "{{ upgradable_packages_dict }}"
+    msg: "{{ upg }}"
 
 
 
