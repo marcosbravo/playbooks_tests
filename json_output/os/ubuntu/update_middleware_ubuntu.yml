@@ -70,6 +70,10 @@
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
   register: foo_result
 
+- name: delete Listing
+  set_fact:
+    foo_result: "{{ foo_result | reject('search','Listing...') | list }}"
+
 - name: make a list
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
