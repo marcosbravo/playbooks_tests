@@ -80,6 +80,12 @@
     msg: "{{ tmpnewvar.results }}"
 
 
+- name:
+  debug:
+    msg: "{{ item.ansible_facts }}"
+  with_items: "{{ tmpnewvar.results }}"
+
+
 
 # - name: tstingB
 #   set_fact:
