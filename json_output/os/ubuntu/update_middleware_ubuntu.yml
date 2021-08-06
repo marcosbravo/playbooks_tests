@@ -154,31 +154,19 @@
     regexp: "'"
     replace: "\""
 
-- name: Get
-  command:  cat /tmp/system_packages_upgradables.json
-  register: catcommand
-
-# - name: Get
-#   command:  sed -i '/Listing/ d' /tmp/system_packages_upgradables.json
-#   register: catcommand
-
-- name: Delete keys in sysadmin/.ssh/authoriezd_keys
+- name: Delete Listing
   lineinfile:
     dest: /tmp/system_packages_upgradables.json
     state: absent
     regexp: 'Listing...'
 
-- name:
-  debug:
-    msg: "{{catcommand.stdout_lines}}"
+- name: Get
+  command:  cat /tmp/system_packages_upgradables.json
+  register: catcommand
 
-- name:
-  set_fact:
-    qsera: "{{catcommand.stdout_lines | to_json}}"
-
-- name:
+- name: Tipo de catcommand.stdout_lines
   debug:
-    msg: "{{qsera | type_debug}}"
+    msg: "{{catcommand.stdout_lines | type_debug}}"
 
 - set_fact:
     first_list: "{{ catcommand.stdout_lines | default({}) + item }}"
