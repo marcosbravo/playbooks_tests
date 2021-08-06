@@ -68,11 +68,16 @@
 - name: Display LOOP LISTSS
   set_fact:
     newvar: "{{ item | regex_replace(' ', '#' ) }}"
-  loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+  register: tmpnewvar
 
 - name: PRINT NEWVAR
   debug:
-    msg: "{{ newvar }}" 
+    msg: "{{ newvar }}"
+
+- name: PRINT NEWVAR
+  debug:
+    msg: "{{ tmpnewvar }}" 
 
 
 
