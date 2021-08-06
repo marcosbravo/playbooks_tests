@@ -62,11 +62,11 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | regex_replace('/', '#' )}}"
+    newlist: "{{ upgradable_packages| regex_replace('/', '#' )}}"
 
 - name: tstingB
   set_fact:
-    newlist: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | regex_replace(' ', '#' )}}"
+    newlist: "{{ newlist | regex_replace(' ', '#' )}}"
 
 # - name: tsting2
 #   set_fact:
