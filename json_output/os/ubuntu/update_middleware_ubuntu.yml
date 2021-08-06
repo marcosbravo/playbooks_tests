@@ -84,7 +84,9 @@
   debug:
     msg: "{{nuevodict}}"
 
-
+- name: NUEVO DICT TYPE
+  debug:
+    msg: "{{nuevodict | type_debug}}"
 
 
 
