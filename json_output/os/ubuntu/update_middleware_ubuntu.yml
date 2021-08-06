@@ -74,23 +74,25 @@
   command: cat /tmp/test.json
   register: content
 
-
 - name:
-  set_fact:
-    finaldict: {}
-
-- name:
-  set_fact:
-    finaldict: "{{ content.stdout }}"
-
-- name: print
   debug:
-    msg: "{{ finaldict | type_debug }}"
-
-
-- name: print
-  debug:
-    msg: "{{ finaldict }}"
+    msg: "{{content}}"
+# - name:
+#   set_fact:
+#     finaldict: {}
+#
+# - name:
+#   set_fact:
+#     finaldict: "{{ content.stdout }}"
+#
+# - name: print
+#   debug:
+#     msg: "{{ finaldict | type_debug }}"
+#
+#
+# - name: print
+#   debug:
+#     msg: "{{ finaldict }}"
 
 
 
