@@ -76,7 +76,7 @@
 
 - name: print
   debug:
-    msg: "{{ content.stdout }}"
+    msg: "{{ content.stdout | to_nice_json}}"
 
 - name:
   set_fact:
