@@ -43,22 +43,13 @@
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
-- name: Creamos dict
-  set_fact:
-    upgradable_packages_dict: {}
 
 - name: Volcamos a dict la lista
   set_fact:
-    upgradable_packages_dict: "{{ upgradable_packages }}"
+    upgradable_packages_dict: "{{ upgradable_packages | default ({}) | [{'name': item}] }}"
+   with_items:
+        - "{{ upgradable_packages}}"
 
-
-- name: CONTENIDO 3
-  debug:
-    msg: "{{ upgradable_packages_dict }}"
-
-- name: TIPO (???)
-  debug:
-    msg: "{{ upgradable_packages_dict | type_debug }}"
 
 
 
