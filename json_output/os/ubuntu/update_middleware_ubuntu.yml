@@ -66,7 +66,7 @@
 
 
 - name: set fact
-  set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | | regex_replace('/', '#' ) }}"
+  set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
   register: foo_result
 
