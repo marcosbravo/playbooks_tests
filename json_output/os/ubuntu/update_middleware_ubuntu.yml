@@ -76,7 +76,7 @@
 
 - name: print
   debug:
-    msg: "{{ content.stdout | to_nice_json}}"
+    msg: "{{ content.stdout | from_json}}"
 
 - name:
   set_fact:
@@ -84,7 +84,7 @@
 
 - name:
   set_fact:
-    finaldict: "{{ content.stdout | to_nice_json }}"
+    finaldict: "{{ content.stdout }}"
 
 - name: print
   debug:
