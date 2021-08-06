@@ -55,18 +55,18 @@
 
 - name: Display LOOP LISTSS
   set_fact:
-    newvar: "{{ item | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
+    newvar: "{{ item | regex_replace(' ', '#') }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-
-- name: Display LOOP LISTSS
-  set_fact:
-    newvar: "{{ item | regex_replace(' ', '' ) }}"
-  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+#
+# - name: Display LOOP LISTSS
+#   set_fact:
+#     newvar: "{{ item | regex_replace(' ', '' ) }}"
+#   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
 
 
 - name: set fact
-  set_fact: foo_item="{{ item | regex_replace(' ', '#' ) }}"
+  set_fact: foo_item="{{ item | regex_replace(' ', '#' ) | | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
   register: foo_result
 
