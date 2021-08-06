@@ -70,17 +70,17 @@
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-  set_fact:
-    upgradable_packages: "{{ foo_result.packages_upgradables_list | reject('search', 'Listing') | list }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-  debug:
-    msg: "{{upgradable_packages}}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
-  debug:
-    msg: "{{upgradable_packages| type_debug}}"
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
+#   set_fact:
+#     upgradable_packages: "{{ foo_result.packages_upgradables_list | reject('search', 'Listing') | list }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
+#   debug:
+#     msg: "{{upgradable_packages}}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Clean Upgradable Packages Log Items on List
+#   debug:
+#     msg: "{{upgradable_packages| type_debug}}"
 
 # - name: asdfasdfasdf
 #   set_fact:
