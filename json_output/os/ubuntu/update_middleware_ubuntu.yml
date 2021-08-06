@@ -19,7 +19,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Set variable with packages list content
   set_fact:
-    packages_upgradables_list: "{{list_upgradable_state.stdout_lines }}"
+    packages_upgradables_list: "{{ list_upgradable_packages.stdout_lines }}"
   register: upgradable_packages
 
 - name: CONTENIDO
