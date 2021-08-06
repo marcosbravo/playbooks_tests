@@ -158,9 +158,13 @@
   command:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
+- name: Get
+  command:  sed -i'/Listing/ d' /tmp/system_packages_upgradables.json
+  register: catcommand
+
 - name:
   debug:
-    msg: "{{catcommand.stdout_lines | items2dict}"
+    msg: "{{catcommand.stdout_lines}}"
 
 # - name:
 #   debug:
