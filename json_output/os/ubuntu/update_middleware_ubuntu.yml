@@ -76,7 +76,7 @@
 
 - name:
   debug:
-    msg: "{{content}}"
+    msg: "{{content.stdout | from_json }}"
 # - name:
 #   set_fact:
 #     finaldict: {}
