@@ -18,13 +18,56 @@
     var: list_upgradable_packages.stdout_lines
   register: upgradable_packages
 
+- name: CONTENIDO
+  debug:
+    msg: "{{ upgradable_packages }}"
+
 - name: TIPO
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
 
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Clean Upgradable Packages Log Items on List
+  set_fact:
+    upgradable_packages: "{{ upgradable_packages | reject('search', 'Listing...') | list }}"
+
+
 - name: CONTENIDO
   debug:
     msg: "{{ upgradable_packages }}"
+
+- name: TIPO
+  debug:
+    msg: "{{ upgradable_packages | type_debug }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   #register: upgr_lines
 #
 # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Add packages list
