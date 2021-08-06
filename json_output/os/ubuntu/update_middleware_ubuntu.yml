@@ -39,9 +39,18 @@
   debug:
     msg: "{{ upgradable_packages }}"
 
-- name: TIPO
+- name: TIPO (Lista)
   debug:
     msg: "{{ upgradable_packages | type_debug }}"
+
+- name: Convertimos en dict
+  set_fact:
+    upgradable_packages: "{{ upgradable_packages | items2dict }}"
+
+- name: TIPO (???)
+  debug:
+    msg: "{{ upgradable_packages | type_debug }}"
+
 
 
 
