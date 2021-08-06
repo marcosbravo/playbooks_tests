@@ -177,8 +177,8 @@
     qsera: "{{catcommand.stdout_lines}}"
 
 - name:
-  set_fact:
-    qsera: "{{qsera | type_debug}}"  
+  debug:
+    msg: "{{qsera | type_debug}}"  
 # - name:
 #   debug:
 #     msg: "{{ catcommand.stdout | from_json}}"
