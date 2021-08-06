@@ -62,7 +62,7 @@
 
 - name: tsting
   set_fact:
-    newlist: "{{ upgradable_packages| regex_replace('\\s', '#' ) | from_json}}"
+    newlist: "{{ upgradable_packages| regex_replace(' ', '#' ) | from_json}}"
 
 # - name: tstingB
 #   set_fact:
