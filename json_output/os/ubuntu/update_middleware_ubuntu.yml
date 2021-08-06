@@ -35,6 +35,13 @@
     upgradable_packages: "{{ upgradable_packages.ansible_facts.packages_upgradables_list | reject('search', 'Listing') | list }}"
 
 
+- name: obtener el upgradable_packages.ansible_facts
+  set_fact:
+    upgradable_packages_ansible_facts: "{{upgradable_packages.ansible_facts}}"
+
+- name:
+  debug:
+    msg: "{{upgradable_packages.ansible_facts}}"
 
 
 
