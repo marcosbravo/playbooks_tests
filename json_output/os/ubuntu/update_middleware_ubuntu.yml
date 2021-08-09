@@ -82,14 +82,14 @@
   debug:
     msg: "{{packages_list}}"
 
-# - name: set fact ONLY KEYS
-#   set_fact: goo_item="{{ item.split('#', 1)[1] }}"
-#   with_items: "{{ packages_list }}"
-#   register: goo_result
-#
-# - name: print ONLY keyS
-#   debug:
-#     msg: "{{ goo_result }}"
+- name: set fact ONLY KEYS
+  set_fact: goo_item="{{ item.split('#', 1)[1] }}"
+  with_items: "{{ packages_list }}"
+  register: goo_result
+
+- name: print ONLY keyS
+  debug:
+    msg: "{{ goo_result }}"
 
 
 
@@ -129,11 +129,6 @@
   loop: "{{ nuevodict.packages_list }}"
 
 
-# - name: Delete Listing
-#   lineinfile:
-#     dest: '{{ json_output_file}}'
-#     state: absent
-#     regexp: 'Listing...'
 
 #######################1##################
 - name: Get
