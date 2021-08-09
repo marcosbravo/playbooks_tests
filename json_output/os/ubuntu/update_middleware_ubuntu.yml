@@ -85,11 +85,12 @@
 - name: set fact ONLY KEYS
   set_fact: goo_item="{{ item.split('#')[0],  item.split('#')[1], item.split('#')[6], item.split('#')[2] }}"
   with_items: "{{ packages_list }}"
-  register: goo_result
+  register: packages_list
+  #register: goo_result
 
 - name: print ONLY keyS
   debug:
-    msg: "{{ goo_result }}"
+    msg: "{{ packages_list }}"
 
 
 
