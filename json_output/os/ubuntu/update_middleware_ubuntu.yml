@@ -83,7 +83,7 @@
     msg: "{{packages_list}}"
 
 - name: set fact ONLY KEYS
-  set_fact: goo_item="{{ item.split('#')[0-2] }}"
+  set_fact: goo_item="{{ item.split('#')[0],  item.split('#')[1], item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
   register: goo_result
 
