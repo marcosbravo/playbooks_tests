@@ -99,7 +99,7 @@
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
-    path: "{{ nuevodict.packages_list }}"
+    path: '{{ json_output_file}}'
     state: present
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
@@ -107,21 +107,18 @@
 
 ######################################################
 
-- name: CONTENIDO I
-  debug:
-    msg: "{{packages_list }}"
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
+  include_tasks:
+    file: combine_parameters.yaml
 
-- name: CONTENIDO II
-  debug:
-    msg: "{{ packages_list | type_debug}}"
+- name:
+  set_fact:
+    nuevodict.packages_list: "{{ remote_content }}"
 
-- name: CONTENIDO III
+- name:   PRINT NUEVODICT TOTAL
   debug:
     msg: "{{ nuevodict }}"
 
-- name: CONTENIDO IV
-  debug:
-    msg: "{{ nuevodict | type_debug}}"
 
 ########################################################
 
