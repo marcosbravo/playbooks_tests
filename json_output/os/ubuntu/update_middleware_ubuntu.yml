@@ -104,7 +104,7 @@
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ nuevodict.packages_list }}"
-  register: "{{ nueva }}"
+  register: nueva
 
 - name: NUEVA
   debug:
