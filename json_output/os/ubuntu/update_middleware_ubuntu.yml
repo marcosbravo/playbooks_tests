@@ -126,18 +126,7 @@
 
 - name: set test lista
   set_fact:
-    newlist: "[{
-                "package": "test1",
-                "saqa: "pluarl",
-                "sasdf": fasdf",
-                "aslkfj": "asdfasd"
-              },
-              {
-                "package2": "test2",
-                "saqa2: "pluarl2",
-                "sasdf2": fasdf2",
-                "aslkfj2": "asdfasd2"
-              }]"
+    newlist: "[{apt#bionic#1.16.5#1.17.2}]"
 
 
 
