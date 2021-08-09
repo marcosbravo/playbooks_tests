@@ -90,7 +90,7 @@
 
 - name: Create and Add items to dictionary
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ "instance_id" : 'i-99999' }) }}"
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
