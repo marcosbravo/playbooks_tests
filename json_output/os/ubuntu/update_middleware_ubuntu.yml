@@ -140,7 +140,9 @@
 - name: KILEE
   set_fact:
     newlist: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
-
+- name: despues kille
+  debug:
+    msg: "{{newlist}}"
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
