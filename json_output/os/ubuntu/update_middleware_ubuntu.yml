@@ -74,6 +74,15 @@
   debug:
     msg: "{{packages_list | type_debug}}"
 
+- name: set fact ONLY KEYS
+  set_fact: goo_item="{{ item | split('#')[0-2] }}"
+  with_items: "{{ packages_list }}"
+  register: goo_result
+
+- name: print ONLY keyS
+  debug:
+    msg: "{{ goo_result }}"
+
 
 
 - name: Nuevo dict2
@@ -97,6 +106,10 @@
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
     msg: "{{nuevodict}}"
+
+
+
+
 
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
