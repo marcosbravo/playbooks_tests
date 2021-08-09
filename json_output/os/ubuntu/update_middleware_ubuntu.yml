@@ -129,7 +129,7 @@
     newlist: "['apt#bionic#1.16.5#1.17.2', 'apt#bionic#1.16.5#1.17.2']"
 
 - debug:
-        msg: "{% for item in newlist %}{{ item + '\n'}}"
+    msg: "{% for item in newlist %}{{ item + '\n'}}"
 
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
