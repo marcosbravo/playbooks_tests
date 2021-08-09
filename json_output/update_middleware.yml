@@ -12,7 +12,7 @@
       - package_name
       - repository
       - upgradable_version
-      - arquitecture
+      - actual_version
       - is_upgradable
       - from
       - actual_version
