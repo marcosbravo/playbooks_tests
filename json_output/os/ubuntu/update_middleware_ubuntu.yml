@@ -94,7 +94,7 @@
 
 - name: Create and Add items to dictionary
   set_fact:
-    listapaquetes: "{{ nuevodict | default({}) | combine ({ 'package_name' : '{{ nuevodict.packages_list }}' }) }}"
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'package_name' : '{{ nuevodict.packages_list }}' }) }}"
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
