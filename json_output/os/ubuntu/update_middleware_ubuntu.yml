@@ -132,7 +132,7 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_json(ensure_ascii=False)  }}, "
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_nice_json  }}, "
   loop: "{{ nuevodict.packages_list }}"
 
 
@@ -146,7 +146,7 @@
 
 - name: Tipo de CATCOMMAND
   debug:
-    msg: "{{catcommand.stdout_lines }}"
+    msg: "{{catcommand.stdout_lines | to_nice_json }}"
 
 - name: Tipo de catcommand.stdout_lines
   debug:
