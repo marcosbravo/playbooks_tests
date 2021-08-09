@@ -126,7 +126,7 @@
 
 - name: set test lista
   set_fact:
-    newlist: "['apt#bionic#1.16.5#1.17.2', 'apt#bionic#1.16.5#1.17.2']"
+    newlist: "['apt#bionic#1.16.5#1.17.2#test#vamos#color', 'apt#bionic#1.16.5#1.17.2#test#vamos#color']"
 
 - name: set test lista
   set_fact:
@@ -152,7 +152,8 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
+    line: "\t{{ dict(keys_list | zip( item ))  }} "
+    #line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
   loop: "{{ newlist }}"
   #loop: "{{ nuevodict.packages_list }}"
 
