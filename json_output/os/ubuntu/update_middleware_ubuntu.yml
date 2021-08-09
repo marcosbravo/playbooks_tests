@@ -101,7 +101,7 @@
 
 - name: Nuevo dict2
   set_fact:
-    nuevodict: '{ "packages_list": "{{ packages_list | to_nice_json }}" }'
+    nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
 - name: NUEVO DICT
   debug:
