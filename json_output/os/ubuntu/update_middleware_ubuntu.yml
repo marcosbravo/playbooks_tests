@@ -166,7 +166,7 @@
 
 #######################1##################
 - name: Get
-  shell:  cat /tmp/system_packages_upgradables.json
+  shell:  cat /tmp/system_packages_upgradables2.json
   register: catcommand
 
 - name: Tipo de CATCOMMAND
