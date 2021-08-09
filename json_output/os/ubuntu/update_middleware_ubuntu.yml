@@ -133,7 +133,12 @@
 
 - name: Create and Add items to dictionary
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'package_name' : nuevodict.packages_list }) }}"
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'package_name' : hil}) }}"
+
+- name: PRINT FINAL OUTPUT
+  debug:
+    msg: "{{ nuevodict}}"
+
 
 
 ######################################################
