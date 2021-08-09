@@ -132,7 +132,7 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_nice_json  }}, "
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_json  }}, "
   loop: "{{ nuevodict.packages_list }}"
 
 
