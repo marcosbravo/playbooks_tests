@@ -128,9 +128,14 @@
   set_fact:
     newlist: "['apt#bionic#1.16.5#1.17.2', 'apt#bionic#1.16.5#1.17.2']"
 
+- name: set test lista
+  set_fact:
+    newlist: "{{ newlist.split('#'') }}"
+
+
 - name: KILEE
   debug:
-    msg: "{% for item in newlist %}{{ item.split('#') + '\n'}}{% endfor %}"
+    msg: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
 
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
