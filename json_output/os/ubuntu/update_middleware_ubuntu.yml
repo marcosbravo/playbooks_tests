@@ -124,17 +124,17 @@
     msg: "{{nuevodict}}"
 
 
-- name: set test lista
-  set_fact:
-    newlist: "['apt#bionic#1.16.5#1.17.2#test#vamos#color', 'apt#bionic#1.16.5#1.17.2#test#vamos#color']"
-
-- name: set test lista
-  set_fact:
-    newlist: "{{ newlist.split('#') }}"
-
-- name: antes kille
-  debug:
-    msg: "{{newlist}}"
+# - name: set test lista
+#   set_fact:
+#     newlist: "['apt#bionic#1.16.5#1.17.2#test#vamos#color', 'apt#bionic#1.16.5#1.17.2#test#vamos#color']"
+#
+# - name: set test lista
+#   set_fact:
+#     newlist: "{{ newlist.split('#') }}"
+#
+# - name: antes kille
+#   debug:
+#     msg: "{{newlist}}"
 
 #
 # - name: KILEE
