@@ -131,7 +131,7 @@
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
-    msg: "{{nuevodict}}"
+    msg: "{{newlist}}"
 
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
