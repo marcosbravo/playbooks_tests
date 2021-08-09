@@ -136,18 +136,18 @@
   debug:
     msg: "{{newlist}}"
 
-
-- name: KILEE
-  set_fact:
-    newlist: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
-
-- name: despues kille
-  debug:
-    msg: "{{newlist}}"
-
-- name: NUEVO DICT TYPE ADD NEW VALUE/KEY
-  debug:
-    msg: "{{newlist}}"
+#
+# - name: KILEE
+#   set_fact:
+#     newlist: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
+#
+# - name: despues kille
+#   debug:
+#     msg: "{{newlist}}"
+#
+# - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
+#   debug:
+#     msg: "{{newlist}}"
 
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
@@ -157,7 +157,7 @@
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item ))  }} "
     #line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
-  loop: "{{ newlist }}"
+  loop: "{{newlist}}"
   #loop: "{{ nuevodict.packages_list }}"
 
 
