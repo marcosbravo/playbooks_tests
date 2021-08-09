@@ -156,7 +156,7 @@
     state: present
     regexp: '#'
     #line: "\t{{ dict(keys_list | zip( item ))  }} "
-    line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
+    line: "\t{{ dict(keys_list | zip( item.split('#')))  }} "
   #loop: "{{newlist}}"
   loop: "{{ nuevodict.packages_list }}"
 
