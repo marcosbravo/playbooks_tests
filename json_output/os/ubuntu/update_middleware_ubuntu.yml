@@ -110,6 +110,10 @@
   shell:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
+- name:
+  set_fact:
+    catcommand: "{{catcommand.stdout_lines | replace('\\t', '') }}"
+
 - name: Contenido de catcommand.stdout_lines
   debug:
     msg: "{{catcommand.stdout_lines }}"
@@ -117,6 +121,8 @@
 - name: Tipo de catcommand.stdout_lines
   debug:
     msg: "{{catcommand.stdout_lines | type_debug}}"
+
+
 
 
 
