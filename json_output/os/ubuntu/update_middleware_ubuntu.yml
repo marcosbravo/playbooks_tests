@@ -132,7 +132,7 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) | from_json }}, "
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) |  }}, "
   loop: "{{ nuevodict.packages_list }}"
 
 
@@ -178,7 +178,8 @@
 
 -  name: Store on remote file
    copy:
-    content: "{{ nuevodict | to_nice_json }} "
+    #content: "{{ nuevodict | to_nice_json }} "
+    content: "{{ nuevodict }} "
     dest: "/tmp/system_packages_upgradables_new.json"
 
 ######################################################
