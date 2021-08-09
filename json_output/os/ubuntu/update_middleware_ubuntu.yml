@@ -148,7 +148,7 @@
 
 - name:
   set_fact:
-    hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('},', '}') }}"
+    hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('},', '}') | replae ('\\', '') }}"
 
 - name: PRINT HIL
   debug:
