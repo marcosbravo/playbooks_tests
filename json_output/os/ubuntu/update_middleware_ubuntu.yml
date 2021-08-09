@@ -138,8 +138,8 @@
 
 
 - name: KILEE
-  debug:
-    msg: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
+  set_fact:
+    newlist: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
 
 - name: despues kille
   debug:
