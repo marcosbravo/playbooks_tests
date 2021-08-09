@@ -116,7 +116,7 @@
 
 - name: Tipo de catcommand.stdout_lines
   debug:
-    msg: "{{catcommand.stdout_lines | type_debu}}"
+    msg: "{{catcommand.stdout_lines | type_debug}}"
 
 
 
