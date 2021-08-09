@@ -171,7 +171,7 @@
 
 -  name: Store on remote file
    copy:
-    content: "{{ nuevodict }} "
+    content: "{{ nuevodict | to_nice_json }} "
     dest: "/tmp/system_packages_upgradables_new.json"
 
 ######################################################
