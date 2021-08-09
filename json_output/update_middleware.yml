@@ -11,8 +11,8 @@
     keys_list:
       - package_name
       - repository
-      - upgradable_version
       - actual_version
+      - upgradable_version
       - is_upgradable
       - from
       - actual_version
