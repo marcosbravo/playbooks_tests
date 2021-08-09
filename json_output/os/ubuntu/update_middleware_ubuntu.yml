@@ -76,7 +76,7 @@
 
 - name: Eliminar primer item en la lista
   set_fact:
-    packages_list: {{ packages_list | reject('search','1') | list }}
+    packages_list: "{{ packages_list | reject('search','1') | list }}"
 
 - name: PACKAGEs LIST | elimminado primer item
   debug:
