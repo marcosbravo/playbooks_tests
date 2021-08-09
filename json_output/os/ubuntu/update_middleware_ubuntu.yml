@@ -118,7 +118,7 @@
 
 - name: print remote_content
   debug:
-    msg: "{{ remote_content }}"
+    msg: "{{ remote_content | base64 }}"
 
 - name:
   set_fact:
