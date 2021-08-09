@@ -8,6 +8,7 @@
     json_output_file: /tmp/system_packages_upgradables.json
     json_output_file_clean: /tmp/system_packages_upgradables_clean.json
     keys_list:
+      - instance_id
       - package_name
       - repository
       - upgradable_version
