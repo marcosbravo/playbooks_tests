@@ -108,7 +108,7 @@
 
 - name: NUEVA
   debug:
-    msg: "{{nueva }}"
+    msg: "{{nueva.results.invocation.line }}"
 
 
 ######################################################
