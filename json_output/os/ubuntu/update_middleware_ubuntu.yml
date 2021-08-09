@@ -148,7 +148,7 @@
 
 -  name: Store on remote file
    copy:
-    content: "{{ hil}}"
+    content: "{{ nuevodict }}"
     dest: "/tmp/system_packages_upgradables_new.json"
 
 ######################################################
