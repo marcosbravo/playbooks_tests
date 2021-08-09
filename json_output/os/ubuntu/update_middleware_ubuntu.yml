@@ -126,7 +126,10 @@
 
 - name: set test lista
   set_fact:
-    newlist: "['apt#'+\\n+'bionic#1.16.5#1.17.2', 'apt#'+\\n+'bionic#1.16.5#1.17.2']"
+    newlist: "['apt#bionic#1.16.5#1.17.2', 'apt#bionic#1.16.5#1.17.2']"
+
+- debug:
+        msg: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
 
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
