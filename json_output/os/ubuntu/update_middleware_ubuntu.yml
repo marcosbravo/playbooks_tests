@@ -104,6 +104,12 @@
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ nuevodict.packages_list }}"
+  register: "{{ nueva }}"
+
+- name: NUEVA
+  debug:
+    msg: "{{nueva }}"
+
 
 ######################################################
 - name: Get CAT
@@ -123,7 +129,9 @@
     msg: "{{catcommand | type_debug}}"
 
 
-
+- name: asignar
+  set_fact:
+    nuevodict.packages_list:
 
 
 - name:   PRINT NUEVODICT TOTAL
