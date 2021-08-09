@@ -130,7 +130,7 @@
 
 - name: KILEE
   debug:
-    msg: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
+    msg: "{% for item.split('#') in newlist %}{{ item + '\n'}}{% endfor %}"
 
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
