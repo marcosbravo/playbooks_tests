@@ -155,10 +155,10 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item ))  }} "
-    #line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
-  loop: "{{newlist}}"
-  #loop: "{{ nuevodict.packages_list }}"
+    #line: "\t{{ dict(keys_list | zip( item ))  }} "
+    line: "\t{{ dict(keys_list | zip( item.split(',')))  }} "
+  #loop: "{{newlist}}"
+  loop: "{{ nuevodict.packages_list }}"
 
 
 
@@ -209,7 +209,7 @@
    copy:
     #content: "{{ nuevodict | to_nice_json }} "
     content: "{{ nuevodict | to_nice_json}} "
-    dest: "/tmp/system_packages_upgradables_new2.json"
+    dest: "/tmp/system_packages_upgradables_new.json"
 
 ######################################################
 # - name: Get CAT
