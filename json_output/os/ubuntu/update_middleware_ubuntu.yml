@@ -146,7 +146,7 @@
 
 - name: Tipo de CATCOMMAND
   debug:
-    msg: "{{catcommand.stdout_lines | to_nice_json }}"
+    msg: "{{catcommand.stdout_lines }}"
 
 - name: Tipo de catcommand.stdout_lines
   debug:
