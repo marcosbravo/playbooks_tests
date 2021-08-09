@@ -115,6 +115,14 @@
   debug:
     msg: "{{ packages_list | type_debug}}"
 
+- name: CONTENIDO III
+  debug:
+    msg: "{{ nuevodict }}"
+
+- name: CONTENIDO IV
+  debug:
+    msg: "{{ nuevodict | type_debug}}"
+
 ########################################################
 
 
