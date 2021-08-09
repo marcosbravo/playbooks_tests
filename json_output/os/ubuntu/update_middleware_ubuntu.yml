@@ -166,7 +166,7 @@
 
 - name: PRINT FINAL OUTPUT
   debug:
-    msg: "{{ nuevodict | to_nice_json}}"
+    msg: "{{ nuevodict }}"
 
 
 -  name: Store on remote file
