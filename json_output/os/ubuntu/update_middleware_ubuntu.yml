@@ -104,39 +104,34 @@
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ nuevodict.packages_list }}"
-  register: nueva
-
-- name: NUEVA
-  debug:
-    msg: "{{nueva.results.invocation.line }}"
 
 
 ######################################################
-- name: Get CAT
-  shell:  cat /tmp/system_packages_upgradables.json
-  register: catcommand
-
-- name:
-  set_fact:
-    catcommand: "{{catcommand.stdout_lines | replace('\\t', '') }}"
-
-- name: Contenido de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand }}"
-
-- name: Tipo de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand | type_debug}}"
-
-
-- name: asignar
-  set_fact:
-    nuevodict.packages_list:
-
-
-- name:   PRINT NUEVODICT TOTAL
-  debug:
-    msg: "{{ nuevodict }}"
+# - name: Get CAT
+#   shell:  cat /tmp/system_packages_upgradables.json
+#   register: catcommand
+#
+# - name:
+#   set_fact:
+#     catcommand: "{{catcommand.stdout_lines | replace('\\t', '') }}"
+#
+# - name: Contenido de catcommand.stdout_lines
+#   debug:
+#     msg: "{{catcommand }}"
+#
+# - name: Tipo de catcommand.stdout_lines
+#   debug:
+#     msg: "{{catcommand | type_debug}}"
+#
+#
+# - name: asignar
+#   set_fact:
+#     nuevodict.packages_list:
+#
+#
+# - name:   PRINT NUEVODICT TOTAL
+#   debug:
+#     msg: "{{ nuevodict }}"
 
 
 ########################################################
