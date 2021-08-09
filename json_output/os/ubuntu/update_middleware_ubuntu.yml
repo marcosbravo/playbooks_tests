@@ -130,7 +130,7 @@
 
 - name: set test lista
   set_fact:
-    newlist: "{{ newlist.split('#'') }}"
+    newlist: "{{ newlist.split('#') }}"
 
 
 - name: KILEE
