@@ -104,6 +104,7 @@
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
+
 - name: NUEVO DICT
   debug:
     msg: "{{nuevodict}}"
@@ -123,6 +124,21 @@
     msg: "{{nuevodict}}"
 
 
+- name: set test lista
+  set_fact:
+    newlist: "[{
+                "package": "test1",
+                "saqa: "pluarl",
+                "sasdf": fasdf",
+                "aslkfj": "asdfasd"
+              },
+              {
+                "package2": "test2",
+                "saqa2: "pluarl2",
+                "sasdf2": fasdf2",
+                "aslkfj2": "asdfasd2"
+              }]"
+
 
 
 
@@ -132,8 +148,9 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_nice_json | regex_replace('\\', '' )}} "
-  loop: "{{ nuevodict.packages_list }}"
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) | to_nice_json }} "
+  loop: "{{ newlist }}"
+  #loop: "{{ nuevodict.packages_list }}"
 
 
 
