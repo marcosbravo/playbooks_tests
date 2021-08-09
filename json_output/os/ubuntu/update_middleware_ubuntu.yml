@@ -126,7 +126,7 @@
 
 - name: set test lista
   set_fact:
-    newlist: "[{apt#bionic#1.16.5#1.17.2}]"
+    newlist: "[apt#bionic#1.16.5#1.17.2, bet#bionic#3.20#3.40]"
 
 
 
