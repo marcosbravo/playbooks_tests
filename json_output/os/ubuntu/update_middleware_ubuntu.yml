@@ -166,7 +166,7 @@
 
 #######################1##################
 - name: Get
-  shell:  cat /tmp/system_packages_upgradables2.json
+  shell:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
 - name: Tipo de CATCOMMAND
@@ -209,7 +209,7 @@
    copy:
     #content: "{{ nuevodict | to_nice_json }} "
     content: "{{ nuevodict | to_nice_json}} "
-    dest: "/tmp/system_packages_upgradables_new.json"
+    dest: "/tmp/system_packages_upgradables_new2.json"
 
 ######################################################
 # - name: Get CAT
