@@ -75,7 +75,7 @@
     msg: "{{packages_list | type_debug}}"
 
 - name: set fact ONLY KEYS
-  set_fact: goo_item="{{ item | split('#') }}"
+  set_fact: goo_item="{{ item.split('#')[0-2] }}"
   with_items: "{{ packages_list }}"
   register: goo_result
 
