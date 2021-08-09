@@ -129,7 +129,9 @@
     newlist: "['apt#'\n'bionic#'\n'1.16.5#'\n'1.17.2', 'apt#'\n'bionic#'\n'1.16.5#'\n'1.17.2']"
 
 
-
+- name: NUEVO DICT TYPE ADD NEW VALUE/KEY
+  debug:
+    msg: "{{nuevodict}}"
 
 
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
