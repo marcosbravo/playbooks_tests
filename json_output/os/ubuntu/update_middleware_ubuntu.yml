@@ -137,18 +137,24 @@
 
 
 
+
+
 #######################1##################
 - name: Get
   shell:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
+- name: Tipo de CATCOMMAND
+  debug:
+    msg: "{{catcommand.stdout_lines }}"
+
 - name: Tipo de catcommand.stdout_lines
   debug:
     msg: "{{catcommand.stdout_lines | type_debug}}"
 
-- name:
+- name: doubling
   set_fact:
-    hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('},', '}') | replace ('\\', '') }}"
+    hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('},', '}') }}"
 
 - name: PRINT HIL
   debug:
