@@ -90,7 +90,8 @@
 
 - name: print ONLY keyS
   debug:
-    msg: "{{ packages_list.results.ansible_facts.goo_item }}"
+    msg: "{{ packages_list }}"
+
 
 - name: make a list
   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
