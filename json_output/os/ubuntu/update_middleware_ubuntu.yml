@@ -92,9 +92,7 @@
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
-- name: Create and Add items to dictionary
-  set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'package_name' : nuevodict.packages_list }) }}"
+
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
@@ -108,6 +106,34 @@
     regexp: '#'
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ nuevodict.packages_list }}"
+
+#######################1##################
+- name: Get
+  shell:  cat /tmp/system_packages_upgradables.json
+  register: catcommand
+
+- name: Tipo de catcommand.stdout_lines
+  debug:
+    msg: "{{catcommand.stdout_lines | type_debug}}"
+
+- name:
+  set_fact:
+    hil: "{{catcommand.stdout_lines | replace('\\t', '') }}"
+
+- name:
+  debug:
+    msg: "{{ hil }}"
+
+
+
+#####################2#######################
+
+
+
+
+- name: Create and Add items to dictionary
+  set_fact:
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'package_name' : nuevodict.packages_list }) }}"
 
 
 ######################################################
