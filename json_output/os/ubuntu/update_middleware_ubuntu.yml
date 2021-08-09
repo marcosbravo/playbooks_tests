@@ -139,7 +139,17 @@
   debug:
     msg: "{{ nuevodict}}"
 
+- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+  lineinfile:
+    path: '{{ json_output_file}}'
+    state: present
+    line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
+  loop: "{{ hil }}"
 
+-  name: Store on remote file
+   copy:
+    content: "{{ hil}}"
+    dest: "/tmp/system_packages_upgradables_new.json"
 
 ######################################################
 # - name: Get CAT

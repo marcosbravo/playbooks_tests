@@ -6,6 +6,7 @@
 
   vars:
     json_output_file: /tmp/system_packages_upgradables.json
+    json_output_file_new: /tmp/system_packages_upgradables_new.json
     json_output_file_clean: /tmp/system_packages_upgradables_clean.json
     keys_list:
       - package_name
