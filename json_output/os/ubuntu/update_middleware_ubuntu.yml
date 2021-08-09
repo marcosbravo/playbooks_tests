@@ -74,8 +74,16 @@
   debug:
     msg: "{{packages_list | type_debug}}"
 
+- name: Eliminar primer item en la lista
+  set_fact:
+    packages_list: {{ packages_list | reject('search','1') | list }}
+
+- name: PACKAGEs LIST | elimminado primer item
+  debug:
+    msg: "{{packages_list}}"
+
 - name: set fact ONLY KEYS
-  set_fact: goo_item="{{ item | split('#', 1)[1] }}"
+  set_fact: goo_item="{{ item.split('#', 1)[1] }}"
   with_items: "{{ packages_list }}"
   register: goo_result
 
