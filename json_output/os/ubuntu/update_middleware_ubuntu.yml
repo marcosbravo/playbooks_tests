@@ -107,6 +107,13 @@
     line: "\t{{ dict(keys_list | zip( item.split('#'))) }}, "
   loop: "{{ nuevodict.packages_list }}"
 
+
+- name: Delete Listing
+  lineinfile:
+    dest: '{{ json_output_file}}'
+    state: absent
+    regexp: 'Listing...'
+
 #######################1##################
 - name: Get
   shell:  cat /tmp/system_packages_upgradables.json
