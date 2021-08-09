@@ -92,6 +92,11 @@
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
+- name: NUEVO DICT TYPE ADD NEW VALUE/KEY
+  debug:
+    msg: "{{nuevodict}}"
+
+
 - name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
   lineinfile:
     path: '{{ json_output_file}}'
