@@ -132,6 +132,10 @@
   set_fact:
     newlist: "{{ newlist.split('#') }}"
 
+- name: antes kille
+  debug:
+    msg: "{{newlist}}"
+
 
 - name: KILEE
   debug:
