@@ -88,9 +88,9 @@
   debug:
     msg: "{{nuevodict | type_debug}}"
 
-# - name: Create and Add items to dictionary
-#   set_fact:
-#     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
+- name: Create and Add items to dictionary
+  set_fact:
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
   debug:
