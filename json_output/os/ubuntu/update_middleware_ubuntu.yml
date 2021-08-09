@@ -126,7 +126,7 @@
 
 - name: set test lista
   set_fact:
-    newlist: "['apt#'\\n'bionic#'\\n'1.16.5#'\\n'1.17.2', 'apt#'\\n'bionic#'\\n'1.16.5#'\\n'1.17.2']"
+    newlist: "['apt#\\nbionic#\\n1.16.5#\\n1.17.2', 'apt#\\nbionic#\\n1.16.5#\\n1.17.2']"
 
 
 - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
