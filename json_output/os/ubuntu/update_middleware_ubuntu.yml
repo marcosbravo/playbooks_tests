@@ -1,4 +1,4 @@
-- name: Update apt packages | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
   apt:
     update_cache: yes
     cache_valid_time: 3600 #One hour
@@ -61,7 +61,8 @@
 
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Fit contents of list of packages upgradables
-  set_fact: foo_item="{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
+  set_fact:
+    foo_item: "{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
   no_log: true
