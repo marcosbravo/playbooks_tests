@@ -63,6 +63,7 @@
   set_fact: foo_item="{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
+  skip: true
 
 # - name: PRINT foo_result
 #   debug:
@@ -95,7 +96,6 @@
   set_fact: goo_item="{{item.split('#')[0]+"#"+item.split('#')[1]+"#"+item.split('#')[6]+"#"+item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
   register: packages_list
-  no_log: true
 
 # - name: print ONLY keyS
 #   debug:
@@ -142,7 +142,7 @@
     line: "\t{{ dict(keys_list | zip( item.split('#')))  }} "
   #loop: "{{newlist}}"
   loop: "{{ nuevodict.packages_list }}"
-  no_log: true
+
 
 
 
