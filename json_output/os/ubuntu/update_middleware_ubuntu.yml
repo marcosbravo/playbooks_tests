@@ -1,7 +1,7 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
   apt:
     update_cache: yes
-    cache_valid_time: 3600 r
+    cache_valid_time: 3600
   register: update_state
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.2 Create remote file to store results
