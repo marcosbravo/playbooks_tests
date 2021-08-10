@@ -63,7 +63,6 @@
   set_fact: foo_item="{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
-  skip: true
 
 # - name: PRINT foo_result
 #   debug:
@@ -148,8 +147,8 @@
 
 
 #######################1##################
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 First dump dict to remote file on target host
-  command:  cat /tmp/system_packages_upgradables.json
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 Get remote host content
+  command:  cat "{{ json_output_file }}"
   register: catcommand
 
 # - name: Tipo de CATCOMMAND
