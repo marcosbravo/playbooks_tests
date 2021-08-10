@@ -8,12 +8,12 @@
     json_output_file: /tmp/system_packages_upgradables.json
     packages_keys_list:
       - package_name
-      - repository
-      - actual_version
-      - upgradable_version
-      - is_upgradable
-      - from
-      - actual_version
+      - package_repository
+      - package_version_actual
+      - package_upgradable_version
+      - package_version_upgradable
+      - package_from
+      - package_version_actual
 
   tasks:
 
