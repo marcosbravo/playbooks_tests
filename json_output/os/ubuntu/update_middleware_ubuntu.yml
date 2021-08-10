@@ -168,9 +168,13 @@
 
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
+
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
+  set_fact:
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_upgradables_total_number' : hil | length }) }}"
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 IMPORT SLURP
   include_tasks:
