@@ -127,7 +127,11 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 Create and Add items to dict(key/value) including list of upgradable packages
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
-    nuevodict: "{{ nuevodict | default({}) | combine({'distribution': ansible_distribution })}}"
+    nuevodict_last: "{{ nuevodict | default({}) | combine({'distribution': ansible_distribution })}}"
+
+- name:
+  set_fact:
+    nuevodict: "{{ nuevodict_last }}"
 
 # - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
 #   debug:
