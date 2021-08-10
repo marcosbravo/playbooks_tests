@@ -87,79 +87,52 @@
   set_fact:
     packages_list: "{{ packages_list[1:] }}"
 
-- name: PACKAGEs LIST | elimminado primer item
-  debug:
-    msg: "{{packages_list}}"
+# - name: PACKAGEs LIST | elimminado primer item
+#   debug:
+#     msg: "{{packages_list}}"
 
-- name: set fact ONLY KEYS
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.1 Set List elements to include on final list
   set_fact: goo_item="{{item.split('#')[0]+"#"+item.split('#')[1]+"#"+item.split('#')[6]+"#"+item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
   register: packages_list
-  #register: goo_result
 
-- name: print ONLY keyS
-  debug:
-    msg: "{{ packages_list }}"
+# - name: print ONLY keyS
+#   debug:
+#     msg: "{{ packages_list }}"
 
 
-- name: make a list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.2 Set List elements to include on final list (map attributes)
   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
 
-- name: PRINT PACKAGES LIST SELECCION
-  debug:
-    msg: "{{ packages_list }}"
+# - name: PRINT PACKAGES LIST SELECCION
+#   debug:
+#     msg: "{{ packages_list }}"
 
-- name: Nuevo dict2
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Set List elements to include on final list (map attributes)
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
 
-- name: NUEVO DICT
-  debug:
-    msg: "{{nuevodict}}"
+# - name: NUEVO DICT
+#   debug:
+#     msg: "{{nuevodict}}"
+#
+# - name: NUEVO DICT TYPE
+#   debug:
+#     msg: "{{nuevodict | type_debug}}"
 
-- name: NUEVO DICT TYPE
-  debug:
-    msg: "{{nuevodict | type_debug}}"
-
-- name: Create and Add items to dictionary
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Create and Add items to dict(key/value) including list of upgradable packages
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
 
 
-- name: NUEVO DICT TYPE ADD NEW VALUE/KEY
-  debug:
-    msg: "{{nuevodict}}"
-
-
-# - name: set test lista
-#   set_fact:
-#     newlist: "['apt#bionic#1.16.5#1.17.2#test#vamos#color', 'apt#bionic#1.16.5#1.17.2#test#vamos#color']"
-#
-# - name: set test lista
-#   set_fact:
-#     newlist: "{{ newlist.split('#') }}"
-#
-# - name: antes kille
-#   debug:
-#     msg: "{{newlist}}"
-
-#
-# - name: KILEE
-#   set_fact:
-#     newlist: "{% for item in newlist %}{{ item + '\n'}}{% endfor %}"
-#
-# - name: despues kille
-#   debug:
-#     msg: "{{newlist}}"
-#
 # - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
 #   debug:
-#     msg: "{{newlist}}"
+#     msg: "{{nuevodict}}"
 
 
-- name: Convert lines to dict | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Convert lines to dict
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 First dump dict to remote file on target host
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
@@ -174,21 +147,21 @@
 
 
 #######################1##################
-- name: Get
-  shell:  cat /tmp/system_packages_upgradables.json
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 First dump dict to remote file on target host
+  command:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
-- name: Tipo de CATCOMMAND
-  debug:
-    msg: "{{ catcommand.stdout_lines }}"
-
-- name: Tipo de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand.stdout_lines }}"
-
-- name: Tipo de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand.stdout_lines | type_debug}}"
+# - name: Tipo de CATCOMMAND
+#   debug:
+#     msg: "{{ catcommand.stdout_lines }}"
+#
+# - name: Tipo de catcommand.stdout_lines
+#   debug:
+#     msg: "{{catcommand.stdout_lines }}"
+#
+# - name: Tipo de catcommand.stdout_lines
+#   debug:
+#     msg: "{{catcommand.stdout_lines | type_debug}}"
 
 - name: doubling
   set_fact:
