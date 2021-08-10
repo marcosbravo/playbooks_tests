@@ -76,7 +76,8 @@
 #     msg: "{{ foo_result | type_debug }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Get List of contents of list of packages upgradables
-  set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
+  set_fact:
+    packages_list: "{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
 # - name: PACKAGEs LIST
 #   debug:
