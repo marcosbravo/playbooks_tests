@@ -152,9 +152,9 @@
 #   debug:
 #     msg: "{{ catcommand.stdout_lines }}"
 #
-# - name: Tipo de catcommand.stdout_lines
-#   debug:
-#     msg: "{{catcommand.stdout_lines }}"
+- name: Tipo de catcommand.stdout_lines
+  debug:
+    msg: "{{catcommand.stdout_lines }}"
 #
 # - name: Tipo de catcommand.stdout_lines
 #   debug:
