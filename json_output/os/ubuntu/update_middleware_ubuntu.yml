@@ -190,7 +190,3 @@
     #content: "{{ nuevodict | to_nice_json }} "
     content: "{{ nuevodict | to_nice_json}} "
     dest: "{{ json_output_file }}"
-
-- name: Print all available facts
-  debug:
-    var: ansible_facts
