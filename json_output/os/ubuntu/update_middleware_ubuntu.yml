@@ -4,16 +4,16 @@
     cache_valid_time: 3600 #One hour
   register: update_state
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
-#   debug:
-#     var: update_state
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
+  debug:
+    var: update_state
 
-- name: Create file if doesn't exist
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.2 Create remote file to store results
   file:
     state: touch
     path: "{{ json_output_file }}"
 
-- name: Create file if doesn't exist
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.3 Create remote file to store New results
   file:
     state: touch
     path: "{{ json_output_file_new }}"
@@ -31,35 +31,35 @@
     packages_upgradables_list: "{{ list_upgradable_packages.stdout_lines }}"
   register: upgradable_packages
 
-- name: CONTENIDO
-  debug:
-    msg: "{{ upgradable_packages }}"
+# - name: CONTENIDO
+#   debug:
+#     msg: "{{ upgradable_packages }}"
+#
+# - name: TIPO
+#   debug:
+#     msg: "{{ upgradable_packages | type_debug }}"
 
-- name: TIPO
-  debug:
-    msg: "{{ upgradable_packages | type_debug }}"
 
-
-- name: obtener el upgradable_packages.ansible_facts
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Get ansible_facts of packages_list
   set_fact:
     upgradable_packages_ansible_facts: "{{upgradable_packages.ansible_facts}}"
 
-- name:
-  debug:
-    msg: "{{upgradable_packages.ansible_facts}}"
-
-- name:
-  debug:
-    msg: "{{upgradable_packages.ansible_facts | type_debug}}"
-
-
-- name: Display LOOP LISTS
-  debug:
-    msg: "{{ item }}"
-  loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+# - name:
+#   debug:
+#     msg: "{{upgradable_packages.ansible_facts}}"
+#
+# - name:
+#   debug:
+#     msg: "{{upgradable_packages.ansible_facts | type_debug}}"
 
 
-- name: set fact
+# - name: Display LOOP LISTS
+#   debug:
+#     msg: "{{ item }}"
+#   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+
+
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Fit contents of list of packages upgradables
   set_fact: foo_item="{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
   register: foo_result
@@ -72,20 +72,20 @@
 #   debug:
 #     msg: "{{ foo_result | type_debug }}"
 
-- name: make a list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Get List of contents of list of packages upgradables
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
-- name: PACKAGEs LIST
-  debug:
-    msg: "{{packages_list}}"
+# - name: PACKAGEs LIST
+#   debug:
+#     msg: "{{packages_list}}"
+#
+# - name: PACKAGEs TYPE
+#   debug:
+#     msg: "{{packages_list | type_debug}}"
 
-- name: PACKAGEs TYPE
-  debug:
-    msg: "{{packages_list | type_debug}}"
-
-- name: Eliminar primer item en la lista
-  set_fact:
-    packages_list: "{{ packages_list[1:] }}"
+# - name: Eliminar primer item en la lista
+#   set_fact:
+#     packages_list: "{{ packages_list[1:] }}"
 
 - name: PACKAGEs LIST | elimminado primer item
   debug:
