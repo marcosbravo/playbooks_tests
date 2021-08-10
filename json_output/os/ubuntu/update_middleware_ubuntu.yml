@@ -110,9 +110,9 @@
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
-# - name: NUEVO DICT
-#   debug:
-#     msg: "{{nuevodict}}"
+- name: NUEVO DICT
+  debug:
+    msg: "{{nuevodict}}"
 #
 # - name: NUEVO DICT TYPE
 #   debug:
