@@ -110,9 +110,9 @@
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
-- name: NUEVO DICT
-  debug:
-    msg: "{{nuevodict}}"
+# - name: NUEVO DICT
+#   debug:
+#     msg: "{{nuevodict}}"
 #
 # - name: NUEVO DICT TYPE
 #   debug:
@@ -139,9 +139,9 @@
 #   debug:
 #     msg: "{{ catcommand.stdout_lines }}"
 #
-- name: Tipo de catcommand.stdout_lines
-  debug:
-    msg: "{{catcommand.stdout_lines }}"
+# - name: Tipo de catcommand.stdout_lines
+#   debug:
+#     msg: "{{catcommand.stdout_lines }}"
 #
 # - name: Tipo de catcommand.stdout_lines
 #   debug:
@@ -171,9 +171,9 @@
   include_tasks:
     file: combine_parameters.yaml
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Print json with all contents
-  debug:
-    msg: "{{ nuevodict }}"
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Print json with all contents
+#   debug:
+#     msg: "{{ nuevodict }}"
 
 
 -  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.1 Store json with all contents on remote file
