@@ -11,7 +11,7 @@
       - package_repository________
       - package_version_actual____
       - package_version_upgradable
-      - package_version_upgradable
+      - package_upgradable________
       - package_from______________
       - package_version_actual____
 
