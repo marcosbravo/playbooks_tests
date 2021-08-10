@@ -6,7 +6,7 @@
 
   vars:
     json_output_file: /tmp/system_packages_upgradables.json
-    keys_list:
+    packages_keys_list:
       - package_name
       - repository
       - actual_version
@@ -14,8 +14,6 @@
       - is_upgradable
       - from
       - actual_version
-    key_parameter_package:
-      - packages_upgradables_list
 
   tasks:
 
