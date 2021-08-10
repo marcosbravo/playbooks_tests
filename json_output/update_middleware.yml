@@ -7,13 +7,13 @@
   vars:
     json_output_file: /tmp/system_packages_upgradables.json
     packages_keys_list:
-      - package_pretty_name_______
-      - package_repository________
-      - package_version_actual____
+      - package_pretty_format_name
+      - package_repository_go_name
+      - package_version_now_actual
       - package_version_upgradable
       - package_upgradable________
       - package_from______________
-      - package_version_actual____
+      - package_version_now_actual
 
   tasks:
 
