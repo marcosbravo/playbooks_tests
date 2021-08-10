@@ -124,15 +124,6 @@
 #   debug:
 #     msg: "{{nuevodict | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 Create and Add items to dict(key/value) including list of upgradable packages
-  set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
-    nuevodict_last: "{{ nuevodict | default({}) | combine({'distribution': ansible_distribution })}}"
-
-- name:
-  set_fact:
-    nuevodict: "{{ nuevodict_last }}"
-
 # - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
 #   debug:
 #     msg: "{{nuevodict}}"
@@ -175,9 +166,14 @@
 
 #####################2#######################
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
-  set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
+
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 IMPORT SLURP
+  include_tasks:
+    file: combine_parameters.yaml
+
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
+#   set_fact:
+#     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Print json with all contents
   debug:
