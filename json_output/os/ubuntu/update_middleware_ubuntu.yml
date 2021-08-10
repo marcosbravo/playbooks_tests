@@ -127,7 +127,7 @@
     path: '{{ json_output_file}}'
     state: present
     regexp: '#'
-    line: "\t{{ dict(packages_keys_list | zip( item.split('#')) | replace('\"', \"'\") ) }}"
+    line: "\t{{ dict(packages_keys_list | zip( item.split('#')) | regex_replace('\"', \"'\") ) }}"
   loop: "{{ nuevodict.packages_list }}"
 
 #######################1##################
