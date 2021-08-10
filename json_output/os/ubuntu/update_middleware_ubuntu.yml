@@ -4,9 +4,9 @@
     cache_valid_time: 3600 #One hour
   register: update_state
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
-  debug:
-    var: update_state
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.1 Print update status
+#   debug:
+#     var: update_state
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.2 Create remote file to store results
   file:
@@ -22,9 +22,9 @@
   command:  apt list --upgradable
   register: list_upgradable_packages
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
-  debug:
-    var: list_upgradable_packages.stdout_lines
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
+#   debug:
+#     var: list_upgradable_packages.stdout_lines
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Set variable with packages list content
   set_fact:
@@ -72,7 +72,7 @@
 #   debug:
 #     msg: "{{ foo_result | type_debug }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Get List of contents of list of packages upgradables
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Get List of contents of list of packages upgradables
   set_fact: packages_list="{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
 # - name: PACKAGEs LIST
@@ -83,7 +83,7 @@
 #   debug:
 #     msg: "{{packages_list | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Remove first unnecesary item on list of packages ('Listing...)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Remove first unnecesary item on list of packages ('Listing...)
   set_fact:
     packages_list: "{{ packages_list[1:] }}"
 
@@ -91,7 +91,7 @@
 #   debug:
 #     msg: "{{packages_list}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.1 Set List elements to include on final list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.1 Set List elements to include on final list
   set_fact: goo_item="{{item.split('#')[0]+"#"+item.split('#')[1]+"#"+item.split('#')[6]+"#"+item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
   register: packages_list
@@ -101,14 +101,14 @@
 #     msg: "{{ packages_list }}"
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6.2 Set List elements to include on final list (map attributes)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.2 Set List elements to include on final list (map attributes)
   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
 
 # - name: PRINT PACKAGES LIST SELECCION
 #   debug:
 #     msg: "{{ packages_list }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7 Set List elements to include on final list (map attributes)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Set List elements to include on final list (map attributes)
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
@@ -121,7 +121,7 @@
 #   debug:
 #     msg: "{{nuevodict | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Create and Add items to dict(key/value) including list of upgradable packages
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 Create and Add items to dict(key/value) including list of upgradable packages
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'instance_id' : 'i-99999' }) }}"
 
@@ -132,7 +132,7 @@
 #     msg: "{{nuevodict}}"
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 First dump dict to remote file on target host
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.10 First dump dict to remote file on target host
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
@@ -147,7 +147,7 @@
 
 
 #######################1##################
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.9 First dump dict to remote file on target host
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 First dump dict to remote file on target host
   command:  cat /tmp/system_packages_upgradables.json
   register: catcommand
 
