@@ -83,9 +83,9 @@
 #   debug:
 #     msg: "{{packages_list | type_debug}}"
 
-# - name: Eliminar primer item en la lista
-#   set_fact:
-#     packages_list: "{{ packages_list[1:] }}"
+- name: Eliminar primer item en la lista
+  set_fact:
+    packages_list: "{{ packages_list[1:] }}"
 
 - name: PACKAGEs LIST | elimminado primer item
   debug:
