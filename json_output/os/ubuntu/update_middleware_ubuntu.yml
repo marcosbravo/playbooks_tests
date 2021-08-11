@@ -1,10 +1,10 @@
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.0 Update apt packages if it is older than cache_valid_time
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.0 Update apt packages if it is older than cache_valid_time
   apt:
     update_cache: yes
     cache_valid_time: 3600
   register: update_state
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.2 Create remote file to store results
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 Create remote file to store results on tmp directory
   copy:
     content: ""
     dest: "{{ json_output_file }}"
@@ -15,7 +15,7 @@
 #     state: touch
 #     path: "{{ json_output_file }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.0 Get List Packages Upgradables
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Get List Upgradabl Packages
   command:  apt list --upgradable
   register: list_upgradable_packages
 
@@ -23,7 +23,7 @@
 #   debug:
 #     var: list_upgradable_packages.stdout_lines
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.2 Set variable with packages list content
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 4.0 Set variable with packages list content
   set_fact:
     packages_upgradables_list: "{{ list_upgradable_packages.stdout_lines }}"
   register: upgradable_packages
@@ -37,7 +37,7 @@
 #     msg: "{{ upgradable_packages | type_debug }}"
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.3 Get ansible_facts of packages_list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.0 Get ansible_facts of packages_list
   set_fact:
     upgradable_packages_ansible_facts: "{{upgradable_packages.ansible_facts}}"
 
@@ -56,7 +56,7 @@
 #   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
 
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.4 Fit contents of list of packages upgradables
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.1 Fit contents of list of packages upgradables
   set_fact:
     foo_item: "{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
@@ -70,7 +70,7 @@
 #   debug:
 #     msg: "{{ foo_result | type_debug }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.5 Get List of contents of list of packages upgradables
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 6.0 Get List of contents of list of packages upgradables
   set_fact:
     packages_list: "{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
 
@@ -82,7 +82,7 @@
 #   debug:
 #     msg: "{{packages_list | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.6 Remove first unnecesary item on list of packages ('Listing...)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 7.0 Remove first unnecesary item on list of packages ('Listing...)
   set_fact:
     packages_list: "{{ packages_list[1:] }}"
 
@@ -90,7 +90,7 @@
 #   debug:
 #     msg: "{{packages_list}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.1 Set List elements to include on final list
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.1 Set List elements to include on final list
   set_fact:
     goo_item: "{{item.split('#')[0]+'#'+item.split('#')[1]+'#'+item.split('#')[6]+'#'+item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
@@ -100,14 +100,14 @@
 #   debug:
 #     msg: "{{ packages_list }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.2 Set List elements to include on final list (map attributes)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.2 Set List elements to include on final list (map attributes)
   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
 
 # - name: PRINT PACKAGES LIST SELECCION
 #   debug:
 #     msg: "{{ packages_list }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.8 Set List elements to include on final list (map attributes)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 9.0 Set List elements to include on final list (map attributes)
   set_fact:
     nuevodict: '{ "packages_list": "{{ packages_list }}" }'
 
@@ -123,7 +123,7 @@
 #   debug:
 #     msg: "{{nuevodict}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.10 First dump dict to remote file on target host
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 10.0 First dump dict to remote file on target host
   lineinfile:
     path: '{{ json_output_file}}'
     state: present
@@ -131,7 +131,7 @@
     line: "\t{{ dict(packages_keys_list | zip( item.split('#'))) }}"
   loop: "{{ nuevodict.packages_list }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 Get remote host content (list)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.0 Get remote host content (list)
   command:  cat "{{ json_output_file }}"
   register: catcommand
 
@@ -147,7 +147,7 @@
 #   debug:
 #     msg: "{{catcommand.stdout_lines | type_debug}}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.1 Fit remote host content (list)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.1 Fit remote host content (list)
   set_fact:
     hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('} ', '}') | regex_replace('\"', '') }}"
 
@@ -155,24 +155,24 @@
 #   debug:
 #     msg: "{{ hil }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_upgradables_total_number' : hil | length }) }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 IMPORT SLURP
+- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Add parameters key/value to new dict
   include_tasks:
     file: combine_parameters.yaml
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Print json with all packages upgradables
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 14.0 Print json with all packages upgradables
   debug:
     msg: "{{ nuevodict }}"
 
 
--  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.1 Store json with all packages upgradables on remote file
+-  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 15.0 Store json with all packages upgradables on remote file
    copy:
     #content: "{{ nuevodict | to_nice_json }} "
     content: "{{ nuevodict | to_nice_json}} "
