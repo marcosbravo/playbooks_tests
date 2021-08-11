@@ -91,13 +91,14 @@
 #     msg: "{{packages_list}}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.1 Set List elements to include on final list
-  set_fact: goo_item="{{item.split('#')[0]+"#"+item.split('#')[1]+"#"+item.split('#')[6]+"#"+item.split('#')[2]}}"
+  set_fact:
+    goo_item: "{{item.split('#')[0]+"#"+item.split('#')[1]+"#"+item.split('#')[6]+"#"+item.split('#')[2]}}"
   with_items: "{{ packages_list }}"
   register: packages_list
+
 # - name: print ONLY keyS
 #   debug:
 #     msg: "{{ packages_list }}"
-
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.7.2 Set List elements to include on final list (map attributes)
   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
@@ -130,7 +131,6 @@
     line: "\t{{ dict(packages_keys_list | zip( item.split('#'))) }}"
   loop: "{{ nuevodict.packages_list }}"
 
-#######################1##################
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.0 Get remote host content (list)
   command:  cat "{{ json_output_file }}"
   register: catcommand
@@ -154,10 +154,6 @@
 # - name: PRINT HIL
 #   debug:
 #     msg: "{{ hil }}"
-
-#####################2#######################
-
-
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 2.2 Create dict with key and value (list)
   set_fact:
