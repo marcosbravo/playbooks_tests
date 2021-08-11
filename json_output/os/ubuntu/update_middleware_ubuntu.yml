@@ -155,13 +155,18 @@
 #   debug:
 #     msg: "{{ hil }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_upgradables_total_number' : hil | length }) }}"
+
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Check if packages upgradables is empty
+    set_fact: true
+      nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : [ 'The are NOT Packages Upgradables' ] }) }}"
+  when: "{{ 'packages_upgradables_total_number' : hil | length' == 0}}"
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Add parameters key/value to new dict
   include_tasks:
