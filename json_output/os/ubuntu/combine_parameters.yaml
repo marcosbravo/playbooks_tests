@@ -1,6 +1,6 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Add key/value item with "instance_id" to new dict
   set_fact:
-    imported_var: "{{ nuevodict | default({}) | combine({'instance_id': '11111'}) }}"
+    imported_var: "{{ nuevodict | default({}) | combine({'instance_id            :': '11111'}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.2 Add key/value item with "execution_date_time_utc" to new dict
   set_fact:
@@ -8,16 +8,16 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.3 Add key/value item with "distribution" to new dict
   set_fact:
-    imported_var_3: "{{ imported_var_2 | combine({'distribution': ansible_distribution }) }}"
+    imported_var_3: "{{ imported_var_2 | combine({'distribution           :': ansible_distribution }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.4 Add key/value item with "distribution_version" to new dict
   set_fact:
-    imported_var_4: "{{ imported_var_3 | combine({'distribution_version': ansible_distribution_version }) }}"
+    imported_var_4: "{{ imported_var_3 | combine({'distribution_version   :': ansible_distribution_version }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.5A dd key/value item with "fqdn" to new dict
   set_fact:
-    imported_var_5: "{{ imported_var_4 | combine({'fqdn': ansible_fqdn}) }}"
+    imported_var_5: "{{ imported_var_4 | combine({'fqdn                   :': ansible_fqdn}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.6 Add key/value item with "instance_id" to new dict
   set_fact:
-    nuevodict: "{{ imported_var_5 | combine({'instance_id': instance_id }) }}"
+    nuevodict: "{{ imported_var_5 | combine({'fqdn                   :': instance_id }) }}"
