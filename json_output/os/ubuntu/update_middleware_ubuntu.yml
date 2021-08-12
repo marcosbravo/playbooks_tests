@@ -109,19 +109,19 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 9.0 Set List elements to include on final list (map attributes)
   set_fact:
-    nuevodict: '{ "packages_list": "{{ packages_list }}" }'
+    detailed_upgradable_packages_dict: '{ "packages_list": "{{ packages_list }}" }'
 
 # - name: NUEVO DICT
 #   debug:
-#     msg: "{{nuevodict}}"
+#     msg: "{{detailed_upgradable_packages_dict}}"
 #
 # - name: NUEVO DICT TYPE
 #   debug:
-#     msg: "{{nuevodict | type_debug}}"
+#     msg: "{{detailed_upgradable_packages_dict | type_debug}}"
 
 # - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
 #   debug:
-#     msg: "{{nuevodict}}"
+#     msg: "{{detailed_upgradable_packages_dict}}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 10.0 First dump dict to remote file on target host
   lineinfile:
@@ -129,7 +129,7 @@
     state: present
     regexp: '#'
     line: "\t{{ dict(packages_keys_list | zip( item.split('#'))) }}"
-  loop: "{{ nuevodict.packages_list }}"
+  loop: "{{ detailed_upgradable_packages_dict.packages_list }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.0 Get remote host content (list)
   command:  cat "{{ json_output_file }}"
@@ -157,15 +157,15 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : clean_packages_list}) }}"
+    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : clean_packages_list}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'upgradables_packages_total_number' : clean_packages_list | length }) }}"
+    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'upgradables_packages_total_number' : clean_packages_list | length }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Check if packages upgradables is empty
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
+    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
   when: ( clean_packages_list | length ) == 0
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
@@ -174,11 +174,11 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 14.0 Print json with all packages upgradables
   debug:
-    msg: "{{ nuevodict }}"
+    msg: "{{ detailed_upgradable_packages_dict }}"
 
 
 -  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 15.0 Store json with all packages upgradables on remote file
    copy:
-    #content: "{{ nuevodict | to_nice_json }} "
-    content: "{{ nuevodict | to_nice_json}} "
+    #content: "{{ detailed_upgradable_packages_dict | to_nice_json }} "
+    content: "{{ detailed_upgradable_packages_dict | to_nice_json}} "
     dest: "{{ json_output_file }}"
