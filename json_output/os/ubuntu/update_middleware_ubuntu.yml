@@ -163,7 +163,7 @@
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_upgradables_total_number' : hil | length }) }}"
 
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Create dict with key and value (list)
   debug:
     msg: "{{ 'packages_upgradables_total_number' : hil | length }}"
 
