@@ -1,6 +1,6 @@
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Add key/value item with "instance_id" to new dict
   set_fact:
-    imported_var: "{{ nuevodict | default({}) | combine({'a_instance_id            ': instance_id}) }}"
+    imported_var: "{{ nuevodict | default({}) | combine({'a_instance_id          ': instance_id}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.2 Add key/value item with "execution_date_time_utc" to new dict
   set_fact:
