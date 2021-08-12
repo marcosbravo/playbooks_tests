@@ -149,24 +149,24 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.1 Fit remote host content (list)
   set_fact:
-    hil: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('} ', '}') | regex_replace('\"', '') }}"
+    clean_packages_list: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('} ', '}') | regex_replace('\"', '') }}"
 
-# - name: PRINT HIL
+# - name: PRINT clean_packages_list
 #   debug:
-#     msg: "{{ hil }}"
+#     msg: "{{ clean_packages_list }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : hil}) }}"
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : clean_packages_list}) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
   set_fact:
-    nuevodict: "{{ nuevodict | default({}) | combine ({ 'upgradables_packages_total_number' : hil | length }) }}"
+    nuevodict: "{{ nuevodict | default({}) | combine ({ 'upgradables_packages_total_number' : clean_packages_list | length }) }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Check if packages upgradables is empty
   set_fact:
     nuevodict: "{{ nuevodict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
-  when: ( hil | length ) == 0
+  when: ( clean_packages_list | length ) == 0
 
 - name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
   include_tasks:
