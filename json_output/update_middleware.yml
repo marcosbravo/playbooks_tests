@@ -11,8 +11,8 @@
       - package_repository_go_name
       - package_version_now_actual
       - package_version_upgradable
-      - package_upgradable________
-      - package_from______________
+      - package_upgradable
+      - package_from
       - package_version_now_actual
 
   tasks:
