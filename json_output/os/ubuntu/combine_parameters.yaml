@@ -20,4 +20,4 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} |  13.6 Add key/value item with "instance_id" to new dict
   set_fact:
-    nuevodict: "{{ imported_var_5 | combine({'fqdn                   ': ansible_fqdn }) }}"
+    nuevodict: "{{ imported_var_5 | combine({'fully_qualified_domain_name': ansible_fqdn }) }}"
