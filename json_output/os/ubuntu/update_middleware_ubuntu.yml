@@ -168,7 +168,7 @@
     detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
   when: ( clean_packages_list | length ) == 0
 
-- name: Import Module Slurp | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
   include_tasks:
     file: combine_parameters.yaml
 
@@ -179,6 +179,5 @@
 
 -  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 15.0 Store json with all packages upgradables on remote file
    copy:
-    #content: "{{ detailed_upgradable_packages_dict | to_nice_json }} "
     content: "{{ detailed_upgradable_packages_dict | to_nice_json}} "
     dest: "{{ json_output_file }}"
