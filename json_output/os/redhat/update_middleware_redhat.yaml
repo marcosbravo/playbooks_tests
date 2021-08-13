@@ -25,8 +25,8 @@
 #   debug:
 #     var: list_upgradable_packages
 
- - debug: var=yumoutput
-    msg: "{{ yumoutput.results | map(attribute='name') | list }}"
+- debug: var=yumoutput
+  msg: "{{ list_upgradable_packages.results | map(attribute='name') | list }}"
 
                               # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
                               #   debug:
