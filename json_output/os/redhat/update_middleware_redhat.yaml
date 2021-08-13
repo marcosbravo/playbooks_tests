@@ -27,7 +27,7 @@
 
 - name:
   debug:
-    msg: "{{list_upgradable_packages | type_debug }}"
+    msg: "{{list_upgradable_packages.results | map(attribute='name') }}"
 
 # - name: debug
 #   debug:
