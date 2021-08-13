@@ -19,9 +19,9 @@
   command:   yum check-update | grep rhel-
   register: list_upgradable_packages
 
- - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
-   debug:
-     var: list_upgradable_packages.stdout_lines
+- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
+  debug:
+    var: list_upgradable_packages.stdout_lines
                               # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
                               #   debug:
                               #     var: list_upgradable_packages.stdout_lines
