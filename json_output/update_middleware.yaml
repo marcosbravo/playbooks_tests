@@ -67,7 +67,7 @@
 
     # REDHAT BLOCK --
     - name: Update middleware | RedHat {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/redhat/update_middleware_redhat_general.yaml
+      include_tasks: ./os/redhat/update_middleware_redhat.yaml
       when:
         - ansible_distribution_major_version in ['8','7','6']
         - ansible_distribution | lower == 'redhat'
@@ -82,7 +82,7 @@
 
     # CentOS BLOCK --
     - name: Update middleware | CentOS {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/centos/update_middleware_centos_general.yaml
+      include_tasks: ./os/centos/update_middleware_centos.yaml
       when:
         - ansible_distribution_major_version in ['8','7','6']
         - ansible_distribution | lower == 'centos'
