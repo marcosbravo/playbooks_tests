@@ -15,6 +15,7 @@
       - package_from
       - package_version_now_actual
     empty_upgradable_packages: 'Instance has NO pending upgradeable packages'
+    ansible_python_interpreter: /usr/bin/python3.7
 
   tasks:
 
