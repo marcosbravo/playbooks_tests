@@ -23,7 +23,7 @@
     # AMAZON LINUX BLOCK  --
 
     - name: Update middleware | Amazon Linux {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/ami_linux/update_middleware_ami_linux_general.yml
+      include_tasks: ./os/ami_linux/update_middleware_ami_linux_general.yaml
       when:
         - ansible_distribution_major_version in ['2', '1']
         - ansible_distribution | lower == 'amazon'
@@ -38,7 +38,7 @@
 
     # DEBIAN BLOCK ++
     - name: Update middleware | Debian {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/debian/update_middleware_debian.yml
+      include_tasks: ./os/debian/update_middleware_debian.yaml
       when:
         - ansible_distribution_major_version in ['9','10']
         - ansible_distribution | lower == 'debian'
@@ -52,7 +52,7 @@
         - ansible_distribution | lower == 'debian'
     #UBUNTU BLOCK ++
     - name: Update middleware | Ubuntu {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/ubuntu/update_middleware_ubuntu.yml
+      include_tasks: ./os/ubuntu/update_middleware_ubuntu.yaml
       when:
         - ansible_distribution_major_version in ['14','16','18','20']
         - ansible_distribution | lower == 'ubuntu'
@@ -67,7 +67,7 @@
 
     # REDHAT BLOCK --
     - name: Update middleware | RedHat {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/redhat/update_middleware_redhat_general.yml
+      include_tasks: ./os/redhat/update_middleware_redhat_general.yaml
       when:
         - ansible_distribution_major_version in ['8','7','6']
         - ansible_distribution | lower == 'redhat'
@@ -82,7 +82,7 @@
 
     # CentOS BLOCK --
     - name: Update middleware | CentOS {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/centos/update_middleware_centos_general.yml
+      include_tasks: ./os/centos/update_middleware_centos_general.yaml
       when:
         - ansible_distribution_major_version in ['8','7','6']
         - ansible_distribution | lower == 'centos'
@@ -113,7 +113,7 @@
     #SUSE BLOCK **
 
     - name: Update middleware | Suse {{ansible_distribution_major_version}} | Install Update middleware
-      include_tasks: ./os/suse/update_middleware_suse_general.yml
+      include_tasks: ./os/suse/update_middleware_suse_general.yaml
       when:
         - ansible_distribution_major_version in ['11', '12', '15']
         - ansible_os_family | lower == 'suse'
