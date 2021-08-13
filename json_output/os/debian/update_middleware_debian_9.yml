@@ -170,7 +170,7 @@
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
   include_tasks:
-    file: combine_parameters.yaml
+    file: "{{ combine_parameters }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 14.0 Print json with all packages upgradables
   debug:
