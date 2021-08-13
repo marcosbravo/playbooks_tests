@@ -10,174 +10,177 @@
     dest: "{{ json_output_file }}"
     force: yes
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.3 Create remote file to store New results
-#   file:
-#     state: touch
-#     path: "{{ json_output_file }}"
+                            # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 0.3 Create remote file to store New results
+                            #   file:
+                            #     state: touch
+                            #     path: "{{ json_output_file }}"
 
 - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 3.0 Get List Upgradabl Packages
-  command:  apt list --upgradable
+  command:   yum check-update | grep rhel-
   register: list_upgradable_packages
 
-# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
-#   debug:
-#     var: list_upgradable_packages.stdout_lines
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 4.0 Set variable with packages list content
-  set_fact:
-    packages_upgradables_list: "{{ list_upgradable_packages.stdout_lines }}"
-  register: upgradable_packages
-
-# - name: CONTENIDO
-#   debug:
-#     msg: "{{ upgradable_packages }}"
+ - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
+   debug:
+     var: list_upgradable_packages.stdout_lines
+                              # - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 1.1 Print middleware update list
+                              #   debug:
+                              #     var: list_upgradable_packages.stdout_lines
 #
-# - name: TIPO
-#   debug:
-#     msg: "{{ upgradable_packages | type_debug }}"
-
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.0 Get ansible_facts of packages_list
-  set_fact:
-    upgradable_packages_ansible_facts: "{{upgradable_packages.ansible_facts}}"
-
-# - name:
-#   debug:
-#     msg: "{{upgradable_packages.ansible_facts}}"
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 4.0 Set variable with packages list content
+#   set_fact:
+#     packages_upgradables_list: "{{ list_upgradable_packages.stdout_lines }}"
+#   register: upgradable_packages
 #
-# - name:
-#   debug:
-#     msg: "{{upgradable_packages.ansible_facts | type_debug}}"
-
-
-# - name: Display LOOP LISTS
-#   debug:
-#     msg: "{{ item }}"
-#   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
-
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.1 Fit contents of list of packages upgradables
-  set_fact:
-    foo_item: "{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
-  with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
-  register: foo_result
-
-# - name: PRINT foo_result
-#   debug:
-#     msg: "{{ foo_result}}"
+#                                 # - name: CONTENIDO
+#                                 #   debug:
+#                                 #     msg: "{{ upgradable_packages }}"
+#                                 #
+#                                 # - name: TIPO
+#                                 #   debug:
+#                                 #     msg: "{{ upgradable_packages | type_debug }}"
 #
-# - name: el tipo de foo_result
-#   debug:
-#     msg: "{{ foo_result | type_debug }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 6.0 Get List of contents of list of packages upgradables
-  set_fact:
-    packages_list: "{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
-
-# - name: PACKAGEs LIST
-#   debug:
-#     msg: "{{packages_list}}"
 #
-# - name: PACKAGEs TYPE
-#   debug:
-#     msg: "{{packages_list | type_debug}}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 7.0 Remove first unnecesary item on list of packages ('Listing...)
-  set_fact:
-    packages_list: "{{ packages_list[1:] }}"
-
-# - name: PACKAGEs LIST | elimminado primer item
-#   debug:
-#     msg: "{{packages_list}}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.1 Set List elements to include on final list
-  set_fact:
-    goo_item: "{{item.split('#')[0]+'#'+item.split('#')[1]+'#'+item.split('#')[6]+'#'+item.split('#')[2]}}"
-  with_items: "{{ packages_list }}"
-  register: packages_list
-
-# - name: print ONLY keyS
-#   debug:
-#     msg: "{{ packages_list }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.2 Set List elements to include on final list (map attributes)
-  set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
-
-# - name: PRINT PACKAGES LIST SELECCION
-#   debug:
-#     msg: "{{ packages_list }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 9.0 Set List elements to include on final list (map attributes)
-  set_fact:
-    detailed_upgradable_packages_dict: '{ "packages_list": "{{ packages_list }}" }'
-
-# - name: NUEVO DICT
-#   debug:
-#     msg: "{{detailed_upgradable_packages_dict}}"
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.0 Get ansible_facts of packages_list
+#   set_fact:
+#     upgradable_packages_ansible_facts: "{{upgradable_packages.ansible_facts}}"
 #
-# - name: NUEVO DICT TYPE
-#   debug:
-#     msg: "{{detailed_upgradable_packages_dict | type_debug}}"
-
-# - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
-#   debug:
-#     msg: "{{detailed_upgradable_packages_dict}}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 10.0 First dump dict to remote file on target host
-  lineinfile:
-    path: '{{ json_output_file}}'
-    state: present
-    regexp: '#'
-    line: "\t{{ dict(packages_keys_list | zip( item.split('#'))) }}"
-  loop: "{{ detailed_upgradable_packages_dict.packages_list }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.0 Get remote host content (list)
-  command:  cat "{{ json_output_file }}"
-  register: catcommand
-
-# - name: Tipo de CATCOMMAND
-#   debug:
-#     msg: "{{ catcommand.stdout_lines }}"
+#                                   # - name:
+#                                   #   debug:
+#                                   #     msg: "{{upgradable_packages.ansible_facts}}"
+#                                   #
+#                                   # - name:
+#                                   #   debug:
+#                                   #     msg: "{{upgradable_packages.ansible_facts | type_debug}}"
 #
-# - name: Tipo de catcommand.stdout_lines
-#   debug:
-#     msg: "{{catcommand.stdout_lines }}"
 #
-# - name: Tipo de catcommand.stdout_lines
+#                                   # - name: Display LOOP LISTS
+#                                   #   debug:
+#                                   #     msg: "{{ item }}"
+#                                   #   loop: "{{ upgradable_packages.ansible_facts.packages_upgradables_list }}"
+#
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 5.1 Fit contents of list of packages upgradables
+#   set_fact:
+#     foo_item: "{{ item[:-1] | regex_replace(' ', '#' ) | regex_replace('/', '#' ) }}"
+#   with_items: "{{ upgradable_packages.ansible_facts.packages_upgradables_list}}"
+#   register: foo_result
+#
+#                                     # - name: PRINT foo_result
+#                                     #   debug:
+#                                     #     msg: "{{ foo_result}}"
+#                                     #
+#                                     # - name: el tipo de foo_result
+#                                     #   debug:
+#                                     #     msg: "{{ foo_result | type_debug }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 6.0 Get List of contents of list of packages upgradables
+#   set_fact:
+#     packages_list: "{{ foo_result.results | map(attribute='ansible_facts.foo_item') | list }}"
+#
+#                                     # - name: PACKAGEs LIST
+#                                     #   debug:
+#                                     #     msg: "{{packages_list}}"
+#                                     #
+#                                     # - name: PACKAGEs TYPE
+#                                     #   debug:
+#                                     #     msg: "{{packages_list | type_debug}}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 7.0 Remove first unnecesary item on list of packages ('Listing...)
+#   set_fact:
+#     packages_list: "{{ packages_list[1:] }}"
+#
+#                                     # - name: PACKAGEs LIST | elimminado primer item
+#                                     #   debug:
+#                                     #     msg: "{{packages_list}}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.1 Set List elements to include on final list
+#   set_fact:
+#     goo_item: "{{item.split('#')[0]+'#'+item.split('#')[1]+'#'+item.split('#')[6]+'#'+item.split('#')[2]}}"
+#   with_items: "{{ packages_list }}"
+#   register: packages_list
+#
+#                                       # - name: print ONLY keyS
+#                                       #   debug:
+#                                       #     msg: "{{ packages_list }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 8.2 Set List elements to include on final list (map attributes)
+#   set_fact: packages_list="{{ packages_list.results | map(attribute='ansible_facts.goo_item') | list }}"
+#
+#                                       # - name: PRINT PACKAGES LIST SELECCION
+#                                       #   debug:
+#                                       #     msg: "{{ packages_list }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 9.0 Set List elements to include on final list (map attributes)
+#   set_fact:
+#     detailed_upgradable_packages_dict: '{ "packages_list": "{{ packages_list }}" }'
+#
+#                                       # - name: NUEVO DICT
+#                                       #   debug:
+#                                       #     msg: "{{detailed_upgradable_packages_dict}}"
+#                                       #
+#                                       # - name: NUEVO DICT TYPE
+#                                       #   debug:
+#                                       #     msg: "{{detailed_upgradable_packages_dict | type_debug}}"
+#
+#                                       # - name: NUEVO DICT TYPE ADD NEW VALUE/KEY
+#                                       #   debug:
+#                                       #     msg: "{{detailed_upgradable_packages_dict}}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 10.0 First dump dict to remote file on target host
+#   lineinfile:
+#     path: '{{ json_output_file}}'
+#     state: present
+#     regexp: '#'
+#     line: "\t{{ dict(packages_keys_list | zip( item.split('#'))) }}"
+#   loop: "{{ detailed_upgradable_packages_dict.packages_list }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.0 Get remote host content (list)
+#   command:  cat "{{ json_output_file }}"
+#   register: catcommand
+#
+#                                         # - name: Tipo de CATCOMMAND
+#                                         #   debug:
+#                                         #     msg: "{{ catcommand.stdout_lines }}"
+#                                         #
+#                                         # - name: Tipo de catcommand.stdout_lines
+#                                         #   debug:
+#                                         #     msg: "{{catcommand.stdout_lines }}"
+#                                         #
+#                                         # - name: Tipo de catcommand.stdout_lines
+#                                         #   debug:
+#                                         #     msg: "{{catcommand.stdout_lines | type_debug}}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.1 Fit remote host content (list)
+#   set_fact:
+#     clean_packages_list: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('} ', '}') | regex_replace('\"', '') }}"
+#
+#                                         # - name: PRINT clean_packages_list
+#                                         #   debug:
+#                                         #     msg: "{{ clean_packages_list }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
+#   set_fact:
+#     detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : clean_packages_list}) }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
+#   set_fact:
+#     detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'upgradables_packages_total_number' : clean_packages_list | length }) }}"
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Check if packages upgradables is empty
+#   set_fact:
+#     detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
+#   when: ( clean_packages_list | length ) == 0
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
+#   include_tasks:
+#     file: combine_parameters.yaml
+#
+# - name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 14.0 Print json with all packages upgradables
 #   debug:
-#     msg: "{{catcommand.stdout_lines | type_debug}}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 11.1 Fit remote host content (list)
-  set_fact:
-    clean_packages_list: "{{catcommand.stdout_lines | replace('\\t', '') | replace ('} ', '}') | regex_replace('\"', '') }}"
-
-# - name: PRINT clean_packages_list
-#   debug:
-#     msg: "{{ clean_packages_list }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 12.0 Create dict with key and value (list)
-  set_fact:
-    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : clean_packages_list}) }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.0 Create dict with key and value (list)
-  set_fact:
-    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'upgradables_packages_total_number' : clean_packages_list | length }) }}"
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.1 Check if packages upgradables is empty
-  set_fact:
-    detailed_upgradable_packages_dict: "{{ detailed_upgradable_packages_dict | default({}) | combine ({ 'packages_list' : [ '{{ empty_upgradable_packages }}' ] }) }}"
-  when: ( clean_packages_list | length ) == 0
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 13.2 Add parameters key/value to new dict
-  include_tasks:
-    file: combine_parameters.yaml
-
-- name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 14.0 Print json with all packages upgradables
-  debug:
-    msg: "{{ detailed_upgradable_packages_dict }}"
-
-
--  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 15.0 Store json with all packages upgradables on remote file
-   copy:
-    content: "{{ detailed_upgradable_packages_dict | to_nice_json}} "
-    dest: "{{ json_output_file }}"
+#     msg: "{{ detailed_upgradable_packages_dict }}"
+#
+#
+# -  name: Update middleware | {{ansible_distribution}} {{ansible_distribution_major_version}} | 15.0 Store json with all packages upgradables on remote file
+#    copy:
+#     content: "{{ detailed_upgradable_packages_dict | to_nice_json}} "
+#     dest: "{{ json_output_file }}"
